@@ -32,6 +32,8 @@ void button_drw(SDL_Surface *screen, Button b){
                 200, 200, 255, 100
                 );
     }
+    rectangleRGBA(screen, b->x, b->y, b->x + b->w, b->y + b->h, 0, 200, 0, 200);
+
 }
 
 bool button_hover(Button b, SDL_Event ev){

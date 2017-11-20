@@ -31,7 +31,7 @@ LevelBox levelBox_add(LevelBox list, int i, int numOf_levelBoxes){ //Minden para
     element->next = NULL;
     element->index = i;
     element->pos = levelBox_getPos(element, numOf_levelBoxes);
-    element->button = button_init(element->pos.x+1, element->pos.y+1, levelBox_getWidth(numOf_levelBoxes)-2, MENU_LEVEL_HEIGHT-2);
+    element->button = button_init(element->pos.x, element->pos.y, levelBox_getWidth(numOf_levelBoxes), MENU_LEVEL_HEIGHT);
 
     element->astrarr = NULL;
     element->numOf_astr = 0;
@@ -58,11 +58,6 @@ LevelBox levelBox_add(LevelBox list, int i, int numOf_levelBoxes){ //Minden para
 
 
 void levelBox_drw(SDL_Surface *screen, LevelBox box, int numOf_levels, TTF_Font *font){
-    rectangleRGBA(screen,
-                  box->pos.x, box->pos.y,
-                  box->pos.x + levelBox_getWidth(numOf_levels), box->pos.y + MENU_LEVEL_HEIGHT,
-                  255, 0, 0, 255
-                  );
 
     button_drw(screen, &box->button);
 

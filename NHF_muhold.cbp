@@ -44,6 +44,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="GameStatusSpecific/Button.h" />
+		<Unit filename="GameStatusSpecific/GAMEOVER/gameover.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GameStatusSpecific/GAMEOVER/gameover.h" />
 		<Unit filename="GameStatusSpecific/GameStatus.h" />
 		<Unit filename="GameStatusSpecific/GameStatusChangingFunctions.c">
 			<Option compilerVar="CC" />

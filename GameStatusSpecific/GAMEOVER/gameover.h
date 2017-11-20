@@ -9,12 +9,12 @@
 
 typedef struct gameOverScreen{
     button toMenu, newGame;
-}
+}gameOverScreen;
 
 gameOverScreen gameOverScreen_init();
 
 void gameOverScreen_drw(SDL_Surface *screen, gameOverScreen this);
 
-void gameOverScreen_upd(*gameOverScreen this, SDL_Event ev);
+void gameOverScreen_upd(gameOverScreen *this, SDL_Event ev);
 
-#endif GAMEOVER_H
+#endif//GAMEOVER_H

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="NHF_muhold" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/NHF_muhold" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/NHF_muhold" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="`sdl-config --cflags`" />
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add option="`sdl-config --libs`" />
+			<Add library="SDL_gfx" />
+			<Add library="SDL_ttf" />
+			<Add library="SDL_image" />
+			<Add library="SDL_mixer" />
+		</Linker>
+		<Unit filename="Constants.h" />
+		<Unit filename="GameStatusSpecific/Button.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GameStatusSpecific/Button.h" />
+		<Unit filename="GameStatusSpecific/GameStatus.h" />
+		<Unit filename="GameStatusSpecific/GameStatusChangingFunctions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GameStatusSpecific/GameStatusChangingFunctions.h" />
+		<Unit filename="GameStatusSpecific/MENU/LevelBox.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GameStatusSpecific/MENU/LevelBox.h" />
+		<Unit filename="GameStatusSpecific/MENU/Menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GameStatusSpecific/MENU/Menu.h" />
+		<Unit filename="GameStatusSpecific/SETTING/Initialized_orbit_calculator.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GameStatusSpecific/SETTING/Initialized_orbit_calculator.h" />
+		<Unit filename="Physics/Vector.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Physics/Vector.h" />
+		<Unit filename="Sprite/Gate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Sprite/Gate.h" />
+		<Unit filename="Sprite/Obstacles/Asteroid.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Sprite/Obstacles/Asteroid.h" />
+		<Unit filename="Sprite/Obstacles/Wall.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Sprite/Obstacles/Wall.h" />
+		<Unit filename="Sprite/Planet.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Sprite/Planet.h" />
+		<Unit filename="Sprite/Satellite.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Sprite/Satellite.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tools.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tools.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

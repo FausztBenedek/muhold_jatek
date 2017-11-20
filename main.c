@@ -12,6 +12,7 @@
 #include "GameStatusSpecific/SETTING/Initialized_orbit_calculator.h"
 #include "GameStatusSpecific/MENU/Menu.h"
 #include "tools.h"
+#include "GameStatusSpecific/GAMEOVER/gameover.h"
 
 Uint32 time_func(Uint32 sec, void *pointer);
 
@@ -34,10 +35,11 @@ int game() {
 ///  ---------------------------------------------
 ///  INICIALIZÁLÁSA A JÁTÉKBAN HASZNÁLT ÉRTÉKEKNEK
 ///  ---------------------------------------------
-    enum gameStatus gameStatus = MENU;
+    enum gameStatus gameStatus = GAMEOVER;
     int i;
 
     menu menu = menu_init();
+    gameOverScreen gameOverScreen = gameOverScreen_init();
 
     sat sat = sat_init(10, HEIGHT/5, 10);
 
@@ -116,18 +118,23 @@ int game() {
             if (ev.type == SDL_QUIT) gameStatus = QUITTING;
 
             ///......
+            ///Update
+            ///......
+
+            gameOverScreen_upd(&gameOverScreen, ev);
+
+            ///......
             ///Draw
             ///......
 
             boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 150);
-            {
-            int lowerTextpos, upperTextpos;
-            upperTextpos = HEIGHT/7;
-            lowerTextpos = upperTextpos + BIG_FONT_SIZE + 10;
 
-            print(screen, "VESZTETTÉL", WIDTH/2, upperTextpos, bigfont);
-            print(screen, "Béna vagy!",WIDTH/2, lowerTextpos, bigfont);
-            }
+            gameOverScreen_drw(screen, gameOverScreen);
+
+
+            print(screen, "VESZTETTÉL", WIDTH/2, HEIGHT/7, bigfont);
+            print(screen, "Béna vagy!",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
+
 
             SDL_Flip(screen);
         }

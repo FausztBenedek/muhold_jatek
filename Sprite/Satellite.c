@@ -1,0 +1,298 @@
+#include "Satellite.h"
+
+#include <SDL.h>
+#include <SDL_gfxPrimitives.h>
+#include <string.h>
+#include <stdio.h>
+
+#include "../Constants.h"
+#include "../tools.h"
+#include "../GameStatusSpecific/GameStatus.h"
+#include "Obstacles/Wall.h"
+#include "Planet.h"
+/*private*/void sat_and_pln_collide (enum gameStatus *gameStatus, Sat s);
+/*private*/void sat_and_astr_collide(enum gameStatus *gameStatus, Sat s);
+/*private*/void sat_and_wall_collide(enum gameStatus *gameStatus, Sat s);
+/*private*/void pln_and_astr_collide(enum gameStatus *gameStatus, Sat s);
+/*private*/void calcResultantForceForSat(Sat s);
+
+void sat_plnarr_button_del_action(Sat s);
+
+sat sat_init(float x, float y, float rad){
+    sat s;
+    s.pos = vect_init(x, y);
+    s.vel = vect_init(0,0);
+    s.force = vect_init(0,0);
+    s.rad = rad;
+    s.numOf_pln = 0;
+    s.numOf_astr = 0;
+    s.numOf_wall = 0;
+    s.gate = gate_init(100, 300);
+    s.plnarr = NULL;
+    s.astrarr = NULL;
+    s.wallarr = NULL;
+    return s;
+}
+
+void sat_resetMotion(Sat s){
+    s->vel = vect_init(0,0);
+    s->force = vect_init(0,0);
+    s->pos = vect_init(10, HEIGHT/5);
+}
+
+void sat_game_cleanup(Sat s){
+    //free(s->astrarr);
+    free(s->wallarr);
+    free(s->plnarr);
+}
+
+void sat_drw(SDL_Surface *screen, Sat const s){
+    filledCircleRGBA(screen,
+            s->pos.x, s->pos.y,//(x, y)
+            s->rad,//Sugár
+            150,150,255,255);//Szín
+
+    gate_drw(screen, &s->gate);
+    gate_drw(screen, &s->gate);
+}
+
+///----------------------------------
+///Hatások az objektumoktól
+///----------------------------------
+
+void sat_RUNNING_upd(Sat s){
+
+    calcResultantForceForSat(s);//Ezzel kiszámoljuk az ehhez az időpillanathoz tartozó eredő erőt.
+
+    add(    &(s->vel)   , s->force);
+
+    add(    &(s->pos)   , s->vel);
+
+    //Visszapattanás a falról
+    if (s->pos.x - s->rad  <  0) {//A képernyõ bal oldalán túl van a műhold
+        s->vel.x *= -1; //Megfordítani horizontálisan a sebességet
+        s->force.x *= -1; //Megfordítani horizontálisan az erõt
+    }
+    else if (s->pos.x + s->rad  >  WIDTH) {//A képernyõ jobb oldalán túl van a műhold
+        s->vel.x *= -1; //Megfordítani horizontálisan a sebességet
+        s->force.x *= -1; //Megfordítani horizontálisan az erõt
+    }
+    if (s->pos.y - s->rad  <  0) {//A képernyõ tetején túl van a műhold
+        s->vel.y *= -1; //Megfordítani horizontálisan a sebességet
+        s->force.y *= -1; //Megfordítani horizontálisan az erõt
+    }
+    else if (s->pos.y + s->rad  >  HEIGHT) {//A képernyõ alján túl van a műhold
+        s->vel.y *= -1; //Megfordítani horizontálisan a sebességet
+        s->force.y *= -1; //Megfordítani horizontálisan az erõt
+    }
+}
+void sat_SETTINGS_upd(Sat s, SDL_Event ev){
+    bool ableToAddPlanet = true;
+    int i;
+    if (ev.type == SDL_MOUSEBUTTONDOWN && ev.button.button == SDL_BUTTON_LEFT) {
+        //Nem hozzáadni, ha menüre kattintunk
+        for (i = 0; i < s->numOf_pln; i++){
+            if (s->plnarr[i].menuIsActive){
+                ableToAddPlanet = false;
+            }
+        }
+        //Nem hozzáadni, ha falra klikkelünk
+        for (i = 0; i < s->numOf_wall; i++)
+            if (wall_hover(&s->wallarr[i], ev))
+                ableToAddPlanet = false;
+
+        //Hozzáadni a bolygót, ha nem bolygóra klikkeltünk
+        if (ableToAddPlanet) {
+            pln onlyPlanet = pln_init(ev.motion.x, ev.motion.y, 30);
+            sat_addPln(s, &onlyPlanet);
+        }
+    }
+
+    //Törölni a bolygót, ha a törlés gombra klikkelünk
+    sat_plnarr_button_del_action(s);
+}
+
+void sat_changeGameIfCollision(enum gameStatus *gameStatus, Sat s) {
+    sat_and_pln_collide (gameStatus, s);
+    sat_and_astr_collide(gameStatus, s);
+    sat_and_wall_collide(gameStatus, s);
+    pln_and_astr_collide(gameStatus, s);
+
+}
+/*private*/void sat_and_pln_collide (enum gameStatus *gameStatus, Sat s){
+    int i;
+    for (i = 0; i < s->numOf_pln; i++){//Műhold & Bolygó
+        if (circlesCollide(s->pos, s->rad, s->plnarr[i].pos, pln_getRad(&s->plnarr[i]))){
+            *gameStatus = SETTING;
+            sat_resetMotion(s);
+        }
+    }
+}
+/*private*/void sat_and_astr_collide(enum gameStatus *gameStatus, Sat s){
+    int i;
+    for (i = 0; i < s->numOf_astr; i++){//Műhold & Aszteroida
+        if (circlesCollide(s->pos, s->rad, s->astrarr[i].pos, s->astrarr[i].rad)){
+            *gameStatus = SETTING;
+            sat_resetMotion(s);
+        }
+    }
+}
+/*private*/void sat_and_wall_collide(enum gameStatus *gameStatus, Sat s){
+    int i;
+    for (i = 0; i < s->numOf_wall; i++){
+      //float dist = a kör közepétől a négyzet legközelebb lévő pontjába mutató vektor hossza
+        float dist = magnitudeOf(differenceOf(s->pos, wall_closestPointToCircle(&s->wallarr[i], s->pos)));
+        if (dist < s->rad){
+            *gameStatus = SETTING;
+            sat_resetMotion(s);
+        }
+    }
+}
+/*private*/void pln_and_astr_collide(enum gameStatus *gameStatus, Sat s){
+    int i, j;
+    for (i = 0; i < s->numOf_pln; i++){//Műhold & Bolygó
+        for (j = 0; j < s->numOf_astr; j++){//Bolygó & Aszteroida
+            if (circlesCollide(s->astrarr[j].pos, s->astrarr[j].rad, s->plnarr[i].pos, pln_getRad(&s->plnarr[j]))){
+                *gameStatus = SETTING;
+                sat_remPln(s, i);
+                sat_resetMotion(s);
+            }
+        }
+    }
+}
+/*private*/ void calcResultantForceForSat(Sat s) {//Ezt a függvényt az sat_upd() függvényben hívjuk meg, és az eredő erőt számoljuk ki vele
+    /*
+    Gravitáció törvénye: F = G * m1 * m2 /d^2
+    A G * m1 * m2 szorzatot összevonjuk:
+          1. Egy nagy konstans a kísérlet alapján JELE: C, Kiszámítása: (1/(float)SAT_DIV)
+          2. A bolygó vonzereje: pln.stength változóban tárolva.
+
+    Ebből a képlet:
+          F = C * bolygó_vonzereje / távolság^2
+    */
+    //Először nullázzuk a jelenlegi erővektort
+    multVect(   &(s->force)     ,0);
+
+    ////Majd a bolygókon végigmenve kiszámoljuk az eredő erőt:
+    int i;
+    for (i = 0; i < s->numOf_pln; i++){
+        //Távolság kiszámítása és hozzárendelése a dir vektorhoz
+        vect dir = differenceOf(s->pos,   s->plnarr[i].pos);
+        if (magnitudeOf(dir) < 1){
+            normalizeVect(&dir);//Ha nagyon kicsi a távolság, akkor nagyon nagy a vonzóerő. Ezt kerüljük el.
+        }
+        //Erő kiszámítása és hozzárendelése a dir vektorhoz
+                  //F   = (          konstans         *     bolygó_vonzereje    ) /                 távolság^2           ;
+        float magnitude = (  (1/(float)SAT_DIV) * s->plnarr[i].strength   ) / (magnitudeOf(dir) * magnitudeOf(dir));//Érték
+        normalizeVect(&dir);//Irány
+        multVect(&dir, magnitude);//Irány * Érték
+        //Eredő erőt tároló változóhoz hozzáadjuk
+        add(    &(s->force)     , dir);
+    }
+    //A játék élvezhetősége végett növeljük vagy csökkentjük a műholdra ható eredő erőt
+    multVect(   &(s->force)     , 8);
+}
+
+///----------------------------------
+///Bolygókhoz tartozó függvények
+///----------------------------------
+
+void sat_addPln(Sat s, Pln p) {//Hozzáad egy fekete lyukat a planet-hez és false tér vissza, ha túlindexelés van (sikeres volt-e a hozzáadás)
+    if (s->numOf_pln == 0){
+        s->plnarr = (Pln) malloc(sizeof(struct planet));
+    }
+    else {
+        s->plnarr = (Pln) realloc(s->plnarr, (s->numOf_pln + 1) * sizeof(struct planet));
+    }
+    s->plnarr[s->numOf_pln] = *p; //Majd hozzáadjuk a következő helyhez
+    s->numOf_pln++; //Megnöveljük a számukat tároló változót
+}
+
+bool sat_remPln(Sat s, int index) {
+    if (!s->plnarr[index].removeable){
+        return false;
+    }
+    int i;
+    for(i = index; i < s->numOf_pln - 1; i++){//Léptet
+        s->plnarr[i] = s->plnarr[i+1];
+    }
+    --s->numOf_pln;
+    s->plnarr = realloc(s->plnarr, (s->numOf_pln) * sizeof(struct planet));
+    return true;
+}
+void sat_plnarr_button_del_action(Sat s){
+    int i;
+    for (i = 0; i < s->numOf_pln; i++){
+        if (s->plnarr[i].but_del.clicked){
+            sat_remPln(s, i);
+        }
+    }
+}
+
+///----------------------------------
+///Aszteroidákhoz tartozó függvények
+///----------------------------------
+Astr sat_astr_init(Sat s){
+    s->numOf_astr = 1;///!!!FÁJLBÓL KELL MAJD OLVASNI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    int i;
+    s->astrarr = (Astr) malloc(s->numOf_astr * sizeof(astr));
+    if (s->astrarr == NULL){
+        return NULL;
+    }
+    for (i = 0; i < s->numOf_astr; i++){
+        float centerX = WIDTH/2;         float centerY = HEIGHT/2;
+        float posX = WIDTH/2+200;          float posY = HEIGHT/2;
+        float rad = 5;
+        float velX = 0;                  float velY = -0.50;
+        s->astrarr[i] = astr_init(centerX, centerY, posX, posY, rad, velX, velY);///!!!FÁJLBÓL KELL MAJD OLVASNI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        pln center = pln_init(s->astrarr[i].center.x, s->astrarr[i].center.y, 40);
+        center.removeable = false;
+        sat_addPln(s, &center);
+    }
+    return s->astrarr;//free()-be vagy ez a visszatérési érték, vagy s->astrarr
+    //free() a sat_game_cleanup() függvényben van meghívva
+}
+
+void sat_wall_init(Sat s, int level){
+        //File megnyitása, és a keresett infókig vaóló eljutás
+    FILE *settings;
+    settings = fopen(SETTINGS, "r");
+    if (settings == NULL) return;
+
+    char row[MAX_ROW_LENGTH_IN_FILE]; // "X.Szint'0'" = 8 karakter
+    sprintf(row, X_LEVEL, level);
+    goto_word_in_file(settings, row, MAX_ROW_LENGTH_IN_FILE);
+
+    //Megszámoljuk hány fal van
+    fflush(settings);
+    unsigned long file_pos = ftell(settings);
+    goto_word_in_file(settings, WALL_BEGIN, MAX_ROW_LENGTH_IN_FILE);
+
+    int i;
+
+    for (i = 0;
+         !strstr(
+                fgets(row, MAX_ROW_LENGTH_IN_FILE, settings),
+                WALL_END
+                );
+         i++);
+
+    s->numOf_wall = i;
+    fseek(settings, file_pos, SEEK_SET);
+    fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);// Egyet előre kell lépni a sorokban, hogy a számoknál legyünk
+
+
+    s->wallarr = (Wall) malloc(s->numOf_wall * sizeof(struct Wall));
+    if (s->wallarr == NULL) return;
+
+    for (i = 0; i < s->numOf_wall; i++){
+        fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);
+        int x, y, w, h;
+        sscanf(row, "%d, %d, %d, %d;", &x, &y, &w, &h);
+        s->wallarr[i] = wall_init(x, y, w, h);
+    }
+
+    fclose(settings);
+    return;
+
+}

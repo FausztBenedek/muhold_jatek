@@ -44,6 +44,7 @@ int game() {
 
     menu menu = menu_init();
     gameOverScreen gameOverScreen = gameOverScreen_init();
+    WinningScreen winningScreen = winningScree_init();
 
     sat sat = sat_init(10, HEIGHT/5, 10);
 
@@ -134,6 +135,31 @@ int game() {
 
             boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
             gameOverScreen_drw(screen, gameOverScreen, smallfont);
+
+            print(screen, "VESZTETTÉL", WIDTH/2, HEIGHT/7, bigfont);
+            print(screen, "Próbáld újra!",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
+
+            SDL_Flip(screen);
+        }//VÉGE: gameStatus == GAMEOVER
+    ///*****************************
+    ///  WINNING
+    ///*****************************
+        while (gameStatus == WINNING){
+            SDL_WaitEvent(&ev);
+            if (ev.type == SDL_QUIT) gameStatus = QUITTING;
+
+            ///......
+            ///Update
+            ///......
+
+            winningScreen_upd(&winningScreen, ev);
+
+            ///......
+            ///Draw
+            ///......
+
+            boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
+            winningScreen_drw(screen, winningScreen, smallfont);
 
             print(screen, "VESZTETTÉL", WIDTH/2, HEIGHT/7, bigfont);
             print(screen, "Próbáld újra!",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);

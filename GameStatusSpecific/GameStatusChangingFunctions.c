@@ -29,10 +29,11 @@ void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event 
     }
 }
 
-void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s){
+void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Data *data){
     if (ev.type == SDL_MOUSEBUTTONDOWN || (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_SPACE)){
         *gameStatus = SETTING;
         sat_resetMotion(s);
+        data->attempts++;
     }
 }
 void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu){
@@ -90,9 +91,11 @@ void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Sat s){
         && (s->pos.y <= s->gate.lower && s->pos.y >= s->gate.upper);
 }
 
-void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat s) {
+void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat s, Data *data) {
     sat_and_pln_collide (gameStatus, s);
     sat_and_wall_collide(gameStatus, s);
+    if (*gameStatus == GAMEOVER)
+        data->attempts++;
 }
 /*private*/void sat_and_pln_collide (enum gameStatus *gameStatus, Sat s){
     int i;

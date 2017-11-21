@@ -10,7 +10,7 @@
 /**A Data struktúra a játék adatainak tárolására alkalmas
 */
 typedef struct Data{
-    int attempts;///<A próbálkozások számát tárolja
+    int attempts;///<A próbálkozások számát tárolja, a
     button saveButton;///<A mentéshez kell megnyomni
 }Data;
 

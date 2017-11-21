@@ -91,7 +91,7 @@ int game() {
         while (gameStatus == RUNNING){
 
             SDL_WaitEvent(&ev);
-            game_status_from_RUNNING_to_SETTING(&gameStatus, ev, &sat);
+            game_status_from_RUNNING_to_SETTING(&gameStatus, ev, &sat, &data);
             game_status_from_RUNNING_to_WINNING(&gameStatus, &sat);
 
             switch (ev.type){
@@ -115,7 +115,7 @@ int game() {
             ///Update
             ///......
                     sat_RUNNING_upd(&sat);
-                    game_status_from_RUNNING_to_GAMEOVER(&gameStatus, &sat);
+                    game_status_from_RUNNING_to_GAMEOVER(&gameStatus, &sat, &data);
                     SDL_Flip(screen);
                     break;
                 default: break;

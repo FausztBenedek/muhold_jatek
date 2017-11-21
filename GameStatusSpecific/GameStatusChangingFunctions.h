@@ -8,10 +8,11 @@
 #include "MENU/Menu.h"
 #include "GAMEOVER/gameover.h"
 
-void game_status_from_SETTING_to_RUNNING (enum gameStatus *gameStatus, SDL_Event ev, Sat s);
-void game_status_from_RUNNING_to_GAMEOVER (enum gameStatus *gameStatus, SDL_Event ev, Sat s);
-void game_status_from_MENU_to_SETTING    (enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu);
+void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Sat s);
+void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s);
+void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu);
 void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, gameOverScreen gameOverScreen);
+void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Sat s);
 
 /*private*/ float levelBox_getWidth(int numOf_levelBoxes);
 

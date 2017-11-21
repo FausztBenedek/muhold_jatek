@@ -46,6 +46,8 @@ void sat_game_cleanup(Sat s){
     //free(s->astrarr);
     free(s->wallarr);
     free(s->plnarr);
+    s->wallarr = NULL;
+    s->plnarr = NULL;
 }
 
 void sat_drw(SDL_Surface *screen, Sat const s){

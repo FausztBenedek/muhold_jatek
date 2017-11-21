@@ -32,6 +32,7 @@ enum {
     NUM_OF_HELPLT = 200,//A segítő pontok száma (number of helping plots)
     HELPLT_MISS = 5,
     VELOCITY_INIT_X = 2,
+    SAT_Y_DISTANCE_FROM_GATE_TO_WIN = 3,
 
     BIG_FONT_SIZE = 32,
     SMALL_FONT_SIZE = 20,

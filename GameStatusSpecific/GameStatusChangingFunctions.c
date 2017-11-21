@@ -4,13 +4,14 @@
 #include <SDL_gfxPrimitives.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #include "../Constants.h"
 #include "../Sprite/Satellite.h"
 #include "MENU/LevelBox.h"
 
 /*private*/void open_level(int level, Sat sat);
-/*private*/void open_level(int level, Sat sat);
+/*private*/bool sat_touched_gate(Sat s);
 
 void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Sat s){
     if ((ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_SPACE) ||
@@ -22,7 +23,7 @@ void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event 
     }
 }
 
-void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, SDL_Event ev, Sat s){
+void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s){
     if (ev.type == SDL_MOUSEBUTTONDOWN || (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_SPACE)){
         *gameStatus = SETTING;
         sat_resetMotion(s);
@@ -55,8 +56,6 @@ void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, S
         }
     }
 }
-
-
 /*private*/void open_level(int level, Sat sat){
     FILE *settings;
     settings = fopen(SETTINGS, "r");
@@ -69,6 +68,21 @@ void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, S
 
     fclose(settings);
 
+}
+
+
+void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Sat s){
+    if (sat_touched_gate(s)){
+        sat_resetMotion(s);
+        *gameStatus = WINNING;
+        //sat_game_cleanup(s);
+    }
+}
+/*private*/bool sat_touched_gate(Sat s){
+    //              nagyon közel van a jobb szélhez
+    return s->pos.x >= WIDTH - s->rad - SAT_Y_DISTANCE_FROM_GATE_TO_WIN
+    //  és      y irányban is jó helyen
+        && (s->pos.y <= s->gate.lower && s->pos.y >= s->gate.upper);
 }
 
 

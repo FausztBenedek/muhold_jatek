@@ -86,7 +86,8 @@ int game() {
         while (gameStatus == RUNNING){
 
             SDL_WaitEvent(&ev);
-            game_status_from_RUNNING_to_GAMEOVER(&gameStatus, ev, &sat);
+            game_status_from_RUNNING_to_SETTING(&gameStatus, ev, &sat);
+            game_status_from_RUNNING_to_WINNING(&gameStatus, &sat);
 
             switch (ev.type){
                 case SDL_QUIT:

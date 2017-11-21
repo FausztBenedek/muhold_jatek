@@ -29,7 +29,7 @@ sat sat_init(float x, float y, float rad){
     s.numOf_pln = 0;
     s.numOf_astr = 0;
     s.numOf_wall = 0;
-    s.gate = gate_init(100, 300);
+    s.gate = gate_init(0, HEIGHT);
     s.plnarr = NULL;
     s.astrarr = NULL;
     s.wallarr = NULL;
@@ -279,14 +279,13 @@ void sat_wall_init(Sat s, int level){
                 );
          i++);
 
+
     s->numOf_wall = i;
-    fseek(settings, file_pos, SEEK_SET);;
-    fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);// Egyet előre kell lépni a sorokban, hogy a számoknál legyünk
+    fseek(settings, file_pos, SEEK_SET);
 
-
+    goto_word_in_file(settings, WALL_BEGIN, MAX_ROW_LENGTH_IN_FILE);
     s->wallarr = (Wall) malloc(s->numOf_wall * sizeof(struct Wall));
     if (s->wallarr == NULL) return;
-
     for (i = 0; i < s->numOf_wall; i++){
         fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);
         int x, y, w, h;
@@ -298,3 +297,5 @@ void sat_wall_init(Sat s, int level){
     return;
 
 }
+
+

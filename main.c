@@ -39,6 +39,7 @@ int game() {
 ///  INICIALIZÁLÁSA A JÁTÉKBAN HASZNÁLT ÉRTÉKEKNEK
 ///  ---------------------------------------------
     enum gameStatus gameStatus = MENU;
+
     int i;
 
     menu menu = menu_init();

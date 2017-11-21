@@ -17,12 +17,11 @@ menu menu_init(){//Minden paraméterét a fájlból olvassa
 
 
 void menu_upd(Menu theMenu, SDL_Event ev){
-    if (ev.type == SDL_MOUSEBUTTONDOWN || ev.type == SDL_MOUSEMOTION){
-        LevelBox iter;
-        for (iter = theMenu->levelarr; iter != NULL; iter = iter->next){
-            levelBox_upd(iter, ev);
-        }
+    LevelBox iter;
+    for (iter = theMenu->levelarr; iter != NULL; iter = iter->next){
+        levelBox_upd(iter, ev);
     }
+
 }
 
 void menu_drw(SDL_Surface *screen, menu theMenu, TTF_Font *font){

@@ -19,12 +19,15 @@ button button_init(float x, float y, float w, float h, char *subscription){
 }
 
 void button_upd(Button b, SDL_Event ev) {
-    button_hover(b, ev);
-    if (b->hover && ev.type == SDL_MOUSEBUTTONDOWN && ev.button.button == SDL_BUTTON_LEFT) {
-        b->clicked = true;
-    }
-    else {
-        b->clicked = false;
+    if (ev.type == SDL_MOUSEBUTTONDOWN || ev.type == SDL_MOUSEMOTION){
+
+        button_hover(b, ev);
+        if (b->hover && ev.type == SDL_MOUSEBUTTONDOWN && ev.button.button == SDL_BUTTON_LEFT) {
+            b->clicked = true;
+        }
+        else {
+            b->clicked = false;
+        }
     }
 }
 void button_drw(SDL_Surface *screen, Button b, TTF_Font *font){

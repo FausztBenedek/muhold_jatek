@@ -14,6 +14,8 @@
 #include "tools.h"
 #include "GameStatusSpecific/GAMEOVER/gameover.h"
 #include "GameStatusSpecific/WINNING/winning.h"
+#include "Storage/Data.h"
+
 
 Uint32 time_func(Uint32 sec, void *pointer);
 
@@ -46,6 +48,7 @@ int game() {
     menu menu = menu_init();
     gameOverScreen gameOverScreen = gameOverScreen_init();
     WinningScreen winningScreen = winningScreen_init();
+    Data data = data_read_in();
 
     sat sat = sat_init(10, HEIGHT/5, 10);
 
@@ -66,6 +69,7 @@ int game() {
             ///Update
             ///......
             menu_upd(&menu, ev);
+            data_upd(&data, ev);
             game_status_from_MENU_to_SETTING(&gameStatus, ev, &sat, &menu);
 
             ///......
@@ -73,6 +77,7 @@ int game() {
             ///......
             boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255,255,255,255);
             menu_drw(screen, menu, smallfont);
+            data_drw(screen, data, smallfont);
 
             print(screen, "ISTEN HOZOTT!", WIDTH/2, HEIGHT/7, bigfont);
             print(screen, "Válassz egy szintet!",WIDTH/2, HEIGHT/7+BIG_FONT_SIZE+10, bigfont);

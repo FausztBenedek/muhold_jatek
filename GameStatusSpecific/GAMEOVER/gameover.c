@@ -20,8 +20,6 @@ void gameOverScreen_drw(SDL_Surface *screen, gameOverScreen this, TTF_Font *font
 }
 
 void gameOverScreen_upd(gameOverScreen *this, SDL_Event ev){
-    if (ev.type == SDL_MOUSEBUTTONDOWN || ev.type == SDL_MOUSEMOTION){
-        button_upd(&this->newGame, ev);
-        button_upd(&this->toMenu, ev);
-    }
+    button_upd(&this->newGame, ev);
+    button_upd(&this->toMenu, ev);
 }

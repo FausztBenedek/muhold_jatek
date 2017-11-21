@@ -1,19 +1,23 @@
-#ifndef DATA_H
-#define DATA_H
+#include "Data.h"
 
-#include "../GameStatusSpecific/Button.h"
+#include "../Constants.h"
 
-/**A Data struktúra a játék adatainak tárolására alkalmas
-*/
-typedef struct Data{
-    int attempts;///<A próbálkozások számát tárolja
-    button
-}Data;
+Data data_read_in(){
+    Data this;
+    this.attempts = 0;
+    this.saveButton = button_init(WIDTH-100-20, 20, 100, 40, "Mentés");
+    return this;
+}
 
-/**Beolvassa a save.txt-ből az elmentett információkat.
-*   A fájlt a függvény nyitja meg, és be is zárja.
-*   Nincs paramétere, mert mindent a fájlból olvas.
-*/
-Data data_read_in();
+void data_upd(Data *this, SDL_Event ev){
+    button_upd(&this->saveButton, ev);
+}
 
-#endif // DATA_H
+void data_drw(SDL_Surface *screen, Data this, TTF_Font *font){
+    button_drw(screen, &this.saveButton, font);
+}
+
+void data_save(Data data){
+
+}
+

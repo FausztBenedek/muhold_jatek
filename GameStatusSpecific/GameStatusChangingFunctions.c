@@ -53,7 +53,7 @@ void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, S
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         if (gameOverScreen.toMenu.clicked){
             *gameStatus = MENU;
-            free(s->wallarr);
+            sat_resetInitialState(s);
         }
 
         if (gameOverScreen.newGame.clicked){
@@ -93,24 +93,12 @@ void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Sat s){
 
 void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat s) {
     sat_and_pln_collide (gameStatus, s);
-    sat_and_astr_collide(gameStatus, s);
     sat_and_wall_collide(gameStatus, s);
-    pln_and_astr_collide(gameStatus, s);
-
 }
 /*private*/void sat_and_pln_collide (enum gameStatus *gameStatus, Sat s){
     int i;
     for (i = 0; i < s->numOf_pln; i++){//Műhold & Bolygó
         if (circlesCollide(s->pos, s->rad, s->plnarr[i].pos, pln_getRad(&s->plnarr[i]))){
-            *gameStatus = GAMEOVER;
-            sat_resetMotion(s);
-        }
-    }
-}
-/*private*/void sat_and_astr_collide(enum gameStatus *gameStatus, Sat s){
-    int i;
-    for (i = 0; i < s->numOf_astr; i++){//Műhold & Aszteroida
-        if (circlesCollide(s->pos, s->rad, s->astrarr[i].pos, s->astrarr[i].rad)){
             *gameStatus = GAMEOVER;
             sat_resetMotion(s);
         }
@@ -124,18 +112,6 @@ void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat s) {
         if (dist < s->rad){
             *gameStatus = GAMEOVER;
             sat_resetMotion(s);
-        }
-    }
-}
-/*private*/void pln_and_astr_collide(enum gameStatus *gameStatus, Sat s){
-    int i, j;
-    for (i = 0; i < s->numOf_pln; i++){//Műhold & Bolygó
-        for (j = 0; j < s->numOf_astr; j++){//Bolygó & Aszteroida
-            if (circlesCollide(s->astrarr[j].pos, s->astrarr[j].rad, s->plnarr[i].pos, pln_getRad(&s->plnarr[j]))){
-                *gameStatus = GAMEOVER;
-                sat_remPln(s, i);
-                sat_resetMotion(s);
-            }
         }
     }
 }

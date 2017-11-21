@@ -14,24 +14,21 @@
 
 typedef struct satellite sat;
 typedef struct satellite *Sat;
-//Ha nagybetûs a deklaráció, akkor pointer lesz
+
 
 struct satellite{
-    vect pos;
-    vect vel;
-    vect force;
-    float rad;
+    vect pos;///<A műholdat reprezentáló kör középpontját tároló float x, y számpár
+    vect vel;///<A műhold sebességét tároló vektor
+    vect force;///<A műholdra ható eredő erőt tároló vektor
+    float rad;///<A műholdat reprezentáló kör sugara
 
-    Pln plnarr;//(planet array)
-    int numOf_pln;//A bolygók száma
+    Pln plnarr;///<A műholdra ható bolygók tömbjének pointere
+    int numOf_pln;///<A műholdra ható bolygók száma
 
-    Astr astrarr;
-    int numOf_astr;
+    Wall wallarr;///<A műholdat akadályozó falak tömbjének pointere (info fájlból olvasva)
+    int numOf_wall;///<A műholdat akadályozó falak száma (info fájlból olvasva)
 
-    Wall wallarr;
-    int numOf_wall;
-
-    gate gate;
+    gate gate;///<A kaput tároló struktúra. Itt kell átjutnia a műholdnak.
 };
 /**Inicializál egy műholdat minden értéket 0-ra illetve a pointereket NULL-ra állítja.
 *@param x   koordináta vízszintes komponense
@@ -42,8 +39,16 @@ struct satellite{
 sat sat_init(float x, float y, float rad);
 
 ///Visszaállítja a műhold kiindulási helyzetét.
-///Megírás oka: Nem törli ki a bolygókat, de újrainicializál.
-void sat_resetMotion(Sat s); //Újrainicializál a bolygók eltörlése nélkül
+///     Megírás oka: Nem törli ki a bolygókat, de újrainicializál.
+void sat_resetMotion(Sat s);
+
+/**Ha visszalépünk a menübe, akkor kell ezt meghívni, hogy a memória ne szivárogjon.
+*      Fő célja, hogy felszabadítsa a dinamikusan kezelt tömböket amikor a menübe lépünk,
+*      mert ha új szintet választunk, akkor az újrainicializál és elveszítené az akkor éppen aktuális tömbök pointerét:
+*
+*      menü->játék->gameover->(a függvény meghívódik)->menü->új-játék(itt szivárogna a memória, mert a tömb-pointereket újrainicializálja a szintválasztás)
+*/
+void sat_resetInitialState(sat *this);
 
 ///Felszabadítja a műhold osztály által lefoglalt memóriát.
 void sat_game_cleanup(Sat s);

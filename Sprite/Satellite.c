@@ -22,11 +22,9 @@ sat sat_init(float x, float y, float rad){
     s.force = vect_init(0,0);
     s.rad = rad;
     s.numOf_pln = 0;
-    s.numOf_astr = 0;
     s.numOf_wall = 0;
     s.gate = gate_init(0, HEIGHT);
     s.plnarr = NULL;
-    s.astrarr = NULL;
     s.wallarr = NULL;
     return s;
 }
@@ -36,6 +34,16 @@ void sat_resetMotion(Sat s){
     s->force = vect_init(0,0);
     s->pos = vect_init(10, HEIGHT/5);
 }
+
+void sat_resetInitialState(sat *this){
+    sat_resetMotion(this);
+    if (this->wallarr == NULL) printf("HELLO");
+    //free(this->wallarr);
+    this->wallarr = NULL;
+    this->numOf_wall = 0;
+    this->gate = gate_init(0, HEIGHT);
+}
+
 
 void sat_game_cleanup(Sat s){
     //free(s->astrarr);
@@ -179,29 +187,6 @@ void sat_plnarr_button_del_action(Sat s){
     }
 }
 
-//----------------------------------
-//Aszteroidákhoz tartozó függvények
-//----------------------------------
-Astr sat_astr_init(Sat s){
-    s->numOf_astr = 1;///!!!FÁJLBÓL KELL MAJD OLVASNI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    int i;
-    s->astrarr = (Astr) malloc(s->numOf_astr * sizeof(astr));
-    if (s->astrarr == NULL){
-        return NULL;
-    }
-    for (i = 0; i < s->numOf_astr; i++){
-        float centerX = WIDTH/2;         float centerY = HEIGHT/2;
-        float posX = WIDTH/2+200;          float posY = HEIGHT/2;
-        float rad = 5;
-        float velX = 0;                  float velY = -0.50;
-        s->astrarr[i] = astr_init(centerX, centerY, posX, posY, rad, velX, velY);///!!!FÁJLBÓL KELL MAJD OLVASNI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        pln center = pln_init(s->astrarr[i].center.x, s->astrarr[i].center.y, 40);
-        center.removeable = false;
-        sat_addPln(s, &center);
-    }
-    return s->astrarr;//free()-be vagy ez a visszatérési érték, vagy s->astrarr
-    //free() a sat_game_cleanup() függvényben van meghívva
-}
 
 void sat_wall_init(Sat s, int level, FILE *settings){
     //A keresett infókig vaóló eljutás

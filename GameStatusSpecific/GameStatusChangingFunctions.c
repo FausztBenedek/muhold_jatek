@@ -81,7 +81,6 @@ void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Sat s){
     if (sat_touched_gate(s)){
         sat_resetMotion(s);
         *gameStatus = WINNING;
-        //sat_game_cleanup(s);
     }
 }
 /*private*/bool sat_touched_gate(Sat s){

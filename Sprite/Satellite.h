@@ -15,7 +15,6 @@
 typedef struct satellite sat;
 typedef struct satellite *Sat;
 
-
 struct satellite{
     vect pos;///<A műholdat reprezentáló kör középpontját tároló float x, y számpár
     vect vel;///<A műhold sebességét tároló vektor

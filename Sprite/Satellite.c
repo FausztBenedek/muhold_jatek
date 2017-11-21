@@ -38,19 +38,22 @@ void sat_resetMotion(Sat s){
 void sat_resetInitialState(sat *this){
     sat_resetMotion(this);
     if (this->wallarr == NULL) printf("HELLO");
-    //free(this->wallarr);
+
+    free(this->wallarr);
     this->wallarr = NULL;
     this->numOf_wall = 0;
+
+    free(this->plnarr);
+    this->plnarr = NULL;
+    this->numOf_pln = 0;
+
     this->gate = gate_init(0, HEIGHT);
 }
 
 
 void sat_game_cleanup(Sat s){
-    //free(s->astrarr);
     free(s->wallarr);
     free(s->plnarr);
-    s->wallarr = NULL;
-    s->plnarr = NULL;
 }
 
 void sat_drw(SDL_Surface *screen, Sat const s){

@@ -6,10 +6,12 @@
 
 #include "../Sprite/Satellite.h"
 #include "MENU/Menu.h"
+#include "GAMEOVER/gameover.h"
 
-void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Sat s);
-void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s);
-void geme_status_from_MENU_to_SETTING   (enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu);
+void game_status_from_SETTING_to_RUNNING (enum gameStatus *gameStatus, SDL_Event ev, Sat s);
+void game_status_from_RUNNING_to_GAMEOVER (enum gameStatus *gameStatus, SDL_Event ev, Sat s);
+void game_status_from_MENU_to_SETTING    (enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu);
+void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, gameOverScreen gameOverScreen);
 
 /*private*/ float levelBox_getWidth(int numOf_levelBoxes);
 

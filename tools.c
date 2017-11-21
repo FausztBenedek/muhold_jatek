@@ -29,24 +29,24 @@ void print(SDL_Surface *screen, char *text, int midx, int midy, TTF_Font *font){
 
 float mapping(float num, float rangeInStart, float rangeInEnd, float rangeOutStart, float rangeOutEnd)
 {
-    //(num - rangeInStart)/(rangeInEnd - rangeInStart) <=> Ennyi sz·zalÈkot megy¸nk elıre a num-ig*/
-    //(solution - rangeOutStart)/(rangeOutEnd - rangeOutStart) <=> Ennyi sz·zalÈkot megy¸nk elıre a megold·sig
-    // A kÈt egyenlet egyenlı
+    //(num - rangeInStart)/(rangeInEnd - rangeInStart) <=> Ennyi sz√°zal√©kot megy√ºnk el√µre a num-ig*/
+    //(solution - rangeOutStart)/(rangeOutEnd - rangeOutStart) <=> Ennyi sz√°zal√©kot megy√ºnk el√µre a megold√°sig
+    // A k√©t egyenlet egyenl√µ
     // solution =
     return       ((num - rangeInStart)*(rangeOutEnd - rangeOutStart))
-           / //--------------------------------------------------------   <- tˆrtvonal :)
+           / //--------------------------------------------------------   <- t√∂rtvonal :)
                            (rangeInEnd - rangeInStart)
            /*And to the fraction*/+ rangeOutStart;
 }
 
 bool circlesCollide(vect pos1, float rad1, vect pos2, float rad2){
-//    float dx = pos1.x - pos2.x; //mindegy, hogy negatÌv-e, mert nÈgyzetre lesz emelve
-//    float dy = pos1.y - pos2.y; //mindegy, hogy negatÌv-e, mert nÈgyzetre lesz emelve
+//    float dx = pos1.x - pos2.x; //mindegy, hogy negat√≠v-e, mert n√©gyzetre lesz emelve
+//    float dy = pos1.y - pos2.y; //mindegy, hogy negat√≠v-e, mert n√©gyzetre lesz emelve
 //    float dist = sqrt(dx*dx + dy*dy);
 //
 //    return dist < rad1 + rad2;
 
-//    ÷sszegezve: (CTRL + C)-vel
+//    √ñsszegezve: (CTRL + C)-vel
     return sqrt( (pos1.x - pos2.x)*(pos1.x - pos2.x)     +   (pos1.y - pos2.y)*(pos1.y - pos2.y) )    <    rad1 + rad2;
 }
 

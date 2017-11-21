@@ -35,7 +35,7 @@ int game() {
 ///  ---------------------------------------------
 ///  INICIALIZÁLÁSA A JÁTÉKBAN HASZNÁLT ÉRTÉKEKNEK
 ///  ---------------------------------------------
-    enum gameStatus gameStatus = GAMEOVER;
+    enum gameStatus gameStatus = MENU;
     int i;
 
     menu menu = menu_init();
@@ -61,7 +61,7 @@ int game() {
             ///......
             menu_upd(&menu, ev);
 
-            geme_status_from_MENU_to_SETTING(&gameStatus, ev, &sat, &menu);
+            game_status_from_MENU_to_SETTING(&gameStatus, ev, &sat, &menu);
             ///......
             ///Draw
             ///......
@@ -80,7 +80,7 @@ int game() {
         while (gameStatus == RUNNING){
 
             SDL_WaitEvent(&ev);
-            game_status_from_RUNNING_to_SETTING(&gameStatus, ev, &sat);
+            game_status_from_RUNNING_to_GAMEOVER(&gameStatus, ev, &sat);
 
             switch (ev.type){
                 case SDL_QUIT:
@@ -122,6 +122,7 @@ int game() {
             ///......
 
             gameOverScreen_upd(&gameOverScreen, ev);
+            game_status_from_GAMEOVER_to_MENU_or_SETTING(&gameStatus, ev, &sat, gameOverScreen);
 
             ///......
             ///Draw

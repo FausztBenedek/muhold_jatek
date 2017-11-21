@@ -20,13 +20,13 @@ void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event 
     }
 }
 
-void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s){
+void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, SDL_Event ev, Sat s){
     if (ev.type == SDL_MOUSEBUTTONDOWN || (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_SPACE)){
         *gameStatus = SETTING;
         sat_resetMotion(s);
     }
 }
-void geme_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu){
+void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu){
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         LevelBox iter;
         int i;
@@ -36,6 +36,19 @@ void geme_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev,
                 *gameStatus = SETTING;
                 break;
             }
+        }
+    }
+}
+
+void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, gameOverScreen gameOverScreen){
+    if (ev.type == SDL_MOUSEBUTTONDOWN){
+        if (gameOverScreen.toMenu.clicked){
+            *gameStatus = MENU;
+        }
+
+        if (gameOverScreen.newGame.clicked){
+            *gameStatus = SETTING;
+            sat_resetMotion(s);
         }
     }
 }

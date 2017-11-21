@@ -18,6 +18,8 @@
 
 void sat_plnarr_button_del_action(Sat s);
 
+
+///Mittomen
 sat sat_init(float x, float y, float rad){
     sat s;
     s.pos = vect_init(x, y);
@@ -123,7 +125,7 @@ void sat_changeGameIfCollision(enum gameStatus *gameStatus, Sat s) {
     int i;
     for (i = 0; i < s->numOf_pln; i++){//Műhold & Bolygó
         if (circlesCollide(s->pos, s->rad, s->plnarr[i].pos, pln_getRad(&s->plnarr[i]))){
-            *gameStatus = SETTING;
+            *gameStatus = GAMEOVER;
             sat_resetMotion(s);
         }
     }
@@ -132,7 +134,7 @@ void sat_changeGameIfCollision(enum gameStatus *gameStatus, Sat s) {
     int i;
     for (i = 0; i < s->numOf_astr; i++){//Műhold & Aszteroida
         if (circlesCollide(s->pos, s->rad, s->astrarr[i].pos, s->astrarr[i].rad)){
-            *gameStatus = SETTING;
+            *gameStatus = GAMEOVER;
             sat_resetMotion(s);
         }
     }
@@ -143,7 +145,7 @@ void sat_changeGameIfCollision(enum gameStatus *gameStatus, Sat s) {
       //float dist = a kör közepétől a négyzet legközelebb lévő pontjába mutató vektor hossza
         float dist = magnitudeOf(differenceOf(s->pos, wall_closestPointToCircle(&s->wallarr[i], s->pos)));
         if (dist < s->rad){
-            *gameStatus = SETTING;
+            *gameStatus = GAMEOVER;
             sat_resetMotion(s);
         }
     }
@@ -153,7 +155,7 @@ void sat_changeGameIfCollision(enum gameStatus *gameStatus, Sat s) {
     for (i = 0; i < s->numOf_pln; i++){//Műhold & Bolygó
         for (j = 0; j < s->numOf_astr; j++){//Bolygó & Aszteroida
             if (circlesCollide(s->astrarr[j].pos, s->astrarr[j].rad, s->plnarr[i].pos, pln_getRad(&s->plnarr[j]))){
-                *gameStatus = SETTING;
+                *gameStatus = GAMEOVER;
                 sat_remPln(s, i);
                 sat_resetMotion(s);
             }
@@ -278,7 +280,7 @@ void sat_wall_init(Sat s, int level){
          i++);
 
     s->numOf_wall = i;
-    fseek(settings, file_pos, SEEK_SET);
+    fseek(settings, file_pos, SEEK_SET);;
     fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);// Egyet előre kell lépni a sorokban, hogy a számoknál legyünk
 
 

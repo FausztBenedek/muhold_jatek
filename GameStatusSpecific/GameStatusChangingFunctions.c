@@ -44,6 +44,7 @@ void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, S
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         if (gameOverScreen.toMenu.clicked){
             *gameStatus = MENU;
+            sat_game_cleanup(s);
         }
 
         if (gameOverScreen.newGame.clicked){
@@ -55,8 +56,14 @@ void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, S
 
 
 /*private*/void open_level(int level, Sat sat){
-    sat_wall_init(sat, level);
-    //sat_astr_init(Sat s, level);
+    FILE *settings;
+    settings = fopen(SETTINGS, "r");
+    if (settings == NULL) return;
+
+    sat_wall_init(sat, level, settings);
+
+    fclose(settings);
+
 }
 
 

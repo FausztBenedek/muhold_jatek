@@ -255,11 +255,8 @@ Astr sat_astr_init(Sat s){
     //free() a sat_game_cleanup() függvényben van meghívva
 }
 
-void sat_wall_init(Sat s, int level){
-        //File megnyitása, és a keresett infókig vaóló eljutás
-    FILE *settings;
-    settings = fopen(SETTINGS, "r");
-    if (settings == NULL) return;
+void sat_wall_init(Sat s, int level, FILE *settings){
+        //A keresett infókig vaóló eljutás
 
     char row[MAX_ROW_LENGTH_IN_FILE]; // "X.Szint'0'" = 8 karakter
     sprintf(row, X_LEVEL, level);
@@ -292,8 +289,6 @@ void sat_wall_init(Sat s, int level){
         sscanf(row, "%d, %d, %d, %d;", &x, &y, &w, &h);
         s->wallarr[i] = wall_init(x, y, w, h);
     }
-
-    fclose(settings);
     return;
 
 }

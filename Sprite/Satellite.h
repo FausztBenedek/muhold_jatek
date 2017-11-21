@@ -53,6 +53,6 @@ bool sat_remPln(Sat s, int index); //Törli a bolygót lyukat a műhold struktú
 Astr sat_astr_init(Sat s);
 
 //Falakhoz tartozó függvények
-void sat_wall_init(Sat s, int level);
+void sat_wall_init(Sat s, int level, FILE *settings);
 
 #endif // PLANET_H

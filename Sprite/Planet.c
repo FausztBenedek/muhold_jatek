@@ -48,7 +48,7 @@ pln pln_init(float x, float y, int strength){
         x_coordinate = plnMenu_getPos(pln).x + plnMenu_getRad(pln)*sin(M_PI/4) - width;
     else
         x_coordinate = plnMenu_getPos(pln).x - plnMenu_getRad(pln)*sin(M_PI/4) + 2 * width;
-    pln->but_strengthUp = button_init(x_coordinate, y_coordinate, width, height);
+    pln->but_strengthUp = button_init(x_coordinate, y_coordinate, width, height, "+");
 
 }
 /*private*/void calculateCoordinatesFor_but_strengthDw(Pln pln){
@@ -59,7 +59,7 @@ pln pln_init(float x, float y, int strength){
         x_coordinate = plnMenu_getPos(pln).x + plnMenu_getRad(pln)*sin(M_PI/4) - 3 * width;
     else
         x_coordinate = plnMenu_getPos(pln).x - plnMenu_getRad(pln)*sin(M_PI/4);
-    pln->but_strengthDw = button_init(x_coordinate, y_coordinate, width, height);
+    pln->but_strengthDw = button_init(x_coordinate, y_coordinate, width, height, "-");
 }
 /*private*/void calculateCoordinatesFor_but_del(Pln pln){
         float x_coordinate, y_coordinate, width, height;
@@ -70,7 +70,7 @@ pln pln_init(float x, float y, int strength){
             x_coordinate = plnMenu_getPos(pln).x;
         else
             x_coordinate = plnMenu_getPos(pln).x - width;
-        pln->but_del = button_init(x_coordinate, y_coordinate, width, height);
+        pln->but_del = button_init(x_coordinate, y_coordinate, width, height, DEL_PLANET);
 
 }
 
@@ -154,16 +154,16 @@ void plnMenu_upd(Pln pln, SDL_Event ev){
     }
 }
 
-void plnMenu_drw(SDL_Surface *screen, Pln const pln, SDL_Event ev){
+void plnMenu_drw(SDL_Surface *screen, Pln const pln, SDL_Event ev, TTF_Font *font){
     if (pln->removeable && pln->menuIsActive){
         filledCircleRGBA(screen,
                          plnMenu_getPos(pln).x, plnMenu_getPos(pln).y,
                          plnMenu_getRad(pln),
                          0, 0, 0, 100
                          );
-        button_drw(screen, &pln->but_strengthUp);
-        button_drw(screen, &pln->but_strengthDw);
-        button_drw(screen, &pln->but_del       );
+        button_drw(screen, &pln->but_strengthUp, font);
+        button_drw(screen, &pln->but_strengthDw, font);
+        button_drw(screen, &pln->but_del,        font);
     }
 }
 

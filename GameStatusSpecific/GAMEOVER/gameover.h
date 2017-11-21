@@ -13,7 +13,7 @@ typedef struct gameOverScreen{
 
 gameOverScreen gameOverScreen_init();
 
-void gameOverScreen_drw(SDL_Surface *screen, gameOverScreen this);
+void gameOverScreen_drw(SDL_Surface *screen, gameOverScreen this, TTF_Font *font);
 
 void gameOverScreen_upd(gameOverScreen *this, SDL_Event ev);
 

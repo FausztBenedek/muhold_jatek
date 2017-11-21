@@ -26,8 +26,6 @@ struct levelBox{
     int numOf_wall;
 
     struct levelBox *next;
-
-    char *subscription;
 };
 
 /*private*/float levelBox_getWidth(int numOf_levelBoxes);

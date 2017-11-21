@@ -32,6 +32,9 @@ int game() {
     TTF_Font *smallfont = TTF_OpenFont(FONT_LOCATION, SMALL_FONT_SIZE);
     if (smallfont == NULL) return 1;
 
+    TTF_Font *tinyfont  = TTF_OpenFont(FONT_LOCATION, TINY_FONT_SIZE);
+    if (tinyfont == NULL) return 1;
+
 ///  ---------------------------------------------
 ///  INICIALIZÁLÁSA A JÁTÉKBAN HASZNÁLT ÉRTÉKEKNEK
 ///  ---------------------------------------------
@@ -60,8 +63,8 @@ int game() {
             ///Update
             ///......
             menu_upd(&menu, ev);
-
             game_status_from_MENU_to_SETTING(&gameStatus, ev, &sat, &menu);
+
             ///......
             ///Draw
             ///......
@@ -128,14 +131,11 @@ int game() {
             ///Draw
             ///......
 
-            boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 150);
-
-            gameOverScreen_drw(screen, gameOverScreen);
-
+            boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
+            gameOverScreen_drw(screen, gameOverScreen, smallfont);
 
             print(screen, "VESZTETTÉL", WIDTH/2, HEIGHT/7, bigfont);
-            print(screen, "Béna vagy!",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
-
+            print(screen, "Próbáld újra!",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
 
             SDL_Flip(screen);
         }
@@ -171,7 +171,7 @@ int game() {
             sat_drw(screen, &sat);
             for (i = 0; i < sat.numOf_pln; i++)    pln_drw(    screen, &sat.plnarr[i]);
             for (i = 0; i < sat.numOf_wall; i++)   wall_drw(   screen, &sat.wallarr[i]);
-            for (i = 0; i < sat.numOf_pln; i++)    plnMenu_drw(screen, &sat.plnarr[i], ev);
+            for (i = 0; i < sat.numOf_pln; i++)    plnMenu_drw(screen, &sat.plnarr[i], ev, tinyfont);
 
             SDL_Flip(screen);
         }//VÉGE: gameStatus == SETTING

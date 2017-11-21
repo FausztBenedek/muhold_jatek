@@ -31,7 +31,10 @@ LevelBox levelBox_add(LevelBox list, int i, int numOf_levelBoxes){ //Minden para
     element->next = NULL;
     element->index = i;
     element->pos = levelBox_getPos(element, numOf_levelBoxes);
-    element->button = button_init(element->pos.x, element->pos.y, levelBox_getWidth(numOf_levelBoxes), MENU_LEVEL_HEIGHT);
+    element->button = button_init(element->pos.x, element->pos.y, levelBox_getWidth(numOf_levelBoxes), MENU_LEVEL_HEIGHT, "");//A stringet manipulálni kell, nem bízom rá a button_init függvényre
+
+    element->button.subscription = (char*) realloc(element->button.subscription, (strlen(X_LEVEL)+2) * sizeof(char));//+2, hogy biztosan legyen elég hely a több helyiértékkel jelölt szinteknek
+    sprintf(element->button.subscription, X_LEVEL, i+1);
 
     element->astrarr = NULL;
     element->numOf_astr = 0;
@@ -39,9 +42,7 @@ LevelBox levelBox_add(LevelBox list, int i, int numOf_levelBoxes){ //Minden para
     element->wallarr = NULL;
     element->numOf_wall = 0;
 
-    element->subscription = (char*) malloc((strlen(X_LEVEL)+1) * sizeof(char));//+1, hogy biztosan legyen elég hely a több helyiértékkel jelölt szinteknek
 
-    sprintf(element->subscription, X_LEVEL, i+1);
 
     //Új elem hozzáadása a listához
     if (list == NULL){
@@ -58,14 +59,7 @@ LevelBox levelBox_add(LevelBox list, int i, int numOf_levelBoxes){ //Minden para
 
 
 void levelBox_drw(SDL_Surface *screen, LevelBox box, int numOf_levels, TTF_Font *font){
-
-    button_drw(screen, &box->button);
-
-    int midx, midy;//Szöveg közepének koordinátái
-    midx = box->pos.x + levelBox_getWidth(numOf_levels)/2;
-    midy = box->pos.y + MENU_LEVEL_HEIGHT/2;
-
-    print(screen, box->subscription, midx, midy,font);
+    button_drw(screen, &box->button, font);
 }
 
 
@@ -78,7 +72,6 @@ void levelBox_upd(LevelBox box, SDL_Event ev){
 
 void levelBox_cleanUp(LevelBox list){
     while (list != NULL){
-//        free(list->subscription);
         LevelBox temp = list->next;
         free(list);
         list = temp;

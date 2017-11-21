@@ -2,13 +2,19 @@
 
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
+#include <SDL_ttf.h>
 #include <stdbool.h>
+#include <string.h>
+
+#include "../tools.h"
 
 
-button button_init(float x, float y, float w, float h){
+button button_init(float x, float y, float w, float h, char *subscription){
     button b;
     b.x = x;    b.y = y;    b.w = w;    b.h = h;
     b.hover = b.clicked = false;
+    b.subscription = (char*) malloc ( (strlen(subscription) + 1) * sizeof(char) );
+    strcpy(b.subscription, subscription);
     return b;
 }
 
@@ -21,7 +27,7 @@ void button_upd(Button b, SDL_Event ev) {
         b->clicked = false;
     }
 }
-void button_drw(SDL_Surface *screen, Button b){
+void button_drw(SDL_Surface *screen, Button b, TTF_Font *font){
     if (b->hover) {
         boxRGBA(screen, b->x, b->y, b->x + b->w, b->y + b->h,
                200, 200, 255, 255
@@ -34,6 +40,7 @@ void button_drw(SDL_Surface *screen, Button b){
     }
     rectangleRGBA(screen, b->x, b->y, b->x + b->w, b->y + b->h, 0, 200, 0, 200);
 
+    print(screen, b->subscription, b->x + b->w/2, b->y + b->h/2, font);
 }
 
 bool button_hover(Button b, SDL_Event ev){
@@ -45,4 +52,8 @@ bool button_hover(Button b, SDL_Event ev){
         b->hover = false;
     }
     return b->hover;
+}
+
+void button_cleanup(Button this){
+    free(this->subscription);
 }

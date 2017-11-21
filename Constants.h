@@ -9,9 +9,13 @@
 #define WALL_BEGIN "Falak:"
 #define WALL_END "VEGE_Falak"
 
-///Egyé sztringek
+///Egyéb sztringek
 #define FONT_LOCATION "/usr/share/fonts/truetype/freefont/FreeSans.ttf"///ENNEK A KARAKTERTÍPUSNAK A SZÉLESSÉGE = MAGASSÁGA/4
 
+//Gomb feliratok
+#define STRMENU "Menü"
+#define STRNEWGAME "Újra"
+#define DEL_PLANET "Törlés"
 
 enum {
     WIDTH = 1000,
@@ -27,6 +31,7 @@ enum {
 
     BIG_FONT_SIZE = 32,
     SMALL_FONT_SIZE = 20,
+    TINY_FONT_SIZE = 16,
     MAX_ROW_LENGTH_IN_FILE = 200
 };
 

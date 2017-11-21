@@ -13,6 +13,7 @@ void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event 
 void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu);
 void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, gameOverScreen gameOverScreen);
 void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Sat s);
+void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat const s);
 
 /*private*/ float levelBox_getWidth(int numOf_levelBoxes);
 

@@ -10,16 +10,11 @@
 #include "../GameStatusSpecific/GameStatus.h"
 #include "Obstacles/Wall.h"
 #include "Planet.h"
-/*private*/void sat_and_pln_collide (enum gameStatus *gameStatus, Sat s);
-/*private*/void sat_and_astr_collide(enum gameStatus *gameStatus, Sat s);
-/*private*/void sat_and_wall_collide(enum gameStatus *gameStatus, Sat s);
-/*private*/void pln_and_astr_collide(enum gameStatus *gameStatus, Sat s);
+
 /*private*/void calcResultantForceForSat(Sat s);
 
 void sat_plnarr_button_del_action(Sat s);
 
-
-///Mittomen
 sat sat_init(float x, float y, float rad){
     sat s;
     s.pos = vect_init(x, y);
@@ -60,9 +55,9 @@ void sat_drw(SDL_Surface *screen, Sat const s){
     gate_drw(screen, &s->gate);
 }
 
-///----------------------------------
-///Hatások az objektumoktól
-///----------------------------------
+//----------------------------------
+//Hatások az objektumoktól
+//----------------------------------
 
 void sat_RUNNING_upd(Sat s){
 
@@ -115,55 +110,6 @@ void sat_SETTINGS_upd(Sat s, SDL_Event ev){
     //Törölni a bolygót, ha a törlés gombra klikkelünk
     sat_plnarr_button_del_action(s);
 }
-
-void sat_changeGameIfCollision(enum gameStatus *gameStatus, Sat s) {
-    sat_and_pln_collide (gameStatus, s);
-    sat_and_astr_collide(gameStatus, s);
-    sat_and_wall_collide(gameStatus, s);
-    pln_and_astr_collide(gameStatus, s);
-
-}
-/*private*/void sat_and_pln_collide (enum gameStatus *gameStatus, Sat s){
-    int i;
-    for (i = 0; i < s->numOf_pln; i++){//Műhold & Bolygó
-        if (circlesCollide(s->pos, s->rad, s->plnarr[i].pos, pln_getRad(&s->plnarr[i]))){
-            *gameStatus = GAMEOVER;
-            sat_resetMotion(s);
-        }
-    }
-}
-/*private*/void sat_and_astr_collide(enum gameStatus *gameStatus, Sat s){
-    int i;
-    for (i = 0; i < s->numOf_astr; i++){//Műhold & Aszteroida
-        if (circlesCollide(s->pos, s->rad, s->astrarr[i].pos, s->astrarr[i].rad)){
-            *gameStatus = GAMEOVER;
-            sat_resetMotion(s);
-        }
-    }
-}
-/*private*/void sat_and_wall_collide(enum gameStatus *gameStatus, Sat s){
-    int i;
-    for (i = 0; i < s->numOf_wall; i++){
-      //float dist = a kör közepétől a négyzet legközelebb lévő pontjába mutató vektor hossza
-        float dist = magnitudeOf(differenceOf(s->pos, wall_closestPointToCircle(&s->wallarr[i], s->pos)));
-        if (dist < s->rad){
-            *gameStatus = GAMEOVER;
-            sat_resetMotion(s);
-        }
-    }
-}
-/*private*/void pln_and_astr_collide(enum gameStatus *gameStatus, Sat s){
-    int i, j;
-    for (i = 0; i < s->numOf_pln; i++){//Műhold & Bolygó
-        for (j = 0; j < s->numOf_astr; j++){//Bolygó & Aszteroida
-            if (circlesCollide(s->astrarr[j].pos, s->astrarr[j].rad, s->plnarr[i].pos, pln_getRad(&s->plnarr[j]))){
-                *gameStatus = GAMEOVER;
-                sat_remPln(s, i);
-                sat_resetMotion(s);
-            }
-        }
-    }
-}
 /*private*/ void calcResultantForceForSat(Sat s) {//Ezt a függvényt az sat_upd() függvényben hívjuk meg, és az eredő erőt számoljuk ki vele
     /*
     Gravitáció törvénye: F = G * m1 * m2 /d^2
@@ -197,19 +143,19 @@ void sat_changeGameIfCollision(enum gameStatus *gameStatus, Sat s) {
     multVect(   &(s->force)     , 8);
 }
 
-///----------------------------------
-///Bolygókhoz tartozó függvények
-///----------------------------------
+//----------------------------------
+//Bolygókhoz tartozó függvények
+//----------------------------------
 
-void sat_addPln(Sat s, Pln p) {//Hozzáad egy fekete lyukat a planet-hez és false tér vissza, ha túlindexelés van (sikeres volt-e a hozzáadás)
+void sat_addPln(Sat s, Pln p) {
     if (s->numOf_pln == 0){
         s->plnarr = (Pln) malloc(sizeof(struct planet));
     }
     else {
         s->plnarr = (Pln) realloc(s->plnarr, (s->numOf_pln + 1) * sizeof(struct planet));
     }
-    s->plnarr[s->numOf_pln] = *p; //Majd hozzáadjuk a következő helyhez
-    s->numOf_pln++; //Megnöveljük a számukat tároló változót
+    s->plnarr[s->numOf_pln] = *p;
+    s->numOf_pln++;
 }
 
 bool sat_remPln(Sat s, int index) {
@@ -233,9 +179,9 @@ void sat_plnarr_button_del_action(Sat s){
     }
 }
 
-///----------------------------------
-///Aszteroidákhoz tartozó függvények
-///----------------------------------
+//----------------------------------
+//Aszteroidákhoz tartozó függvények
+//----------------------------------
 Astr sat_astr_init(Sat s){
     s->numOf_astr = 1;///!!!FÁJLBÓL KELL MAJD OLVASNI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     int i;

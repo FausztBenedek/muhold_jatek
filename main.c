@@ -110,7 +110,7 @@ int game() {
             ///Update
             ///......
                     sat_RUNNING_upd(&sat);
-                    sat_changeGameIfCollision(&gameStatus, &sat);
+                    game_status_from_RUNNING_to_GAMEOVER(&gameStatus, &sat);
                     SDL_Flip(screen);
                     break;
                 default: break;

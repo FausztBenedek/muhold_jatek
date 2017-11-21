@@ -33,27 +33,66 @@ struct satellite{
 
     gate gate;
 };
-
+/**Inicializál egy műholdat minden értéket 0-ra illetve a pointereket NULL-ra állítja.
+*@param x   koordináta vízszintes komponense
+*@param y   koordináta függőleges komponense
+*@param rad   műholdat kirajzoló kör sugara
+*@return Az inicializált műhold
+*/
 sat sat_init(float x, float y, float rad);
+
+///Visszaállítja a műhold kiindulási helyzetét.
+///Megírás oka: Nem törli ki a bolygókat, de újrainicializál.
 void sat_resetMotion(Sat s); //Újrainicializál a bolygók eltörlése nélkül
+
+///Felszabadítja a műhold osztály által lefoglalt memóriát.
 void sat_game_cleanup(Sat s);
 
+/**Kirajzolja a műhold aktuális helyzetét a képernyőre.
+*Felhasználja a pozíciót, és a sugarat.
+*A kaput megrajzoló függvény is itt hívódik meg.
+*/
 void sat_drw(SDL_Surface *screen, Sat const s);//Megrajzolja a műholdat
 
-//Hatások az objektumoktól
-void sat_RUNNING_upd(Sat s);//Frissíti az adatokat (satellite_update())
+/**A műhold változóinak a változásáért felelős RUNNING állapotban.
+*   1. Kiszámolja az eredő erőt.
+*   2. Megoldja, hogy a műhold visszapattanjon a képernyő széléről
+*/
+void sat_RUNNING_upd(Sat s);
+
+/**A műhold változóinak a változásáért felelős SETTING állapotban
+*   1. Bolygókat ad hozzá oda ahova kattintunk, illetve letilt bizonyos helyeket
+*   2. Ehhez teszteli, hogy mi az aktuális event
+*/
 void sat_SETTINGS_upd(Sat s, SDL_Event ev);
-void sat_changeGameIfCollision(enum gameStatus *gameStatus, Sat const s);
 
 //Bolygókhoz tartozó függvények
-void sat_addPln(Sat s, Pln const p);//Hozzáad egy bolygót a műholdhoz és false-al tér vissza, ha túlindexelés van
-bool sat_remPln(Sat s, int index); //Törli a bolygót lyukat a műhold struktúrájából (removePlanet()), visszatér, hogy sikeres-e
+/**Hozzáad egy már inicializált bolygót a játékhoz és eltárolja műhold plnarr változójában
+**@param p   az inicializált bolygó
+*/
+void sat_addPln(Sat s, Pln const p);
+/**Töröl egybolygót a műhold listájából, ha a bolygó eltávolítható.
+*@param index   Minden bolygónak van egy egyedi indexe, ez megfelel a bolygótömb indexének
+*@return    Ha a bolygó eltávolítható akkor true, ha nem akkor false
+*/
+bool sat_remPln(Sat s, int index);
 
-//Aszteroidákhoz tartozó függvények
-Astr sat_astr_init(Sat s);
-
-//Falakhoz tartozó függvények
+/**Beolvassa a falakhoz szükséges információakt fájból.
+*   1. Bal oldal,
+*   2. Felső oldal,
+*   3. Szélesség,
+*   4. Magasság
+*@param level   Szint száma a fájl szerint (0.-tól indul)
+*@param settings    Fájl elejére mutató pointer
+*/
 void sat_wall_init(Sat s, int level, FILE *settings);
+
+/**Beolvassa a kapuhoz szükséges információakt fájból.
+*   1. Felső oldal,
+*   2. Magasság
+*@param level   Szint száma a fájl szerint (0.-tól indul)
+*@param settings    Fájl elejére mutató pointer
+*/
 void sat_gate_init(Sat this, int level, FILE *settings);
 
 

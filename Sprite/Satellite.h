@@ -54,5 +54,7 @@ Astr sat_astr_init(Sat s);
 
 //Falakhoz tartozó függvények
 void sat_wall_init(Sat s, int level, FILE *settings);
+void sat_gate_init(Sat this, int level, FILE *settings);
+
 
 #endif // PLANET_H

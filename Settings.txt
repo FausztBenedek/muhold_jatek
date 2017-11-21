@@ -2,21 +2,38 @@ Beallitasok
 Falak: (bal oldal, felso oldal, szelesseg, magassag)
 Kapu: (felso oldal, magassag)
 0.Szint
+    KEZD_Kapu
+        0, 100
+    VEGE_Kapu
+
     KEZD_Falak:
-        400, 0, 200, 250
+        400, 0, 200, 200
         0, 250, 300, 250
         700, 250, 300, 250
     VEGE_Falak
+
 1.Szint
+    KEZD_Kapu
+        0, 500
+    VEGE_Kapu
+
     KEZD_Falak:
         400, 0, 200, 250    
     VEGE_Falak
 2.Szint
+    KEZD_Kapu
+        0, 500
+    VEGE_Kapu
+
     KEZD_Falak:
         0, 250, 300, 250
         0, 0, 100, 100
     VEGE_Falak
 3.Szint
+    KEZD_Kapu
+        0, 500
+    VEGE_Kapu
+
     KEZD_Falak:
         0, 0, 50, 50
     VEGE_Falak

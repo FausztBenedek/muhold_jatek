@@ -44,7 +44,6 @@ void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, S
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         if (gameOverScreen.toMenu.clicked){
             *gameStatus = MENU;
-            sat_game_cleanup(s);
         }
 
         if (gameOverScreen.newGame.clicked){

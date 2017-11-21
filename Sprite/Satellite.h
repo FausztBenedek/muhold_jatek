@@ -28,8 +28,6 @@ struct satellite{
     int numOf_wall;///<A műholdat akadályozó falak száma (info fájlból olvasva)
 
     gate gate;///<A kaput tároló struktúra. Itt kell átjutnia a műholdnak.
-
-    int attempts///<A probálkozások számát tároló változó
 };
 /**Inicializál egy műholdat minden értéket 0-ra illetve a pointereket NULL-ra állítja.
 *@param x   koordináta vízszintes komponense

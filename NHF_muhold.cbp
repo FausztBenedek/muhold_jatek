@@ -93,6 +93,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Sprite/Satellite.h" />
+		<Unit filename="Storage/Data.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Storage/Data.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

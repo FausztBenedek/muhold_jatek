@@ -6,8 +6,11 @@
 
 #define X_LEVEL "%d.Szint"
 #define LEVEL_IDENTIFIER "Szint"
+
 #define WALL_BEGIN "KEZD_Falak:"
 #define WALL_END "VEGE_Falak"
+#define GATE_BEGIN "KEZD_Kapu"
+#define GATE_END "VEGE_Kapu"
 
 ///Egyéb sztringek
 #define FONT_LOCATION "/usr/share/fonts/truetype/freefont/FreeSans.ttf"///ENNEK A KARAKTERTÍPUSNAK A SZÉLESSÉGE = MAGASSÁGA/4

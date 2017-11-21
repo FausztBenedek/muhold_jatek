@@ -256,7 +256,7 @@ Astr sat_astr_init(Sat s){
 }
 
 void sat_wall_init(Sat s, int level, FILE *settings){
-        //A keresett infókig vaóló eljutás
+    //A keresett infókig vaóló eljutás
 
     char row[MAX_ROW_LENGTH_IN_FILE]; // "X.Szint'0'" = 8 karakter
     sprintf(row, X_LEVEL, level);
@@ -286,11 +286,26 @@ void sat_wall_init(Sat s, int level, FILE *settings){
     for (i = 0; i < s->numOf_wall; i++){
         fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);
         int x, y, w, h;
-        sscanf(row, "%d, %d, %d, %d;", &x, &y, &w, &h);
+        sscanf(row, "%d, %d, %d, %d", &x, &y, &w, &h);
         s->wallarr[i] = wall_init(x, y, w, h);
     }
-    return;
 
 }
+
+void sat_gate_init(Sat this, int level, FILE *settings){
+    //A keresett infókig vaóló eljutás
+    char row[MAX_ROW_LENGTH_IN_FILE]; // "X.Szint'0'" = 8 karakter
+    sprintf(row, X_LEVEL, level);
+    goto_word_in_file(settings, row, MAX_ROW_LENGTH_IN_FILE);
+
+
+
+    goto_word_in_file(settings, GATE_BEGIN, MAX_ROW_LENGTH_IN_FILE);
+    fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);
+    int y, h;
+    sscanf(row, "%d, %d", &y, &h);
+    this->gate = gate_init(y, y+h);
+}
+
 
 

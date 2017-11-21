@@ -2,6 +2,8 @@
 
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "../Constants.h"
 #include "../Sprite/Satellite.h"
@@ -61,6 +63,9 @@ void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, S
     if (settings == NULL) return;
 
     sat_wall_init(sat, level, settings);
+    fseek(settings, 0, SEEK_SET);
+
+    sat_gate_init(sat, level, settings);
 
     fclose(settings);
 

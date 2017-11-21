@@ -18,6 +18,7 @@
 //Gomb feliratok
 #define STRMENU "Menü"
 #define STRNEWGAME "Újra"
+#define STRNEXTLEVEL "Következő pálya"
 #define DEL_PLANET "Törlés"
 
 enum {

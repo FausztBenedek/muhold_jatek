@@ -65,6 +65,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="GameStatusSpecific/SETTING/Initialized_orbit_calculator.h" />
+		<Unit filename="GameStatusSpecific/WINNING/winning.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GameStatusSpecific/WINNING/winning.h" />
 		<Unit filename="Physics/Vector.c">
 			<Option compilerVar="CC" />
 		</Unit>

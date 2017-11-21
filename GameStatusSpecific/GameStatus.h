@@ -7,6 +7,7 @@ enum gameStatus {
     RUNNING,
     SETTING,
     MENU,
+    WINNING,
     GAMEOVER
 };
 

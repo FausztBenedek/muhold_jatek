@@ -13,6 +13,7 @@
 #include "GameStatusSpecific/MENU/Menu.h"
 #include "tools.h"
 #include "GameStatusSpecific/GAMEOVER/gameover.h"
+#include "GameStatusSpecific/WINNING/winning.h"
 
 Uint32 time_func(Uint32 sec, void *pointer);
 
@@ -44,7 +45,7 @@ int game() {
 
     menu menu = menu_init();
     gameOverScreen gameOverScreen = gameOverScreen_init();
-    WinningScreen winningScreen = winningScree_init();
+    WinningScreen winningScreen = winningScreen_init();
 
     sat sat = sat_init(10, HEIGHT/5, 10);
 
@@ -161,8 +162,8 @@ int game() {
             boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
             winningScreen_drw(screen, winningScreen, smallfont);
 
-            print(screen, "VESZTETTÉL", WIDTH/2, HEIGHT/7, bigfont);
-            print(screen, "Próbáld újra!",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
+            print(screen, "EZAZ!", WIDTH/2, HEIGHT/7, bigfont);
+            print(screen, "Elérhető a következő pálya",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
 
             SDL_Flip(screen);
         }

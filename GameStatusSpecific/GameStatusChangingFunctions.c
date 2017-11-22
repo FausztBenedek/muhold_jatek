@@ -43,7 +43,7 @@ void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev,
         for (i = 0, iter = menu->levelarr; i < menu->numOf_levels; i++, iter = iter->next){
             if (iter->button.clicked){
                 open_level(iter->index, s);
-                data->activeLevel = iter->index;
+                data_changeActiveLevel(data, iter->index);
                 *gameStatus = SETTING;
                 break;
             }
@@ -81,10 +81,11 @@ void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, S
 }
 
 
-void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Sat s){
+void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Sat s, Data *data){
     if (sat_touched_gate(s)){
         sat_resetMotion(s);
         *gameStatus = WINNING;
+        data->solved[data->activeLevel] = true;
     }
 }
 /*private*/bool sat_touched_gate(Sat s){

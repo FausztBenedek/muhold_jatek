@@ -59,6 +59,7 @@ int game() {
 ///  JÁTÉK LOOP
 ///  ---------------------------------------------
     while (gameStatus != QUITTING){
+    if (data.solved[0]) printf("1. szint teljesitve");
     ///*****************************
     ///  MENÜ LOOP
     ///*****************************
@@ -93,7 +94,7 @@ int game() {
 
             SDL_WaitEvent(&ev);
             game_status_from_RUNNING_to_SETTING(&gameStatus, ev, &sat, &data);
-            game_status_from_RUNNING_to_WINNING(&gameStatus, &sat);
+            game_status_from_RUNNING_to_WINNING(&gameStatus, &sat, &data);
 
             switch (ev.type){
                 case SDL_QUIT:

@@ -4,7 +4,7 @@
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
 #include <SDL_ttf.h>
-#include <SDL_bool.h>
+#include <stdbool.h>
 
 #include "../GameStatusSpecific/Button.h"
 
@@ -25,9 +25,9 @@ typedef struct Data{
 Data data_read_in(int level);
 
 
-//*Visszaállítja az aktuálist szintet -1-re, ami azt jelenti, hogy nincsen aktuális szint.
-//*/
-//void data_changeActiveLevel(Data *this, int newActiveLevel);
+/**Visszaállítja az aktuálist szintet -1-re, ami azt jelenti, hogy nincsen aktuális szint.
+*/
+void data_changeActiveLevel(Data *this, int newActiveLevel);
 
 
 /**Mivel a data struktúrába a menüből, és más helyekről futás idő alatt gomb benyomására kell változtatni,

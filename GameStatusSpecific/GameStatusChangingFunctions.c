@@ -136,7 +136,6 @@ void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, 
             int i;
             for (i = 0, iter = menu->levelarr; i < menu->numOf_levels; i++, iter = iter->next){
                 if (i == menu->numOf_levels -1){//Ha az utolsó pályán nyertél és megnyomod a következő gombot, akkor irány a menü
-                    printf("HELLO");
                     *gameStatus = MENU;
                     sat_resetInitialState(s);
                 }

@@ -71,5 +71,3 @@ void goto_word_in_file(FILE *file, char* word, int rowMax){
     char string[rowMax];
     while(fgets(string, rowMax, file) != NULL  &&  strstr(string, word) == NULL);
 }
-
-

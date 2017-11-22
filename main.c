@@ -59,7 +59,6 @@ int game() {
 ///  JÁTÉK LOOP
 ///  ---------------------------------------------
     while (gameStatus != QUITTING){
-    if (data.solved[0]) printf("1. szint teljesitve");
     ///*****************************
     ///  MENÜ LOOP
     ///*****************************
@@ -70,7 +69,7 @@ int game() {
             ///......
             ///Update
             ///......
-            menu_upd(&menu, ev);
+            menu_upd(&menu, ev, data);
             data_upd(&data, ev);
             game_status_from_MENU_to_SETTING(&gameStatus, ev, &sat, &menu, &data);
 

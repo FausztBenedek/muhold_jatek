@@ -15,10 +15,15 @@ menu menu_init(){//Minden paraméterét a fájlból olvassa
     return theMenu;
 }
 
-void menu_upd(Menu theMenu, SDL_Event ev){
+void menu_upd(Menu theMenu, SDL_Event ev, Data data){
     LevelBox iter;
     for (iter = theMenu->levelarr; iter != NULL; iter = iter->next){
-        levelBox_upd(iter, ev);
+        if (iter->index == 0){//A 0. szintnek mindig aktívnak kell lennie
+            levelBox_upd(iter, ev);
+        }
+        else if (data.solved[iter->index-1]){//A többinek csak akkor, ha az elötte lévő teljesítve van
+            levelBox_upd(iter, ev);
+        }
     }
 
 }

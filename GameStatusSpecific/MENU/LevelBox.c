@@ -66,6 +66,19 @@ void levelBox_drw(SDL_Surface *screen, LevelBox box, int numOf_levels, TTF_Font 
     sprintf(str, "%d próba", data.attempts[box->index]);
 
     print(screen, str, box->pos.x + levelBox_getWidth(numOf_levels)/2, box->pos.y + MENU_LEVEL_HEIGHT*1.5, font);
+
+    if (box->index != 0 && !data.solved[box->index-1]){//Számít a sorrend, mert ha index = 0 akkor a tömb -1-dik elemére hivatkozunk
+        lineRGBA(screen,
+                 box->pos.x, box->pos.y,
+                 box->pos.x + levelBox_getWidth(numOf_levels), box->pos.y + MENU_LEVEL_HEIGHT,
+                 200, 0, 0, 255
+                );
+        lineRGBA(screen,
+                 box->pos.x+ levelBox_getWidth(numOf_levels), box->pos.y,
+                 box->pos.x, box->pos.y + MENU_LEVEL_HEIGHT,
+                 200, 0, 0, 255
+                );
+    }
 }
 
 

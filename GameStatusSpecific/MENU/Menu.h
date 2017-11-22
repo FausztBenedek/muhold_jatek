@@ -17,7 +17,7 @@ struct menu{
 
 menu menu_init();
 
-void menu_upd(Menu theMenu, SDL_Event ev);
+void menu_upd(Menu theMenu, SDL_Event ev, Data data);
 
 void menu_drw(SDL_Surface *screen, menu theMenu, TTF_Font *font, Data data);
 

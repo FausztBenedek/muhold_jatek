@@ -31,10 +31,12 @@ static void read_from_file(int *numOf_level, bool *solvedarr, int *attemptsarr){
     for (int i = 0; i < *numOf_level; i++){
         fscanf(fp, "%d. Szint:\n", &j);
         if (0 == fscanf(fp, "\tSikertelen probalkozasok szama:\t%d\n", &attemptsarr[i]))    attemptsarr[i] = 0;
-        if (0 == fscanf(fp, "\tTeljesitett szint:\t%s", checker))                           strcpy(checker, "Nem\n");
+        if (0 == fscanf(fp, "\tTeljesitett szint:\t%s", checker))                           strcpy(checker, "Nem");
         fscanf(fp, "\n");
 
-        if (NULL != strstr(checker, "Igen\n"))    solvedarr[i] = true;
+        printf("%s", checker);
+
+        if (NULL != strstr(checker, "Igen"))    solvedarr[i] = true;
         else                        solvedarr[i] = false;
 
         if (i != j) {/*baj van*/}

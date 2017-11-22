@@ -50,6 +50,7 @@ int game() {
     gameOverScreen gameOverScreen = gameOverScreen_init();
     WinningScreen winningScreen = winningScreen_init();
 
+    button toMenu = button_init(20, 20, 100, 40, STRMENU);
 
     sat sat = sat_init(10, HEIGHT/5, 10);
 
@@ -72,6 +73,9 @@ int game() {
             menu_upd(&menu, ev, data);
             data_upd(&data, ev);
             game_status_from_MENU_to_SETTING(&gameStatus, ev, &sat, &menu, &data);
+            button_upd(&toMenu, ev);
+
+
 
             ///......
             ///Draw
@@ -82,6 +86,8 @@ int game() {
 
             print(screen, "ISTEN HOZOTT!", WIDTH/2, HEIGHT/7, bigfont);
             print(screen, "Válassz egy szintet!",WIDTH/2, HEIGHT/7+BIG_FONT_SIZE+10, bigfont);
+
+            button_drw(screen, &toMenu, smallfont);
 
             SDL_Flip(screen);
         } //VÉGE: gameStatus == MENU
@@ -94,6 +100,8 @@ int game() {
             SDL_WaitEvent(&ev);
             game_status_from_RUNNING_to_SETTING(&gameStatus, ev, &sat, &data);
             game_status_from_RUNNING_to_WINNING(&gameStatus, &sat, &data);
+            game_status_from_RUNNING_to_GAMEOVER(&gameStatus, &sat, &data);
+
 
             switch (ev.type){
                 case SDL_QUIT:
@@ -111,16 +119,27 @@ int game() {
                     sat_drw(screen, &sat);
                     for (i = 0; i < sat.numOf_pln; i++)     pln_drw(screen, &sat.plnarr[i] );
                     for (i = 0; i < sat.numOf_wall; i++)    wall_drw(screen, &sat.wallarr[i]);
+                    button_drw(screen, &toMenu, smallfont);
 
             ///......
             ///Update
             ///......
                     sat_RUNNING_upd(&sat);
-                    game_status_from_RUNNING_to_GAMEOVER(&gameStatus, &sat, &data);
-                    SDL_Flip(screen);
+                    break;
+
+                case SDL_MOUSEMOTION:
+                    /*FALL THROUGH*/
+
+                case SDL_MOUSEBUTTONDOWN:
+                    button_upd(&toMenu, ev);
                     break;
                 default: break;
             }
+
+            SDL_Flip(screen);
+
+
+
         } //VÉGE: gameStatus == RUNNING
     ///*****************************
     ///  GAMEOVER
@@ -136,6 +155,8 @@ int game() {
 
             gameOverScreen_upd(&gameOverScreen, ev);
             game_status_from_GAMEOVER_to_MENU_or_SETTING(&gameStatus, ev, &sat, gameOverScreen);
+            button_upd(&toMenu, ev);
+
 
             ///......
             ///Draw
@@ -143,6 +164,7 @@ int game() {
 
             boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
             gameOverScreen_drw(screen, gameOverScreen, smallfont);
+            button_drw(screen, &toMenu, smallfont);
 
             print(screen, "VESZTETTÉL", WIDTH/2, HEIGHT/7, bigfont);
             print(screen, "Próbáld újra!",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
@@ -162,6 +184,8 @@ int game() {
 
             winningScreen_upd(&winningScreen, ev);
             game_status_from_WINNING_to_MENU_or_NEXTLEVEL(&gameStatus, ev, &sat, winningScreen, &data, &menu);
+            button_upd(&toMenu, ev);
+
 
             ///......
             ///Draw
@@ -169,6 +193,7 @@ int game() {
 
             boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
             winningScreen_drw(screen, winningScreen, smallfont);
+            button_drw(screen, &toMenu, smallfont);
 
             print(screen, "EZAZ!", WIDTH/2, HEIGHT/7, bigfont);
             print(screen, "Elérhető a következő pálya",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
@@ -182,20 +207,17 @@ int game() {
             SDL_WaitEvent(&ev);
             game_status_from_SETTING_to_RUNNING(&gameStatus, ev, &sat);
 
-            switch (ev.type) {
-                case SDL_QUIT:
-                    gameStatus = QUITTING;
-                    break;
+            if (ev.type == SDL_QUIT) gameStatus = QUITTING;
+
             ///......
             ///Update
             ///......
-                case SDL_USEREVENT:
-                    break;
-            }
             sat_SETTINGS_upd(&sat, ev);
             for (i = 0; i < sat.numOf_pln; i++)    pln_upd(&sat.plnarr[i], ev);
             for (i = 0; i < sat.numOf_pln; i++)    plnMenu_upd(&sat.plnarr[i], ev);
             helplt_upd(&plots, &sat, ev);
+            button_upd(&toMenu, ev);
+
             ///......
             ///Draw
             ///......
@@ -208,6 +230,7 @@ int game() {
             for (i = 0; i < sat.numOf_pln; i++)    pln_drw(    screen, &sat.plnarr[i]);
             for (i = 0; i < sat.numOf_wall; i++)   wall_drw(   screen, &sat.wallarr[i]);
             for (i = 0; i < sat.numOf_pln; i++)    plnMenu_drw(screen, &sat.plnarr[i], ev, tinyfont);
+            button_drw(screen, &toMenu, smallfont);
 
             SDL_Flip(screen);
         }//VÉGE: gameStatus == SETTING

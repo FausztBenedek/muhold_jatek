@@ -38,7 +38,8 @@ void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat const
 *@param *gameStatus Ez a függvény megváltoztatja az állapotot a feltételek kiértékelését követően
 *@param ev Az állapotváltás függ az aktuális event-től
 */
-void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Sat s, WinningScreen winningScreen);
+void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Sat s,
+                                                   WinningScreen winningScreen, Data *data, Menu menu);
 
 
 /*private*/ float levelBox_getWidth(int numOf_levelBoxes);

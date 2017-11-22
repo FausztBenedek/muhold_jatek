@@ -37,7 +37,6 @@ void sat_resetMotion(Sat s){
 
 void sat_resetInitialState(sat *this){
     sat_resetMotion(this);
-    if (this->wallarr == NULL) printf("HELLO");
 
     free(this->wallarr);
     this->wallarr = NULL;

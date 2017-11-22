@@ -50,6 +50,19 @@ void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev,
         }
     }
 }
+/*private*/void open_level(int level, Sat sat){
+    FILE *settings;
+    settings = fopen(SETTINGS, "r");
+    if (settings == NULL) return;
+
+    sat_wall_init(sat, level, settings);
+    fseek(settings, 0, SEEK_SET);
+
+    sat_gate_init(sat, level, settings);
+
+    fclose(settings);
+}
+
 
 void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, gameOverScreen gameOverScreen){
     if (ev.type == SDL_MOUSEBUTTONDOWN){
@@ -66,19 +79,6 @@ void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, S
 }
 
 
-/*private*/void open_level(int level, Sat sat){
-    FILE *settings;
-    settings = fopen(SETTINGS, "r");
-    if (settings == NULL) return;
-
-    sat_wall_init(sat, level, settings);
-    fseek(settings, 0, SEEK_SET);
-
-    sat_gate_init(sat, level, settings);
-
-    fclose(settings);
-
-}
 
 
 void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Sat s, Data *data){
@@ -123,7 +123,8 @@ void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat s, Da
     }
 }
 
-void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Sat s, WinningScreen winningScreen){
+void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Sat s,
+                                                   WinningScreen winningScreen, Data *data, Menu menu){
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         if (winningScreen.toMenu.clicked){
             *gameStatus = MENU;
@@ -131,7 +132,17 @@ void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, 
         }
 
         if (winningScreen.nextLevel.clicked){
-
+            LevelBox iter;
+            int i;
+            for (i = 0, iter = menu->levelarr; i < menu->numOf_levels; i++, iter = iter->next){
+                if (!data->solved[i]){//Amint megtalálta az első olyat, amelyik még nincs megoldva, akkor...
+                    sat_resetInitialState(s);
+                    open_level(i, s);
+                    data_changeActiveLevel(data, i);
+                    *gameStatus = SETTING;
+                    break;
+                }
+            }
         }
     }
 }

@@ -28,6 +28,7 @@ A gombok mûködése:
 button button_init(float x, float y, float w, float h, char *subscription);
 
 void button_upd(Button b, SDL_Event ev);
+
 void button_drw(SDL_Surface *screen, Button b, TTF_Font *font);
 
 bool button_hover(Button b, SDL_Event ev);

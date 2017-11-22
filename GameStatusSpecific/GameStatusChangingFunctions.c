@@ -151,3 +151,11 @@ void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, 
     }
 }
 
+void game_status_button_toMenuButton_upd(Button b, SDL_Event ev, Sat s, enum gameStatus *gameStatus){
+    button_upd(b, ev);
+    if (b->clicked){
+        *gameStatus = MENU;
+        sat_resetInitialState(s);
+    }
+}
+

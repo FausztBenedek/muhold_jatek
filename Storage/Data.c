@@ -42,7 +42,7 @@ static void read_from_file(int *numOf_level, bool *solvedarr, int *attemptsarr){
     if (    0 == fscanf(fp, "Szintek szama:\t%d\n\n", numOf_level)  )
         return;
 
-    for (int i = 0; i < *numOf_level; i++){
+    for (i = 0; i < *numOf_level; i++){
         fscanf(fp, "%d. Szint:\n", &j);
         if (0 == fscanf(fp, "\tSikertelen probalkozasok szama:\t%d\n", &attemptsarr[i]))    attemptsarr[i] = 0;
         if (0 == fscanf(fp, "\tTeljesitett szint:\t%s", checker))                           strcpy(checker, "Nem");

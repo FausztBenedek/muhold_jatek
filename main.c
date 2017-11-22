@@ -73,7 +73,7 @@ int game() {
             menu_upd(&menu, ev, data);
             data_upd(&data, ev);
             game_status_from_MENU_to_SETTING(&gameStatus, ev, &sat, &menu, &data);
-            button_upd(&toMenu, ev);
+            game_status_button_toMenuButton_upd(&toMenu, ev, &sat, &gameStatus);
 
 
 
@@ -131,7 +131,7 @@ int game() {
                     /*FALL THROUGH*/
 
                 case SDL_MOUSEBUTTONDOWN:
-                    button_upd(&toMenu, ev);
+                    game_status_button_toMenuButton_upd(&toMenu, ev, &sat, &gameStatus);
                     break;
                 default: break;
             }
@@ -155,7 +155,7 @@ int game() {
 
             gameOverScreen_upd(&gameOverScreen, ev);
             game_status_from_GAMEOVER_to_MENU_or_SETTING(&gameStatus, ev, &sat, gameOverScreen);
-            button_upd(&toMenu, ev);
+            game_status_button_toMenuButton_upd(&toMenu, ev, &sat, &gameStatus);
 
 
             ///......
@@ -184,7 +184,7 @@ int game() {
 
             winningScreen_upd(&winningScreen, ev);
             game_status_from_WINNING_to_MENU_or_NEXTLEVEL(&gameStatus, ev, &sat, winningScreen, &data, &menu);
-            button_upd(&toMenu, ev);
+            game_status_button_toMenuButton_upd(&toMenu, ev, &sat, &gameStatus);
 
 
             ///......
@@ -216,7 +216,7 @@ int game() {
             for (i = 0; i < sat.numOf_pln; i++)    pln_upd(&sat.plnarr[i], ev);
             for (i = 0; i < sat.numOf_pln; i++)    plnMenu_upd(&sat.plnarr[i], ev);
             helplt_upd(&plots, &sat, ev);
-            button_upd(&toMenu, ev);
+            game_status_button_toMenuButton_upd(&toMenu, ev, &sat, &gameStatus);
 
             ///......
             ///Draw

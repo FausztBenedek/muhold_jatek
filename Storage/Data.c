@@ -34,13 +34,16 @@ static void read_from_file(int *numOf_level, bool *solvedarr, int *attemptsarr){
     if (fp == NULL){//Csinálunk egy fájlt
         fp = fopen("Save.txt", "wt");
         fclose(fp);
+        *numOf_level = -1;
     }
     int i, j;
     char checker[7];
 
     //fscanf meghívva, és visszatéréri értéke ellenőrizve felesleges deklaráció nélkül
-    if (    0 == fscanf(fp, "Szintek szama:\t%d\n\n", numOf_level)  )
+    if (    0 == fscanf(fp, "Szintek szama:\t%d\n\n", numOf_level)  ){
+        *numOf_level = -1;
         return;
+    }
 
     for (i = 0; i < *numOf_level; i++){
         fscanf(fp, "%d. Szint:\n", &j);

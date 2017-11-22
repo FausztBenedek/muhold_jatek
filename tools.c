@@ -20,7 +20,7 @@ void print(SDL_Surface *screen, char *text, int midx, int midy, TTF_Font *font){
     y = midy - h/2;
 
     SDL_Color textColor = {0, 0, 0};
-    SDL_Surface *subscription = TTF_RenderUTF8_Solid(font, text, textColor);
+    SDL_Surface *subscription = TTF_RenderUTF8_Blended(font, text, textColor);
 
     SDL_Rect place = {x, y, x + w, y + h};
     SDL_BlitSurface(subscription, NULL, screen, &place);

@@ -33,15 +33,15 @@ void button_upd(Button b, SDL_Event ev) {
 void button_drw(SDL_Surface *screen, Button b, TTF_Font *font){
     if (b->hover) {
         boxRGBA(screen, b->x, b->y, b->x + b->w, b->y + b->h,
-               200, 200, 255, 255
+               230, 230, 230, 255
                 );
     }
     else {
         boxRGBA(screen, b->x, b->y, b->x + b->w, b->y + b->h,
-                200, 200, 255, 100
+                200, 200, 200, 255
                 );
     }
-    rectangleRGBA(screen, b->x, b->y, b->x + b->w, b->y + b->h, 0, 200, 0, 200);
+    rectangleRGBA(screen, b->x, b->y, b->x + b->w, b->y + b->h, 0, 100, 0, 255);
 
     print(screen, b->subscription, b->x + b->w/2, b->y + b->h/2, font);
 }

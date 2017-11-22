@@ -71,12 +71,12 @@ void levelBox_drw(SDL_Surface *screen, LevelBox box, int numOf_levels, TTF_Font 
         lineRGBA(screen,
                  box->pos.x, box->pos.y,
                  box->pos.x + levelBox_getWidth(numOf_levels), box->pos.y + MENU_LEVEL_HEIGHT,
-                 200, 0, 0, 255
+                 0, 100, 0, 255
                 );
         lineRGBA(screen,
                  box->pos.x+ levelBox_getWidth(numOf_levels), box->pos.y,
                  box->pos.x, box->pos.y + MENU_LEVEL_HEIGHT,
-                 200, 0, 0, 255
+                 0, 100, 0, 255
                 );
     }
 }

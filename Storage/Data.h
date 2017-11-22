@@ -11,8 +11,11 @@
 /**A Data struktúra a játék adatainak tárolására alkalmas
 */
 typedef struct Data{
-    int *attempts;///<A próbálkozások számát tárolja egy tömbben, amely akkora, ahány szint van. Ezt a számot menu struktúrától kéri el.
+
+    int numOf_level;///<A szintek számát tárolja. A menütől struktúrából másolja át.
+
     int activeLevel;///Az éppen aktuális szintet tároló változó. -1, ha éppen nem választunk.
+    int *attempts;///<A próbálkozások számát tárolja egy tömbben, amely akkora, ahány szint van. Ezt a számot menu struktúrától kéri el.
     bool *solved;
     button saveButton;///<A mentéshez kell megnyomni
 }Data;
@@ -25,7 +28,7 @@ typedef struct Data{
 Data data_read_in(int level);
 
 
-/**Visszaállítja az aktuálist szintet -1-re, ami azt jelenti, hogy nincsen aktuális szint.
+/**Beállítja az új aktuális szintet, amit a data struktúra tárol.
 */
 void data_changeActiveLevel(Data *this, int newActiveLevel);
 

@@ -41,7 +41,7 @@ int game() {
 ///  ---------------------------------------------
 ///  INICIALIZÁLÁSA A JÁTÉKBAN HASZNÁLT ÉRTÉKEKNEK
 ///  ---------------------------------------------
-    enum gameStatus gameStatus = WINNING;
+    enum gameStatus gameStatus = MENU;
 
     int i;
 
@@ -217,6 +217,7 @@ int game() {
 ///  TAKARÍTÁS
 ///  ---------------------------------------------
     menu_cleanup(&menu);
+    data_save(data);
     data_cleanUp(&data);
     sat_game_cleanup(&sat);
     TTF_CloseFont(bigfont);

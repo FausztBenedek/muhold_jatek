@@ -117,3 +117,17 @@ void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat s, Da
         }
     }
 }
+
+void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Sat s, WinningScreen winningScreen){
+    if (ev.type == SDL_MOUSEBUTTONDOWN){
+        if (winningScreen.toMenu.clicked){
+            *gameStatus = MENU;
+            sat_resetInitialState(s);
+        }
+
+        if (winningScreen.nextLevel.clicked){
+
+        }
+    }
+}
+

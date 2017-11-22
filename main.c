@@ -41,7 +41,7 @@ int game() {
 ///  ---------------------------------------------
 ///  INICIALIZÁLÁSA A JÁTÉKBAN HASZNÁLT ÉRTÉKEKNEK
 ///  ---------------------------------------------
-    enum gameStatus gameStatus = MENU;
+    enum gameStatus gameStatus = WINNING;
 
     int i;
 
@@ -160,6 +160,7 @@ int game() {
             ///......
 
             winningScreen_upd(&winningScreen, ev);
+            game_status_from_WINNING_to_MENU_or_NEXTLEVEL(&gameStatus, ev, &sat, winningScreen);
 
             ///......
             ///Draw

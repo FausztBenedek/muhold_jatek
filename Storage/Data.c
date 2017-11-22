@@ -8,14 +8,20 @@ static void read_from_file(int *numOf_level, bool *solvedarr, int *attemptsarr);
 
 Data data_read_in(int level){
     Data this;
-    this.numOf_level = 1;
+    this.numOf_level = level;
     this.activeLevel = -1;
 
     this.attempts = (int*) malloc(level * sizeof(int));
     this.solved  = (bool*) malloc(level * sizeof(bool));
     int check;
     read_from_file(&check, this.solved, this.attempts);
-    this.numOf_level = check;
+    if (this.numOf_level != check || true){//A fájl nem helyes
+        int i;
+        for (i = 0; i < this.numOf_level; i++){
+            this.attempts[i] = 0;
+            this.solved[i] = false;
+        }
+    }
 
     this.saveButton = button_init(WIDTH-100-20, 20, 100, 40, "Mentés");
     return this;

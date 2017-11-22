@@ -17,7 +17,11 @@ void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event 
 *@param &data a data struktúrában tárolt próbálkozások száma nő.
 */
 void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Data *data);
-void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu);
+
+/**
+*@param *data Beállítja az aktuális szintet
+*/
+void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu, Data *data);
 /**
 *@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat
 */

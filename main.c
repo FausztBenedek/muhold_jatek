@@ -71,7 +71,7 @@ int game() {
             ///......
             menu_upd(&menu, ev);
             data_upd(&data, ev);
-            game_status_from_MENU_to_SETTING(&gameStatus, ev, &sat, &menu);
+            game_status_from_MENU_to_SETTING(&gameStatus, ev, &sat, &menu, &data);
 
             ///......
             ///Draw

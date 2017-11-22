@@ -4,6 +4,7 @@
 
 Data data_read_in(int level){
     Data this;
+    this.activeLevel = -1;
 
 
     ///!!!!!!!!Feltétel ellenőrzés: Ugyanannyi level van-e mint legutóbb?
@@ -17,6 +18,10 @@ Data data_read_in(int level){
 
 void data_upd(Data *this, SDL_Event ev){
     button_upd(&this->saveButton, ev);
+}
+
+void data_changeActiveLevel(Data *this, int newActiveLevel){
+    this->activeLevel = newActiveLevel;
 }
 
 void data_drw(SDL_Surface *screen, Data this, TTF_Font *font){

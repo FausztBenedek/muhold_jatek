@@ -11,6 +11,7 @@
 */
 typedef struct Data{
     int *attempts;///<A próbálkozások számát tárolja egy tömbben, amely akkora, ahány szint van. Ezt a számot menu struktúrától kéri el.
+    int activeLevel;///Az éppen aktuális szintet tároló változó. -1, ha éppen nem választunk.
     button saveButton;///<A mentéshez kell megnyomni
 }Data;
 
@@ -21,10 +22,17 @@ typedef struct Data{
 */
 Data data_read_in(int level);
 
+
+/**Visszaállítja az aktuálist szintet -1-re, ami azt jelenti, hogy nincsen aktuális szint.
+*/
+void data_changeActiveLevel(Data *this, int newActiveLevel);
+
+
 /**Mivel a data struktúrába a menüből, és más helyekről futás idő alatt gomb benyomására kell változtatni,
 *ezért szükség van update-elő és rajzoló függvényre
 */
 void data_upd(Data *this, SDL_Event ev);
+
 
 /**Mivel a data struktúrába a menüből, és más helyekről futás idő alatt gomb benyomására kell változtatni,
 *ezért szükség van update-elő és rajzoló függvényre
@@ -36,6 +44,7 @@ void data_drw(SDL_Surface *screen, Data this, TTF_Font *font);
 *   A Data struktúrához tartozó gomb funkciója is ez a függvény.
 */
 void data_save();
+
 
 ///Felszabadítja a data struktúra által lefoglalt memóriát.
 void data_cleanUp(Data *this);

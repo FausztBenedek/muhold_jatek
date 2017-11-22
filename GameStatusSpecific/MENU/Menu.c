@@ -6,7 +6,6 @@
 menu menu_init(){//Minden paraméterét a fájlból olvassa
     menu theMenu;
     theMenu.numOf_levels = calculate_words(SETTINGS, LEVEL_IDENTIFIER, 20);
-    theMenu.activeLevel = -1;
     theMenu.levelarr = NULL;
 
     int i;
@@ -15,12 +14,6 @@ menu menu_init(){//Minden paraméterét a fájlból olvassa
     }
     return theMenu;
 }
-
-void menu_LevelChangeReinit(menu *this, int newActiveLevel){
-    this->activeLevel = newActiveLevel;
-}
-
-
 
 void menu_upd(Menu theMenu, SDL_Event ev){
     LevelBox iter;

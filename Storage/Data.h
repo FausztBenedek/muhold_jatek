@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
 #include <SDL_ttf.h>
+#include <SDL_bool.h>
 
 #include "../GameStatusSpecific/Button.h"
 
@@ -12,6 +13,7 @@
 typedef struct Data{
     int *attempts;///<A próbálkozások számát tárolja egy tömbben, amely akkora, ahány szint van. Ezt a számot menu struktúrától kéri el.
     int activeLevel;///Az éppen aktuális szintet tároló változó. -1, ha éppen nem választunk.
+    bool *solved;
     button saveButton;///<A mentéshez kell megnyomni
 }Data;
 

@@ -9,8 +9,12 @@ Data data_read_in(int level){
 
     ///!!!!!!!!Feltétel ellenőrzés: Ugyanannyi level van-e mint legutóbb?
     this.attempts = (int*) malloc(level * sizeof(int));
+    this.solved  = (bool*) malloc(level * sizeof(bool));
     int i;
-    for (i = 0; i < level; i++) this.attempts[i] = 0;
+    for (i = 0; i < level; i++){
+        this.attempts[i] = 0;
+        this.solved[i] = false;
+    }
 
     this.saveButton = button_init(WIDTH-100-20, 20, 100, 40, "Mentés");
     return this;

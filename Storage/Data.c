@@ -2,9 +2,15 @@
 
 #include "../Constants.h"
 
-Data data_read_in(){
+Data data_read_in(int level){
     Data this;
-    this.attempts = 0;
+
+
+    ///!!!!!!!!Feltétel ellenőrzés: Ugyanannyi level van-e mint legutóbb?
+    this.attempts = (int*) malloc(level * sizeof(int));
+    int i;
+    for (i = 0; i < level; i++) this.attempts[i] = 0;
+
     this.saveButton = button_init(WIDTH-100-20, 20, 100, 40, "Mentés");
     return this;
 }
@@ -19,5 +25,9 @@ void data_drw(SDL_Surface *screen, Data this, TTF_Font *font){
 
 void data_save(Data data){
 
+}
+
+void data_cleanUp(Data *this){
+    free(this->attempts);
 }
 

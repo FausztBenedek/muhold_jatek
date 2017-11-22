@@ -10,6 +10,8 @@
 #include "../Storage/Data.h"
 #include "WINNING/winning.h"
 
+
+
 void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Sat s);
 /**
 *@param &data a data struktúrában tárolt próbálkozások száma nő.

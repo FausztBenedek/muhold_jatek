@@ -46,9 +46,10 @@ int game() {
     int i;
 
     menu menu = menu_init();
+    Data data = data_read_in(menu.numOf_levels);
     gameOverScreen gameOverScreen = gameOverScreen_init();
     WinningScreen winningScreen = winningScreen_init();
-    Data data = data_read_in();
+
 
     sat sat = sat_init(10, HEIGHT/5, 10);
 
@@ -216,6 +217,7 @@ int game() {
 ///  TAKARÍTÁS
 ///  ---------------------------------------------
     menu_cleanup(&menu);
+    data_cleanUp(&data);
     sat_game_cleanup(&sat);
     TTF_CloseFont(bigfont);
     TTF_CloseFont(smallfont);

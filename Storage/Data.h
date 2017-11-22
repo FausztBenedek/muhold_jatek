@@ -48,7 +48,7 @@ void data_drw(SDL_Surface *screen, Data this, TTF_Font *font);
 /**Az új fájlokat beírja a fájlba, amit megnyit, majd be is zár.
 *   A Data struktúrához tartozó gomb funkciója is ez a függvény.
 */
-void data_save();
+void data_save(Data data);
 
 
 ///Felszabadítja a data struktúra által lefoglalt memóriát.

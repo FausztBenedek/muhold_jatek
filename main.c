@@ -217,7 +217,6 @@ int game() {
 ///  TAKARÍTÁS
 ///  ---------------------------------------------
     menu_cleanup(&menu);
-    data_save(data);
     data_cleanUp(&data);
     sat_game_cleanup(&sat);
     TTF_CloseFont(bigfont);

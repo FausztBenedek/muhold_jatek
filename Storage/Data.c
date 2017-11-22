@@ -5,6 +5,8 @@
 #include "../Constants.h"
 
 static void read_from_file(int *numOf_level, bool *solvedarr, int *attemptsarr);
+static void data_saveButtonAction(Data data);
+
 
 Data data_read_in(int level){
     Data this;
@@ -58,6 +60,7 @@ static void read_from_file(int *numOf_level, bool *solvedarr, int *attemptsarr){
 
 void data_upd(Data *this, SDL_Event ev){
     button_upd(&this->saveButton, ev);
+    data_saveButtonAction(*this);
 }
 
 void data_changeActiveLevel(Data *this, int newActiveLevel){
@@ -82,6 +85,11 @@ void data_save(Data data){
     }
     fclose(fp);
 
+}
+static void data_saveButtonAction(Data data){
+    if (data.saveButton.clicked){
+        data_save(data);
+    }
 }
 
 void data_cleanUp(Data *this){

@@ -12,10 +12,16 @@ typedef struct menu *Menu;
 
 struct menu{
     LevelBox levelarr;
+    int activeLevel;///Az éppen aktuális szintet tároló változó. -1, ha éppen nem választunk.
     int numOf_levels;
 };
 
-menu menu_init();//Minden paraméterét a fájlból olvassa
+menu menu_init();
+
+
+/**Visszaállítja az aktuálist szintet -1-re, ami azt jelenti, hogy nincsen aktuális szint.
+*/
+void menu_LevelChangeReinit(menu *this, int newActiveLevel);
 
 void menu_upd(Menu theMenu, SDL_Event ev);
 

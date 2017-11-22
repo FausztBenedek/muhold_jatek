@@ -17,7 +17,7 @@ Data data_read_in(int level){
     this.solved  = (bool*) malloc(level * sizeof(bool));
     int check;
     read_from_file(&check, this.solved, this.attempts);
-    if (this.numOf_level != check || true){//A fájl nem helyes
+    if (this.numOf_level != check){//A fájl nem helyes
         int i;
         for (i = 0; i < this.numOf_level; i++){
             this.attempts[i] = 0;

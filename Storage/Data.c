@@ -36,7 +36,10 @@ static void read_from_file(int *numOf_level, bool *solvedarr, int *attemptsarr){
     int i, j;
     char checker[7];
 
-    fscanf(fp, "Szintek szama:\t%d\n\n", numOf_level);
+    //fscanf meghívva, és visszatéréri értéke ellenőrizve felesleges deklaráció nélkül
+    if (    0 == fscanf(fp, "Szintek szama:\t%d\n\n", numOf_level)  )
+        return;
+
     for (int i = 0; i < *numOf_level; i++){
         fscanf(fp, "%d. Szint:\n", &j);
         if (0 == fscanf(fp, "\tSikertelen probalkozasok szama:\t%d\n", &attemptsarr[i]))    attemptsarr[i] = 0;

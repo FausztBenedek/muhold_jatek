@@ -29,7 +29,10 @@ Data data_read_in(int level){
 static void read_from_file(int *numOf_level, bool *solvedarr, int *attemptsarr){
     FILE *fp;
     fp = fopen("Save.txt", "rt");
-
+    if (fp == NULL){//Csinálunk egy fájlt
+        fp = fopen("Save.txt", "wt");
+        fclose(fp);
+    }
     int i, j;
     char checker[7];
 

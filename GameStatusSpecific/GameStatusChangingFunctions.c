@@ -34,6 +34,7 @@ void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event 
         *gameStatus = SETTING;
         sat_resetMotion(s);
         data->attempts[data->activeLevel]++;
+        printf("ActiveLevel = %d\tAttempts = %d\n", data->activeLevel, data->attempts[data->activeLevel]);
     }
 }
 void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu, Data *data){
@@ -99,6 +100,7 @@ void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat s, Da
     sat_and_wall_collide(gameStatus, s);
     if (*gameStatus == GAMEOVER){
         data->attempts[data->activeLevel]++;
+        printf("ActiveLevel = %d\tAttempts = %d\n", data->activeLevel, data->attempts[data->activeLevel]);
     }
 }
 /*private*/void sat_and_pln_collide (enum gameStatus *gameStatus, Sat s){

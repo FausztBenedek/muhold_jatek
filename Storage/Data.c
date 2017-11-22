@@ -20,9 +20,9 @@ void data_upd(Data *this, SDL_Event ev){
     button_upd(&this->saveButton, ev);
 }
 
-void data_changeActiveLevel(Data *this, int newActiveLevel){
-    this->activeLevel = newActiveLevel;
-}
+//void data_changeActiveLevel(Data *this, int newActiveLevel){
+//    this->activeLevel = newActiveLevel;
+//}
 
 void data_drw(SDL_Surface *screen, Data this, TTF_Font *font){
     button_drw(screen, &this.saveButton, font);

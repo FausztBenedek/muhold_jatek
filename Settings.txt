@@ -19,8 +19,7 @@ Kapu: (felso oldal, magassag)
         400, 0, 200, 250    
     VEGE_Falak
 
-3.Szint
-
+2.Szint
     KEZD_Kapu
         0, 100
     VEGE_Kapu

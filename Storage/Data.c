@@ -34,8 +34,6 @@ static void read_from_file(int *numOf_level, bool *solvedarr, int *attemptsarr){
         if (0 == fscanf(fp, "\tTeljesitett szint:\t%s", checker))                           strcpy(checker, "Nem");
         fscanf(fp, "\n");
 
-        printf("%s", checker);
-
         if (NULL != strstr(checker, "Igen"))    solvedarr[i] = true;
         else                        solvedarr[i] = false;
 

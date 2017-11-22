@@ -58,8 +58,14 @@ LevelBox levelBox_add(LevelBox list, int i, int numOf_levelBoxes){ //Minden para
 
 
 
-void levelBox_drw(SDL_Surface *screen, LevelBox box, int numOf_levels, TTF_Font *font){
+void levelBox_drw(SDL_Surface *screen, LevelBox box, int numOf_levels, TTF_Font *font, Data data){
     button_drw(screen, &box->button, font);
+
+    char str[14+1];
+
+    sprintf(str, "%d próba", data.attempts[box->index]);
+
+    print(screen, str, box->pos.x + levelBox_getWidth(numOf_levels)/2, box->pos.y + MENU_LEVEL_HEIGHT*1.5, font);
 }
 
 

@@ -77,7 +77,7 @@ int game() {
             ///Draw
             ///......
             boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255,255,255,255);
-            menu_drw(screen, menu, smallfont);
+            menu_drw(screen, menu, smallfont, data);
             data_drw(screen, data, smallfont);
 
             print(screen, "ISTEN HOZOTT!", WIDTH/2, HEIGHT/7, bigfont);

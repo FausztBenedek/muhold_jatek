@@ -19,7 +19,7 @@ menu menu_init();
 
 void menu_upd(Menu theMenu, SDL_Event ev);
 
-void menu_drw(SDL_Surface *screen, menu theMenu, TTF_Font *font);
+void menu_drw(SDL_Surface *screen, menu theMenu, TTF_Font *font, Data data);
 
 void menu_cleanup(Menu theMenu);
 

@@ -23,10 +23,10 @@ void menu_upd(Menu theMenu, SDL_Event ev){
 
 }
 
-void menu_drw(SDL_Surface *screen, menu theMenu, TTF_Font *font){
+void menu_drw(SDL_Surface *screen, menu theMenu, TTF_Font *font, Data data){
     LevelBox iter;
     for (iter = theMenu.levelarr; iter != NULL; iter = iter->next){
-        levelBox_drw(screen, iter, theMenu.numOf_levels, font);
+        levelBox_drw(screen, iter, theMenu.numOf_levels, font, data);
     }
 }
 

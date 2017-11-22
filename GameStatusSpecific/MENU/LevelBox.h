@@ -8,6 +8,8 @@
 #include "../../Sprite/Obstacles/Asteroid.h"
 #include "../../Sprite/Obstacles/Wall.h"
 #include "../Button.h"
+#include "../../Storage/Data.h"
+
 
 
 typedef struct levelBox levelBox;
@@ -33,7 +35,7 @@ struct levelBox{
 
 LevelBox levelBox_add(LevelBox list, int i, int numOf_levelBoxes); //Minden paraméterét a fájlból olvassa
 
-void levelBox_drw(SDL_Surface *screen, LevelBox box, int numOf_levelBoxes, TTF_Font *font);
+void levelBox_drw(SDL_Surface *screen, LevelBox box, int numOf_levelBoxes, TTF_Font *font, Data data);
 
 void levelBox_upd(LevelBox box, SDL_Event ev);
 

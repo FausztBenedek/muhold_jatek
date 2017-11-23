@@ -7,9 +7,10 @@
 
 #include "LevelBox.h"
 
+/**A menüt és a LevelBox linkelt listáját kezelő struktúra
+*/
 typedef struct Menu{
-    LevelBox * levelarr;
-    int numOf_levels;
+    LevelBox * levelarr;///<A LevelBox-ok linkelt listája
 }Menu;
 
 Menu menu_init();

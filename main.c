@@ -45,8 +45,9 @@ int game() {
 
     int i;
 
-    Menu menu = menu_init();
-    Data data = data_read_in(menu.numOf_levels);
+    Data data = data_read_in();
+    Menu menu = menu_init(data);
+
     GameOverScreen gameOverScreen = gameOverScreen_init();
     WinningScreen winningScreen = winningScreen_init();
 

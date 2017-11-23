@@ -12,7 +12,7 @@
 */
 typedef struct Data{
 
-    int numOf_level;///<A szintek számát tárolja. A menütől struktúrából másolja át.
+    int numOf_level;///<A szintek számát tárolja
 
     int activeLevel;///Az éppen aktuális szintet tároló változó. -1, ha éppen nem választunk.
     int *attempts;///<A próbálkozások számát tárolja egy tömbben, amely akkora, ahány szint van. Ezt a számot menu struktúrától kéri el.
@@ -23,9 +23,8 @@ typedef struct Data{
 /**Beolvassa a save.txt-ből az elmentett információkat.
 *   A fájlt a függvény nyitja meg, és be is zárja.
 *   Mindenképpen a menü inicializálása után kell meghívni
-*   @param level A próbálkozások számát tároló tömb hosszát határozza meg. Annyinak kell lennie, ahány szint van.
 */
-Data data_read_in(int level);
+Data data_read_in();
 
 
 /**Beállítja az új aktuális szintet, amit a data struktúra tárol.

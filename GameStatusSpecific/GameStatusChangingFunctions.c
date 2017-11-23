@@ -38,7 +38,7 @@ void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev,
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         LevelBox * iter;
         int i;
-        for (i = 0, iter = Menu->levelarr; i < Menu->numOf_levels; i++, iter = iter->next){
+        for (i = 0, iter = Menu->levelarr; i < data->numOf_level; i++, iter = iter->next){
             if (iter->button.clicked){
                 open_level(iter->index, s);
                 data_changeActiveLevel(data, iter->index);
@@ -132,8 +132,8 @@ void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, 
         if (winningScreen.nextLevel.clicked){
             LevelBox * iter;
             int i;
-            for (i = 0, iter = Menu->levelarr; i < Menu->numOf_levels; i++, iter = iter->next){
-                if (i == Menu->numOf_levels -1){//Ha az utolsó pályán nyertél és megnyomod a következő gombot, akkor irány a menü
+            for (i = 0, iter = Menu->levelarr; i < data->numOf_level; i++, iter = iter->next){
+                if (i == data->numOf_level -1){//Ha az utolsó pályán nyertél és megnyomod a következő gombot, akkor irány a menü
                     *gameStatus = MENU;
                     sat_resetInitialState(s);
                 }

@@ -3,14 +3,13 @@
 #include "../../tools.h"
 #include "../../Constants.h"
 
-Menu menu_init(){//Minden paraméterét a fájlból olvassa
+Menu menu_init(Data data){//Minden paraméterét a fájlból olvassa
     Menu theMenu;
-    theMenu.numOf_levels = calculate_words(SETTINGS, LEVEL_IDENTIFIER, 20);
     theMenu.levelarr = NULL;
 
     int i;
-    for (i = 0; i < theMenu.numOf_levels; i++){
-        theMenu.levelarr = levelBox_add(theMenu.levelarr, i, theMenu.numOf_levels);
+    for (i = 0; i < data.numOf_level; i++){
+        theMenu.levelarr = levelBox_add(theMenu.levelarr, i, data.numOf_level);
     }
     return theMenu;
 }
@@ -31,7 +30,7 @@ void menu_upd(Menu * theMenu, SDL_Event ev, Data data){
 void menu_drw(SDL_Surface *screen, Menu theMenu, TTF_Font *font, Data data){
     LevelBox * iter;
     for (iter = theMenu.levelarr; iter != NULL; iter = iter->next){
-        levelBox_drw(screen, iter, theMenu.numOf_levels, font, data);
+        levelBox_drw(screen, iter, data.numOf_level, font, data);
     }
 }
 

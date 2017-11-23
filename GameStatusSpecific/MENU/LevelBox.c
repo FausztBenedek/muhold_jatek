@@ -48,23 +48,23 @@ LevelBox * levelBox_add(LevelBox * list, int i, int numOf_levelBoxes){ //Minden 
     return list;
 }
 
-void levelBox_drw(SDL_Surface *screen, LevelBox * box, int numOf_levels, TTF_Font *font, Data data){
+void levelBox_drw(SDL_Surface *screen, LevelBox * box, int numOf_level, TTF_Font *font, Data data){
     button_drw(screen, &box->button, font);
 
     char str[14+1];
 
     sprintf(str, "%d sikertelen", data.attempts[box->index]);
 
-    print(screen, str, box->pos.x + levelBox_getWidth(numOf_levels)/2, box->pos.y + MENU_LEVEL_HEIGHT*1.5, font);
+    print(screen, str, box->pos.x + levelBox_getWidth(numOf_level)/2, box->pos.y + MENU_LEVEL_HEIGHT*1.5, font);
 
     if (box->index != 0 && !data.solved[box->index-1]){//Számít a sorrend, mert ha index = 0 akkor a tömb -1-dik elemére hivatkozunk
         lineRGBA(screen,
                  box->pos.x, box->pos.y,
-                 box->pos.x + levelBox_getWidth(numOf_levels), box->pos.y + MENU_LEVEL_HEIGHT,
+                 box->pos.x + levelBox_getWidth(numOf_level), box->pos.y + MENU_LEVEL_HEIGHT,
                  0, 100, 0, 255
                 );
         lineRGBA(screen,
-                 box->pos.x+ levelBox_getWidth(numOf_levels), box->pos.y,
+                 box->pos.x+ levelBox_getWidth(numOf_level), box->pos.y,
                  box->pos.x, box->pos.y + MENU_LEVEL_HEIGHT,
                  0, 100, 0, 255
                 );

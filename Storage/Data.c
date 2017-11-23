@@ -8,13 +8,13 @@ static void read_from_file(int *numOf_level, bool *solvedarr, int *attemptsarr);
 static void data_saveButtonAction(Data data);
 
 
-Data data_read_in(int level){
+Data data_read_in(){
     Data this;
-    this.numOf_level = level;
+    this.numOf_level = calculate_words(SETTINGS, LEVEL_IDENTIFIER, 20);;
     this.activeLevel = -1;
 
-    this.attempts = (int*) malloc(level * sizeof(int));
-    this.solved  = (bool*) malloc(level * sizeof(bool));
+    this.attempts = (int*) malloc(this.numOf_level * sizeof(int));
+    this.solved  = (bool*) malloc(this.numOf_level * sizeof(bool));
     int check;
     read_from_file(&check, this.solved, this.attempts);
     if (this.numOf_level != check){//A fájl nem helyes

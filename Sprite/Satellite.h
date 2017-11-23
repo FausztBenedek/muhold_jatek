@@ -26,7 +26,7 @@ typedef struct Satellite{
     Wall wallarr;///<A műholdat akadályozó falak tömbjének pointere (info fájlból olvasva)
     int numOf_wall;///<A műholdat akadályozó falak száma (info fájlból olvasva)
 
-    gate gate;///<A kaput tároló struktúra. Itt kell átjutnia a műholdnak.
+    Gate gate;///<A kaput tároló struktúra. Itt kell átjutnia a műholdnak.
 }Satellite;
 /**Inicializál egy műholdat minden értéket 0-ra illetve a pointereket NULL-ra állítja.
 *@param x   koordináta vízszintes komponense

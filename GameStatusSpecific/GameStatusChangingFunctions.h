@@ -18,7 +18,7 @@
 void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s);
 
 /**Inputra visszaugrik tervező állapotba a GameOver képernyő megjelenése nélkül.
-*@param &data A sikertertelen próbálkozások száma nő.
+*@param *data A sikertertelen próbálkozások száma nő.
 */
 void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, Data *data);
 
@@ -27,26 +27,34 @@ void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event 
 */
 void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, Menu *Menu, Data *data);
 
-/**
-*@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat
+/**A GameOver-ből lép át menübe vagy tervező állapotba.
+*@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat, ha a toMenu gombra klikkelünk.
+*@param gameOverScreen A GameOverScreen struktúra gombjainak funkcionalitását kezeli.
 */
 void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, GameOverScreen gameOverScreen);
+
+/**Ellenőrzi, hogy a műhold áthaladt-e a kapun/célvonalon.
+*@param *data Beállítja, hogy a pálya sikeresen el lett végezve. Ezt az információt a *data tárolja.
+*/
 void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Satellite *s, Data *data);
-/**
-*@param *data a data struktúrában tárolt próbálkozások száma nő.
+
+/**A műhold ütközéseket vizsgálja:
+*   1. Bolygóhoz ütközik
+*   2. Falhoz ütközik
+*@param *data A sikertertelen próbálkozások száma nő.
 */
 void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Satellite *const s, Data *data);
 
 /**A WINNING állapotból lép továb a képernyőn lévő két gomb lenyomásától függően.
 *@param winningScreen Ez a függvény kezeli a winningScreen struktúra két gombját.
-*@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat
-*@param *gameStatus Ez a függvény megváltoztatja az állapotot a feltételek kiértékelését követően
-*@param ev Az állapotváltás függ az aktuális event-től
+*@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat, ha a toMenu gombra klikkelünk.
 */
 void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s,
                                                    WinningScreen winningScreen, Data *data, Menu *Menu);
 
-/**Az állandóan látható menü gomb frissítéséért és a menübe lépésért felelős
+/**Az állandóan látható menü gomb frissítéséért és a menübe lépésért felelős. (bal felső sarok)
+*@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat, ha a toMenu gombra klikkelünk.
+*@param *b A menübe lépés gombja
 */
 void game_status_button_toMenuButton_upd(Button *b, SDL_Event ev, Satellite *s, enum gameStatus *gameStatus);
 

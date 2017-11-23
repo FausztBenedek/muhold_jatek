@@ -47,7 +47,7 @@ int game() {
 
     menu menu = menu_init();
     Data data = data_read_in(menu.numOf_levels);
-    gameOverScreen gameOverScreen = gameOverScreen_init();
+    GameOverScreen gameOverScreen = gameOverScreen_init();
     WinningScreen winningScreen = winningScreen_init();
 
     button toMenu = button_init(20, 20, 100, 40, STRMENU);
@@ -241,7 +241,7 @@ int game() {
 ///  ---------------------------------------------
     menu_cleanup(&menu);
     winningScreen_cleanup(&winningScreen);
-    gameOverScreen_cleanup(&gameOverScreen)
+    gameOverScreen_cleanup(&gameOverScreen);
     data_cleanUp(&data);
     sat_game_cleanup(&sat);
     TTF_CloseFont(bigfont);

@@ -64,7 +64,7 @@ void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev,
 }
 
 
-void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, gameOverScreen gameOverScreen){
+void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, GameOverScreen gameOverScreen){
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         if (gameOverScreen.toMenu.clicked){
             *gameStatus = MENU;

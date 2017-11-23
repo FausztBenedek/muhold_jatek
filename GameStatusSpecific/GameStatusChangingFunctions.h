@@ -25,7 +25,7 @@ void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev,
 /**
 *@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat
 */
-void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, gameOverScreen gameOverScreen);
+void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, GameOverScreen gameOverScreen);
 void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Satellite * s, Data *data);
 /**
 *@param *data a data struktúrában tárolt próbálkozások száma nő.

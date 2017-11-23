@@ -10,26 +10,26 @@
 /**A gameover képernyő deklarációja
 *A gombok funkcionalitása a game_status_from_GAMEOVER_to_MENU_or_SETTING() függvényben a gameStatusChangingFunctions modulban
 */
-typedef struct gameOverScreen{
+typedef struct GameOverScreen{
     button toMenu;///<A menübe lépő gomb
     button newGame;///<Új játék indítása
-}gameOverScreen;
+}GameOverScreen;
 
 /**Inicializálja a gombokat a megfelelő helyre
 */
-gameOverScreen gameOverScreen_init();
+GameOverScreen gameOverScreen_init();
 
 /**Megrajzolja a gombokat
 *@param *font Ezt a betűtípust használja fel a gomb feliratához
 */
-void gameOverScreen_drw(SDL_Surface *screen, gameOverScreen this, TTF_Font *font);
+void gameOverScreen_drw(SDL_Surface *screen, GameOverScreen this, TTF_Font *font);
 
 /**A gombokat frissíti.
 */
-void gameOverScreen_upd(gameOverScreen *this, SDL_Event ev);
+void gameOverScreen_upd(GameOverScreen *this, SDL_Event ev);
 
 /**Feltakarítja a gombjai által lefoglalt dinamikus memóriát.
 */
-void gameOverScreen_cleanup(gameOverScreen *this);
+void gameOverScreen_cleanup(GameOverScreen *this);
 
 #endif//GAMEOVER_H

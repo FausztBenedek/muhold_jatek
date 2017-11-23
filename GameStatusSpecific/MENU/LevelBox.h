@@ -17,6 +17,7 @@ typedef struct LevelBox{
     int index;///<Egyéni azonosító
 
     vect pos;///<Bal felső sarok
+    float width;///<A levelBox-ok szélessége
     button button;///<Az interaktív felület, vagyis maga a gomb
 
     struct LevelBox *next;///<Egyirányú láncolt listában helyezkednek el.
@@ -37,7 +38,7 @@ LevelBox *levelBox_add(LevelBox * list, int index, int numOf_level); //Minden pa
 *@param numOf_level Szükség van a szintek számára a számításokhoz.
 *@param data Ez alapján tudja, hogy melyik szintek vannak már lejesítve, és melyikeket kell áthúzni.
 */
-void levelBox_drw(SDL_Surface *screen, LevelBox * box, int numOf_level, TTF_Font *font, Data data);
+void levelBox_drw(SDL_Surface *screen, LevelBox * box, TTF_Font *font, Data data);
 
 /**A gombot frissíti.
 */

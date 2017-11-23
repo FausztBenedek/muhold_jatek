@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include "../Constants.h"
+#include "../tools.h"
 
 static void read_from_file(int *numOf_level, bool *solvedarr, int *attemptsarr);
 static void data_saveButtonAction(Data data);

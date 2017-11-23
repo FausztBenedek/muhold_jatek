@@ -30,7 +30,7 @@ void menu_upd(Menu * theMenu, SDL_Event ev, Data data){
 void menu_drw(SDL_Surface *screen, Menu theMenu, TTF_Font *font, Data data){
     LevelBox * iter;
     for (iter = theMenu.levelarr; iter != NULL; iter = iter->next){
-        levelBox_drw(screen, iter, data.numOf_level, font, data);
+        levelBox_drw(screen, iter, font, data);
     }
 }
 

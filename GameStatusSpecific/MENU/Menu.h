@@ -13,6 +13,9 @@ typedef struct Menu{
     LevelBox * levelarr;///<A LevelBox-ok linkelt listája
 }Menu;
 
+/**Inicializálja a LevelBox-ok linkelt listáját.
+*   A levelBox-ok maguk számolják ki a pozíciójukat
+*/
 Menu menu_init();
 
 void menu_upd(Menu * theMenu, SDL_Event ev, Data data);

@@ -112,7 +112,7 @@ void sat_SETTINGS_upd(Satellite *s, SDL_Event ev){
 
         //Hozzáadni a bolygót, ha nem bolygóra klikkeltünk
         if (ableToAddPlanet) {
-            Pln onlyPlanet = pln_init(ev.motion.x, ev.motion.y, 30);
+            Pln onlyPlanet = pln_init(ev.motion.x, ev.motion.y, PLN_INIT_STRENGTH);
             sat_addPln(s, &onlyPlanet);
         }
     }

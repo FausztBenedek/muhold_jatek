@@ -8,6 +8,10 @@
 #include <SDL_ttf.h>
 
 #include "Physics/Vector.h"
+
+///@defgroup tools Eszközök
+///@{
+
 /**A képernyőre ír ki szöveget
 *@param *text A sztring
 *@param midx A szöveg középpontjának x koordinátája
@@ -48,5 +52,6 @@ int calculate_words(char *fileName, char *word, int rowMax);
 */
 void goto_word_in_file(FILE *file, char *word, int rowMax);
 
+///@}
 
 #endif // TOOLS_H

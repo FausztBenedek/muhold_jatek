@@ -3,6 +3,9 @@
 
 #include "../GameStatusSpecific/Button.h"
 
+///@defgroup data Adatok
+///@{
+
 /**A Data struktúra a játék adatainak tárolására alkalmas
 */
 typedef struct Data{
@@ -48,5 +51,6 @@ void data_save(Data data);
 ///Felszabadítja a data struktúra által lefoglalt memóriát.
 void data_cleanUp(Data *this);
 
+///@}
 
 #endif // DATA_H

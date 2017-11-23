@@ -148,8 +148,8 @@ void plnMenu_upd(Pln *this, SDL_Event ev){
         button_upd(&this->but_strengthDw, ev);
         button_upd(&this->but_del,        ev);
 
-        button_strengthDw_action(this);
-        button_strengthUp_action(this);
+        pln_button_strengthDw_action(this);
+        pln_button_strengthUp_action(this);
     }
 }
 
@@ -178,12 +178,12 @@ bool plnMenu_hover(Pln *const this, SDL_Event ev){//Az egér éppen benne van a 
 //---------------------------------------------------
 //Gombokkal kapcsolatos függvények
 //---------------------------------------------------
-void button_strengthUp_action(Pln *this){
+void pln_button_strengthUp_action(Pln *this){
     if (this->but_strengthUp.clicked)
         if (this->strength < PLN_MAX_STRENGTH)
             this->strength += PLN_STRENGTH_STEP;
 }
-void button_strengthDw_action(Pln *this){
+void pln_button_strengthDw_action(Pln *this){
     if (this->but_strengthDw.clicked)
         if (this->strength > PLN_MIN_STRENGTH)
             this->strength -= PLN_STRENGTH_STEP;

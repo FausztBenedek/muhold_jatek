@@ -74,11 +74,17 @@ void sat_SETTINGS_upd(Satellite *s, SDL_Event ev);
 //Bolygókhoz tartozó függvények
 /**Hozzáad egy már inicializált bolygót a játékhoz és eltárolja műhold plnarr változójában
 **@param p   az inicializált bolygó
+*@ingroup planetMenu
+*@ingroup planet
+*@ingroup justPlanet
 */
 void sat_addPln(Satellite *s, Pln *const p);
 /**Töröl egybolygót a műhold listájából, ha a bolygó eltávolítható.
 *@param index   Minden bolygónak van egy egyedi indexe, ez megfelel a bolygótömb indexének
 *@return    Ha a bolygó eltávolítható akkor true, ha nem akkor false
+*@ingroup planetMenu
+*@ingroup planet
+*@ingroup justPlanet
 */
 bool sat_remPln(Satellite *s, int index);
 

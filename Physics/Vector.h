@@ -1,6 +1,8 @@
 #ifndef VECT_H
 #define VECT_H
 
+///@defgroup vector Vektorok
+///@{
 
 /**A vektorokat illetve pontokat tartalmazó struktúra
 */
@@ -32,4 +34,5 @@ float magnitudeOf(Vect v);
 ///Egységnyire változtatja a vektort. (Irány nem változik)
 void normalizeVect(Vect *v);
 
+///@}
 #endif // VECT_H

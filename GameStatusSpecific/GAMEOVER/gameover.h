@@ -7,6 +7,9 @@
 
 #include "../Button.h"
 
+///@defgroup gameOverScreen GameOver képernyő
+///@{
+
 /**A gameover képernyő deklarációja
 *A gombok funkcionalitása a game_status_from_GAMEOVER_to_MENU_or_SETTING() függvényben a gameStatusChangingFunctions modulban
 */
@@ -32,4 +35,5 @@ void gameOverScreen_upd(GameOverScreen *this, SDL_Event ev);
 */
 void gameOverScreen_cleanup(GameOverScreen *this);
 
+///@}
 #endif//GAMEOVER_H

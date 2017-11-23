@@ -8,7 +8,7 @@
 #include "../Physics/Vector.h"
 #include "../GameStatusSpecific/Button.h"
 
-///@defgroup planet Bolygó
+///@defgroup planet Bolygók
 ///@{
 
 ///@defgroup justPlanet Bolygó adatai

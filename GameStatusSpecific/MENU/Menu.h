@@ -7,6 +7,9 @@
 
 #include "LevelBox.h"
 
+///@defgroup menuinfos Menu
+///@{
+
 /**A menüt és a LevelBox linkelt listáját kezelő struktúra, így a main-ben nem kell listát deklarálni.
 */
 typedef struct Menu{
@@ -31,5 +34,7 @@ void menu_drw(SDL_Surface *screen, Menu theMenu, TTF_Font *font, Data data);
 /**Feltakarítja a linkelt listát
 */
 void menu_cleanup(Menu *theMenu);
+
+///@}
 
 #endif // MENU_H

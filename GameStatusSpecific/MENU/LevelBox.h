@@ -9,6 +9,8 @@
 #include "../Button.h"
 #include "../../Storage/Data.h"
 
+///@ingroup menuinfos
+///@{
 
 /**Az egyes szinteket képviselő gombok a menüben. (Láncolt lista)
 */
@@ -46,5 +48,7 @@ void levelBox_upd(LevelBox *box, SDL_Event ev);
 /**Feltakarítja a láncolt listét és a gomb felirata által lefoglalt területet.
 */
 void levelBox_cleanUp(LevelBox *list);
+
+///@}
 
 #endif // LEVEL_BOX_H

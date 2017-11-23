@@ -3,15 +3,15 @@
 #include "../../tools.h"
 #include "../../Constants.h"
 
-helplt helplt_init(Satellite *const Satellite){
-    helplt h; int i;
+HelpingPlots helplt_init(){
+    HelpingPlots h; int i;
     for (i = 0; i < NUM_OF_HELPLT; i++) h.posarr[i] = vect_init(0, 0);
     return h;
 }
 
-void helplt_upd(Helplt plots, Satellite *const sat, SDL_Event ev) {
+void helplt_upd(HelpingPlots * plots, Satellite const sat, SDL_Event ev) {
     if (ev.type == SDL_MOUSEBUTTONDOWN || ev.type == SDL_MOUSEMOTION){
-        Satellite s = *sat;
+        Satellite s = sat;
         sat_resetMotion(&s);
         s.vel = vect_init(VELOCITY_INIT_X, 0);
         int i, j;
@@ -23,7 +23,7 @@ void helplt_upd(Helplt plots, Satellite *const sat, SDL_Event ev) {
         }
     }
 }
-void helplt_drw(SDL_Surface *screen, Helplt const plots) {
+void helplt_drw(SDL_Surface *screen, HelpingPlots * const plots) {
     int i;
     int alpha = 150;
     for (i = 0; i < NUM_OF_HELPLT; i++){

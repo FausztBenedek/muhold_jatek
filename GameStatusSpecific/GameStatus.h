@@ -1,6 +1,8 @@
 #ifndef GAME_STATUS_H
 #define GAME_STATUS_H
 
+///@defgroup gameStatusValues Játék állopotai
+
 /**A játék lehetséges állapotait tartalmazó enum.
 *A fő programban egyetlen egy gameStatus változó van, aminek az értékét ellenőrzik a while loop-ok
 *és ez dönti el, hogy melyik állapotban van a játék.

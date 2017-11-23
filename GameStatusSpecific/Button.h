@@ -5,6 +5,8 @@
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
 #include <SDL_ttf.h>
+///@defgroup button Gombok
+///@{
 
 /**
 A gombok mûködése:
@@ -44,5 +46,7 @@ bool button_hover(Button *b, SDL_Event ev);
 /**Felszabadítja az init-ben lefoglalt memórát a subscription-hoz.
 */
 void button_cleanup(Button *this);
+
+///@}
 
 #endif

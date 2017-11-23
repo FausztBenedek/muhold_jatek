@@ -7,6 +7,9 @@
 
 #include "../Button.h"
 
+///@defgroup winningScreen Siker-képenyő
+///@{
+
 /**A "Sikerült" képernyő deklarációja.
 *A gombok funkcionalitását kezelő függvény: game_status_from_GAMEOVER_to_MENU_or_SETTING(...) a gameStatusChangingFunctions modulban
 */
@@ -32,4 +35,5 @@ void winningScreen_upd(WinningScreen *this, SDL_Event ev);
 */
 void winningScreen_cleanup(WinningScreen *this);
 
+///@}
 #endif // WINNING_H

@@ -27,9 +27,10 @@ void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event 
 */
 void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, Menu *Menu, Data *data);
 
-/**A GameOver-ből lép át menübe vagy tervező állapotba.
+/**A GameOver-ből lép át menübe vagy tervező állapotba. A GameOver gombjainak funkcionalitását definiálja.
 *@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat, ha a toMenu gombra klikkelünk.
 *@param gameOverScreen A GameOverScreen struktúra gombjainak funkcionalitását kezeli.
+*@ingroup gameOverScreen
 */
 void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, GameOverScreen gameOverScreen);
 
@@ -48,6 +49,8 @@ void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Satellite
 /**A WINNING állapotból lép továb a képernyőn lévő két gomb lenyomásától függően.
 *@param winningScreen Ez a függvény kezeli a winningScreen struktúra két gombját.
 *@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat, ha a toMenu gombra klikkelünk.
+*@param *data Az aktív szintet meg kell változtatni, amit a data tárol.
+*@ingroup winningScreen
 */
 void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s,
                                                    WinningScreen winningScreen, Data *data, Menu *Menu);

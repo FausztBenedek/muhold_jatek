@@ -31,7 +31,12 @@ void button_upd(Button b, SDL_Event ev) {
     }
 }
 void button_drw(SDL_Surface *screen, Button b, TTF_Font *font){
-    if (b->hover) {
+    if (b->clicked){
+        boxRGBA(screen, b->x, b->y, b->x + b->w, b->y + b->h,
+               170, 170, 170, 255
+                );
+    }
+    else if (b->hover) {
         boxRGBA(screen, b->x, b->y, b->x + b->w, b->y + b->h,
                230, 230, 230, 255
                 );

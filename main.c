@@ -85,7 +85,7 @@ int game() {
             data_drw(screen, data, smallfont);
 
             print(screen, "ISTEN HOZOTT!", WIDTH/2, HEIGHT/7, bigfont);
-            print(screen, "Válassz egy szintet!",WIDTH/2, HEIGHT/7+BIG_FONT_SIZE+10, bigfont);
+            print(screen, "Válassz egy szintet, és juttasd el a műholdat a kapuba!",WIDTH/2, HEIGHT/7+BIG_FONT_SIZE+10, bigfont);
 
             button_drw(screen, &toMenu, smallfont);
 

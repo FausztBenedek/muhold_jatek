@@ -77,10 +77,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Sprite/Gate.h" />
-		<Unit filename="Sprite/Obstacles/Asteroid.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Sprite/Obstacles/Asteroid.h" />
 		<Unit filename="Sprite/Obstacles/Wall.c">
 			<Option compilerVar="CC" />
 		</Unit>

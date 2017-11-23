@@ -1,11 +1,6 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
-#include <SDL_ttf.h>
-#include <stdbool.h>
-
 #include "../GameStatusSpecific/Button.h"
 
 /**A Data struktúra a játék adatainak tárolására alkalmas
@@ -14,9 +9,9 @@ typedef struct Data{
 
     int numOf_level;///<A szintek számát tárolja
 
-    int activeLevel;///Az éppen aktuális szintet tároló változó. -1, ha éppen nem választunk.
-    int *attempts;///<A próbálkozások számát tárolja egy tömbben, amely akkora, ahány szint van. Ezt a számot menu struktúrától kéri el.
-    bool *solved;
+    int activeLevel;///<Az éppen aktuális szintet tároló változó. -1-el inicializálódik.
+    int *attempts;///<A próbálkozások számát tárolja egy tömbben. A tömb akkora, ahány szint van.
+    bool *solved;///<Minden szinthez hozzárendeljük, hogy megoldott-e vagy sem. Ha igen akkor a solved tömb megfelelő indexű tagja true értékű (pl.: solved[3] = true; <=> a 3. szint megoldva)
     button saveButton;///<A mentéshez kell megnyomni
 }Data;
 

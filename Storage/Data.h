@@ -12,7 +12,7 @@ typedef struct Data{
     int activeLevel;///<Az éppen aktuális szintet tároló változó. -1-el inicializálódik.
     int *attempts;///<A próbálkozások számát tárolja egy tömbben. A tömb akkora, ahány szint van.
     bool *solved;///<Minden szinthez hozzárendeljük, hogy megoldott-e vagy sem. Ha igen akkor a solved tömb megfelelő indexű tagja true értékű (pl.: solved[3] = true; <=> a 3. szint megoldva)
-    button saveButton;///<A mentéshez kell megnyomni
+    Button saveButton;///<A mentéshez kell megnyomni
 }Data;
 
 /**Beolvassa a save.txt-ből az elmentett információkat.

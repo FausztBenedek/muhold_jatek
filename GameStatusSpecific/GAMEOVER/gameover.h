@@ -11,8 +11,8 @@
 *A gombok funkcionalitása a game_status_from_GAMEOVER_to_MENU_or_SETTING() függvényben a gameStatusChangingFunctions modulban
 */
 typedef struct GameOverScreen{
-    button toMenu;///<A menübe lépő gomb
-    button newGame;///<Új játék indítása
+    Button toMenu;///<A menübe lépő gomb
+    Button newGame;///<Új játék indítása
 }GameOverScreen;
 
 /**Inicializálja a gombokat a megfelelő helyre

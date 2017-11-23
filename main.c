@@ -51,7 +51,7 @@ int game() {
     GameOverScreen gameOverScreen = gameOverScreen_init();
     WinningScreen winningScreen = winningScreen_init();
 
-    button toMenu = button_init(20, 20, 100, 40, STRMENU);
+    Button toMenu = button_init(20, 20, 100, 40, STRMENU);
 
     Satellite sat = sat_init(10, HEIGHT/5, 10);
 

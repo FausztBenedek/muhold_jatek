@@ -43,7 +43,7 @@ void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, 
 
 /**Az állandóan látható menü gomb frissítéséért és a menübe lépésért felelős
 */
-void game_status_button_toMenuButton_upd(Button b, SDL_Event ev, Satellite * s, enum gameStatus *gameStatus);
+void game_status_button_toMenuButton_upd(Button * b, SDL_Event ev, Satellite * s, enum gameStatus *gameStatus);
 
 
 #endif // GAME_STATUS_CHANGER_H

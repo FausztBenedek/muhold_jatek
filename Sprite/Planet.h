@@ -30,9 +30,9 @@ typedef struct Pln {
     bool screenSideLeft;
 
     bool pressing;///<A bolygó vonszolásához kell
-    button but_strengthUp;///<A bolygó méretét növeli. Funkció: (button_strengthUp_action(...))
-    button but_strengthDw;///<A bolygó méretét csökkenti. Funkció: (button_strengthDw_action(...))
-    button but_del;///<Törli a bolygót. Funkció a satellite modulban: (sat_plnarr_button_del_action(...))
+    Button but_strengthUp;///<A bolygó méretét növeli. Funkció: (button_strengthUp_action(...))
+    Button but_strengthDw;///<A bolygó méretét csökkenti. Funkció: (button_strengthDw_action(...))
+    Button but_del;///<Törli a bolygót. Funkció a satellite modulban: (sat_plnarr_button_del_action(...))
 }Pln;
 
 

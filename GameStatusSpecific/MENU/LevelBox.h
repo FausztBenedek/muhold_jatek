@@ -17,7 +17,7 @@ typedef struct LevelBox{
 
     Vect pos;///<Bal felső sarok
     float width;///<A levelBox-ok szélessége
-    button button;///<Az interaktív felület, vagyis maga a gomb
+    Button button;///<Az interaktív felület, vagyis maga a gomb
 
     struct LevelBox *next;///<Egyirányú láncolt listában helyezkednek el.
 

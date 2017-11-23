@@ -11,8 +11,8 @@
 *A gombok funkcionalitását kezelő függvény: game_status_from_GAMEOVER_to_MENU_or_SETTING(...) a gameStatusChangingFunctions modulban
 */
 typedef struct WinningScreen{
-    button toMenu;///<A menübe lépésért felelős gomb
-    button nextLevel;///<A következő szintre lépésért felelős gomb.
+    Button toMenu;///<A menübe lépésért felelős gomb
+    Button nextLevel;///<A következő szintre lépésért felelős gomb.
 }WinningScreen;
 
 /**Inicializálja a gombokat a megfelelő helyre

@@ -35,14 +35,6 @@ LevelBox * levelBox_add(LevelBox * list, int i, int numOf_levelBoxes){ //Minden 
     element->button.subscription = (char*) realloc(element->button.subscription, (strlen(X_LEVEL)+2) * sizeof(char));//+2, hogy biztosan legyen elég hely a több helyiértékkel jelölt szinteknek
     sprintf(element->button.subscription, X_LEVEL, i+1);
 
-    element->astrarr = NULL;
-    element->numOf_astr = 0;
-
-    element->wallarr = NULL;
-    element->numOf_wall = 0;
-
-
-
     //Új elem hozzáadása a listához
     if (list == NULL){
         list = element;

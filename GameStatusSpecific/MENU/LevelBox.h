@@ -19,12 +19,6 @@ typedef struct LevelBox{
     vect pos;///<Bal felső sarok
     button button;///<Az interaktív felület, vagyis maga a gomb
 
-    Astr astrarr;
-    int numOf_astr;
-
-    Wall wallarr;
-    int numOf_wall;
-
     struct LevelBox *next;
 }LevelBox;
 

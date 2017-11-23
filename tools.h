@@ -11,7 +11,7 @@
 
 void print(SDL_Surface *screen, char *text, int midx, int midy, TTF_Font *font);
 float mapping(float num, float rangeInStart, float rangeInEnd, float rangeOutStart, float rangeOutEnd);
-bool circlesCollide(vect pos1, float rad1, vect pos2, float rad2);
+bool circlesCollide(Vect pos1, float rad1, Vect pos2, float rad2);
 int calculate_words(char *fileName, char *word, int rowMax);
 void goto_word_in_file(FILE *file, char* word, int rowMax);
 

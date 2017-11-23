@@ -14,7 +14,7 @@ typedef struct initialOrbitCalculator *Helplt; //(Helping_plots)
 
 
 struct initialOrbitCalculator {
-    vect posarr[NUM_OF_HELPLT]; //(position array)
+    Vect posarr[NUM_OF_HELPLT]; //(position array)
 };
 
 helplt helplt_init(Satellite * const s);//Hozzárendeli az összes posarr elemhez a megfelelő értéket

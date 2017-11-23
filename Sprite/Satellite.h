@@ -15,9 +15,9 @@
 
 
 typedef struct Satellite{
-    vect pos;///<A műholdat reprezentáló kör középpontját tároló float x, y számpár
-    vect vel;///<A műhold sebességét tároló vektor
-    vect force;///<A műholdra ható eredő erőt tároló vektor
+    Vect pos;///<A műholdat reprezentáló kör középpontját tároló float x, y számpár
+    Vect vel;///<A műhold sebességét tároló vektor
+    Vect force;///<A műholdra ható eredő erőt tároló vektor
     float rad;///<A műholdat reprezentáló kör sugara
 
     Pln plnarr;///<A műholdra ható bolygók tömbjének pointere

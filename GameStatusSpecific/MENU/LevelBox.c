@@ -10,7 +10,7 @@ static float levelBox_getWidth(int numOf_level){
     return (WIDTH - 2 * MENU_LEVEL_LIST_BORDER - (numOf_level - 1) * MENU_SPACE_BETWEEN_LEVELS)/numOf_level;
 }
 
-static  vect levelBox_getPos(LevelBox * box, int numOf_level){
+static  Vect levelBox_getPos(LevelBox * box, int numOf_level){
     return vect_init(
             /*x value: */ mapping(box->index,
                                   0, numOf_level - 1,

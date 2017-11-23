@@ -16,7 +16,7 @@ typedef struct planet *Pln;
 
 struct planet {
     int index;///<Minden bolygónak van egy indexe, amivel
-    vect pos;///<Helyzetet tároló pont
+    Vect pos;///<Helyzetet tároló pont
     int strength;
     bool removeable;
 
@@ -37,7 +37,7 @@ float pln_getRad(Pln const p);
 
 ///Menüvel kapcsoloatos függvények
 float plnMenu_getRad(Pln pln);
-vect plnMenu_getPos(Pln pln);
+Vect plnMenu_getPos(Pln pln);
 
 void plnMenu_upd(Pln pln, SDL_Event ev);
 void plnMenu_drw(SDL_Surface *screen, Pln const pln, SDL_Event ev, TTF_Font *font);

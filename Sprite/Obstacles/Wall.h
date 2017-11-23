@@ -20,6 +20,6 @@ void wall_drw(SDL_Surface *screen, Wall wall);
 
 bool wall_hover(Wall const wall, SDL_Event ev);
 
-vect wall_closestPointToCircle(Wall const w, vect circle_center);//Visszaadja a legközelebbi pontot a kör közepéhez
+Vect wall_closestPointToCircle(Wall const w, Vect circle_center);//Visszaadja a legközelebbi pontot a kör közepéhez
 
 #endif //WALL_H

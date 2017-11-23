@@ -137,7 +137,7 @@ static  void calcResultantForceForSat(Satellite * s) {//Ezt a függvényt az sat
     int i;
     for (i = 0; i < s->numOf_pln; i++){
         //Távolság kiszámítása és hozzárendelése a dir vektorhoz
-        vect dir = differenceOf(s->pos,   s->plnarr[i].pos);
+        Vect dir = differenceOf(s->pos,   s->plnarr[i].pos);
         if (magnitudeOf(dir) < 1){
             normalizeVect(&dir);//Ha nagyon kicsi a távolság, akkor nagyon nagy a vonzóerő. Ezt kerüljük el.
         }

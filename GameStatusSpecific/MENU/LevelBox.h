@@ -16,7 +16,7 @@
 typedef struct LevelBox{
     int index;///<Egyéni azonosító
 
-    vect pos;///<Bal felső sarok
+    Vect pos;///<Bal felső sarok
     float width;///<A levelBox-ok szélessége
     button button;///<Az interaktív felület, vagyis maga a gomb
 

@@ -7,7 +7,7 @@
 
 #include "../Constants.h"
 
-static void pln_reinit(Pln pln, vect pos);
+static void pln_reinit(Pln pln, Vect pos);
 static void calculateCoordinatesFor_but_strengthUp(Pln pln);
 static void calculateCoordinatesFor_but_strengthDw(Pln pln);
 static void calculateCoordinatesFor_but_del(Pln pln);
@@ -30,7 +30,7 @@ pln pln_init(float x, float y, int strength){
 
     return p;
 }
-static void pln_reinit(Pln pln, vect pos){
+static void pln_reinit(Pln pln, Vect pos){
     pln->pos = vect_init(pos.x, pos.y);
     ///Menü
     if (pln->pos.x >= WIDTH/2) pln->screenSideLeft = false;
@@ -124,8 +124,8 @@ float pln_getRad(Pln const p){
 float plnMenu_getRad(Pln pln){
     return PLN_MAX_STRENGTH*2*0.75 + PLN_MIN_STRENGTH;
 }
-vect plnMenu_getPos(Pln pln){
-    vect pos = pln->pos;
+Vect plnMenu_getPos(Pln pln){
+    Vect pos = pln->pos;
     if (pln->screenSideLeft) {//Ha a bolygó a képernyő közepétől jobbra van, akkor a menü középpontja tőle balra  helyezkedjen el
         pos.x += plnMenu_getRad(pln)/2;
     }
@@ -169,7 +169,7 @@ void plnMenu_drw(SDL_Surface *screen, Pln const pln, SDL_Event ev, TTF_Font *fon
 
 bool plnMenu_hover(Pln const pln, SDL_Event ev){//Az egér éppen benne van a bolygóban menüjében
     //(x-u)^2 + (y-v)^2 = r^2
-    vect pos = plnMenu_getPos(pln);
+    Vect pos = plnMenu_getPos(pln);
     /*OLVASS!! ->            (x-u)^2                   +                   (y-v)^2                  */
     return (pos.x - ev.motion.x)*(pos.x - ev.motion.x) + (pos.y - ev.motion.y)*(pos.y - ev.motion.y)
             //=                        r^2

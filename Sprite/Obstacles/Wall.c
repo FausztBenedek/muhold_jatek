@@ -25,7 +25,7 @@ bool wall_hover(Wall const wall, SDL_Event ev){
     return ev.motion.x > wall->x && ev.motion.x < wall->x + wall->w && ev.motion.y < wall->y + wall->w && ev.motion.y > wall->y;
 }
 
-vect wall_closestPointToCircle(Wall const w, vect circle_center){//Visszaadja a legközelebbi pontot a kör közepéhez
+Vect wall_closestPointToCircle(Wall const w, Vect circle_center){//Visszaadja a legközelebbi pontot a kör közepéhez
     //Ez a függvény nem kezeli azt az esetet, amikor a kör közepe benne van a négyzetben.
     float x, y;
     //          négyzet

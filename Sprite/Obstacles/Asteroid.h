@@ -11,11 +11,11 @@ typedef struct asteroid_obsticle astr;
 typedef struct asteroid_obsticle *Astr;
 
 struct asteroid_obsticle{
-	vect pos;
-	vect vel;
-	vect force;
+	Vect pos;
+	Vect vel;
+	Vect force;
 	float rad;
-	vect center;
+	Vect center;
 };
 
 astr astr_init(float centerX, float centerY, float posX, float posY, float rad, float velX, float velY);

@@ -45,7 +45,7 @@ static  void calcForceForAstr(Astr a){//Ezt a függvényt az astr_upd() függvé
 
     //Majd kiszámoljuk a jelenlegi erőt
     //1. Irány kiszámítása és hozzárendelése a dir vektorhoz
-    vect dir = differenceOf(a->pos,   a->center);
+    Vect dir = differenceOf(a->pos,   a->center);
     if (magnitudeOf(dir) < 1) normalizeVect(&dir);//Ha nagyon kicsi a távolság, akkor nagyon nagy a vonzóerõ. Ezt kerüljük el.
 
     //Erõ kiszámítása és hozzárendelése a dir vektorhoz

@@ -39,7 +39,7 @@ float mapping(float num, float rangeInStart, float rangeInEnd, float rangeOutSta
            /*And to the fraction*/+ rangeOutStart;
 }
 
-bool circlesCollide(vect pos1, float rad1, vect pos2, float rad2){
+bool circlesCollide(Vect pos1, float rad1, Vect pos2, float rad2){
 //    float dx = pos1.x - pos2.x; //mindegy, hogy negatív-e, mert négyzetre lesz emelve
 //    float dy = pos1.y - pos2.y; //mindegy, hogy negatív-e, mert négyzetre lesz emelve
 //    float dist = sqrt(dx*dx + dy*dy);

@@ -1,26 +1,21 @@
 #ifndef VECT_H
 #define VECT_H
 
-typedef struct vect vect;
-typedef struct vect *Vect;
-//Ha nagybetûs a deklaráció, akkor pointer lesz
-
-struct vect
-{
+typedef struct Vect{
     float x, y;
-};
+}Vect;
 
-vect vect_init(float x, float y);
+Vect vect_init(float x, float y);
 
-vect sumOf(vect a, vect b);
-vect differenceOf(vect a, vect b);//Visszatérõ vektor az a pontból b-be mutat. (ab vektor)
-void add(Vect toThis, vect addThis);
-void sub(Vect fromThis, vect substractThis);
+Vect sumOf(Vect a, Vect b);
+Vect differenceOf(Vect a, Vect b);//Visszatérõ vektor az a pontból b-be mutat. (ab vektor)
+void add(Vect * toThis, Vect addThis);
+void sub(Vect * fromThis, Vect substractThis);
 
-void multVect(Vect v, float num);
+void multVect(Vect * v, float num);
 
-float magnitudeOf(vect v);
+float magnitudeOf(Vect v);
 
-void normalizeVect(Vect v);
+void normalizeVect(Vect * v);
 
 #endif // VECT_H

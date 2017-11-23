@@ -8,6 +8,7 @@
 #include "../Button.h"
 
 /**A "Sikerült" képernyő deklarációja.
+*A gombok funkcionalitását kezelő függvény: game_status_from_GAMEOVER_to_MENU_or_SETTING(...) a gameStatusChangingFunctions modulban
 */
 typedef struct WinningScreen{
     button toMenu;///<A menübe lépésért felelős gomb

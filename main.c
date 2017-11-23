@@ -241,6 +241,7 @@ int game() {
 ///  ---------------------------------------------
     menu_cleanup(&menu);
     winningScreen_cleanup(&winningScreen);
+    gameOverScreen_cleanup(&gameOverScreen)
     data_cleanUp(&data);
     sat_game_cleanup(&sat);
     TTF_CloseFont(bigfont);

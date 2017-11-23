@@ -23,3 +23,9 @@ void gameOverScreen_upd(gameOverScreen *this, SDL_Event ev){
     button_upd(&this->newGame, ev);
     button_upd(&this->toMenu, ev);
 }
+
+void gameOverScreen_cleanup(gameOverScreen *this){
+    button_cleanup(&this->newGame);
+    button_cleanup(&this->toMenu);
+}
+

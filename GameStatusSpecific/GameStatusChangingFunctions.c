@@ -11,13 +11,13 @@
 #include "MENU/LevelBox.h"
 #include "../tools.h"
 
-static void open_level(int level, Satellite * Satellite);
-static bool sat_touched_gate(Satellite * s);
+static void open_level(int level, Satellite *Satellite);
+static bool sat_touched_gate(Satellite *s);
 
-static void sat_and_pln_collide (enum gameStatus *gameStatus, Satellite * s);
-static void sat_and_wall_collide(enum gameStatus *gameStatus, Satellite * s);
+static void sat_and_pln_collide (enum gameStatus *gameStatus, Satellite *s);
+static void sat_and_wall_collide(enum gameStatus *gameStatus, Satellite *s);
 
-void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s){
+void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s){
     if ((ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_SPACE) ||
         (ev.type == SDL_MOUSEBUTTONDOWN && ev.button.button  == SDL_BUTTON_RIGHT)
         ){
@@ -26,17 +26,16 @@ void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event 
         *gameStatus = RUNNING;
     }
 }
-
-void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, Data *data){
+void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, Data *data){
     if (ev.type == SDL_MOUSEBUTTONDOWN || (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_SPACE)){
         *gameStatus = SETTING;
         sat_resetMotion(s);
         data->attempts[data->activeLevel]++;
     }
 }
-void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, Menu * Menu, Data *data){
+void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, Menu *Menu, Data *data){
     if (ev.type == SDL_MOUSEBUTTONDOWN){
-        LevelBox * iter;
+        LevelBox *iter;
         int i;
         for (i = 0, iter = Menu->levelarr; i < data->numOf_level; i++, iter = iter->next){
             if (iter->button.clicked){
@@ -48,7 +47,7 @@ void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev,
         }
     }
 }
-static void open_level(int level, Satellite * Satellite){
+static void open_level(int level, Satellite *Satellite){
     FILE *settings;
     settings = fopen(SETTINGS, "r");
     if (settings == NULL) return;
@@ -62,7 +61,7 @@ static void open_level(int level, Satellite * Satellite){
 }
 
 
-void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, GameOverScreen gameOverScreen){
+void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, GameOverScreen gameOverScreen){
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         if (gameOverScreen.toMenu.clicked){
             *gameStatus = MENU;
@@ -79,28 +78,28 @@ void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, S
 
 
 
-void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Satellite * s, Data *data){
+void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Satellite *s, Data *data){
     if (sat_touched_gate(s)){
         sat_resetMotion(s);
         *gameStatus = WINNING;
         data->solved[data->activeLevel] = true;
     }
 }
-static bool sat_touched_gate(Satellite * s){
+static bool sat_touched_gate(Satellite *s){
     //              nagyon közel van a jobb szélhez
     return s->pos.x >= WIDTH - s->rad - SAT_Y_DISTANCE_FROM_GATE_TO_WIN
     //  és      y irányban is jó helyen
         && (s->pos.y <= s->gate.lower && s->pos.y >= s->gate.upper);
 }
 
-void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Satellite * s, Data *data) {
+void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Satellite *s, Data *data) {
     sat_and_pln_collide (gameStatus, s);
     sat_and_wall_collide(gameStatus, s);
     if (*gameStatus == GAMEOVER){
         data->attempts[data->activeLevel]++;
     }
 }
-static void sat_and_pln_collide (enum gameStatus *gameStatus, Satellite * s){
+static void sat_and_pln_collide (enum gameStatus *gameStatus, Satellite *s){
     int i;
     for (i = 0; i < s->numOf_pln; i++){//Műhold & Bolygó
         if (circlesCollide(s->pos, s->rad, s->plnarr[i].pos, pln_getRad(&s->plnarr[i]))){
@@ -109,7 +108,7 @@ static void sat_and_pln_collide (enum gameStatus *gameStatus, Satellite * s){
         }
     }
 }
-static void sat_and_wall_collide(enum gameStatus *gameStatus, Satellite * s){
+static void sat_and_wall_collide(enum gameStatus *gameStatus, Satellite *s){
     int i;
     for (i = 0; i < s->numOf_wall; i++){
       //float dist = a kör közepétől a négyzet legközelebb lévő pontjába mutató vektor hossza
@@ -121,8 +120,8 @@ static void sat_and_wall_collide(enum gameStatus *gameStatus, Satellite * s){
     }
 }
 
-void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s,
-                                                   WinningScreen winningScreen, Data *data, Menu * Menu){
+void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s,
+                                                   WinningScreen winningScreen, Data *data, Menu *Menu){
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         if (winningScreen.toMenu.clicked){
             *gameStatus = MENU;
@@ -130,7 +129,7 @@ void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, 
         }
 
         if (winningScreen.nextLevel.clicked){
-            LevelBox * iter;
+            LevelBox *iter;
             int i;
             for (i = 0, iter = Menu->levelarr; i < data->numOf_level; i++, iter = iter->next){
                 if (i == data->numOf_level -1){//Ha az utolsó pályán nyertél és megnyomod a következő gombot, akkor irány a menü
@@ -149,7 +148,7 @@ void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, 
     }
 }
 
-void game_status_button_toMenuButton_upd(Button * b, SDL_Event ev, Satellite * s, enum gameStatus *gameStatus){
+void game_status_button_toMenuButton_upd(Button *b, SDL_Event ev, Satellite *s, enum gameStatus *gameStatus){
     button_upd(b, ev);
     if (b->clicked){
         *gameStatus = MENU;

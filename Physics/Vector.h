@@ -18,18 +18,18 @@ Vect sumOf(Vect a, Vect b);
 Vect differenceOf(Vect a, Vect b);
 
 ///Hozzáadja az első paraméterhez a másodikat.
-void add(Vect * toThis, Vect addThis);
+void add(Vect *toThis, Vect addThis);
 
 ///Kivonja az első parméterből a másodikat.
-void sub(Vect * fromThis, Vect substractThis);
+void sub(Vect *fromThis, Vect substractThis);
 
 ///Megszorozza a vektort egy számmal.
-void multVect(Vect * v, float num);
+void multVect(Vect *v, float num);
 
 ///@return A vektor hossza
 float magnitudeOf(Vect v);
 
 ///Egységnyire változtatja a vektort. (Irány nem változik)
-void normalizeVect(Vect * v);
+void normalizeVect(Vect *v);
 
 #endif // VECT_H

@@ -7,10 +7,10 @@
 #include "../../Constants.h"
 static float levelBox_getWidth(int numOf_level){
     //Szélesség  -        a lista margója     -         a lista elemei között lévő hely
-    return (WIDTH - 2 * MENU_LEVEL_LIST_BORDER - (numOf_level - 1) * MENU_SPACE_BETWEEN_LEVELS)/numOf_level;
+    return (WIDTH - 2 *MENU_LEVEL_LIST_BORDER - (numOf_level - 1) *MENU_SPACE_BETWEEN_LEVELS)/numOf_level;
 }
 
-static  Vect levelBox_getPos(LevelBox * box, int numOf_level){
+static  Vect levelBox_getPos(LevelBox *box, int numOf_level){
     return vect_init(
             /*x value: */ mapping(box->index,
                                   0, numOf_level - 1,
@@ -20,10 +20,10 @@ static  Vect levelBox_getPos(LevelBox * box, int numOf_level){
                     );
 }
 
-LevelBox * levelBox_add(LevelBox * list, int i, int numOf_level){ //Minden paraméterét a fájlból olvassa
+LevelBox *levelBox_add(LevelBox *list, int i, int numOf_level){ //Minden paraméterét a fájlból olvassa
 
     //Új elem helyének lefoglalása
-    LevelBox * element;
+    LevelBox *element;
     element = (LevelBox *) malloc(sizeof(struct LevelBox));
 
     //Új elem inicializálása
@@ -34,7 +34,7 @@ LevelBox * levelBox_add(LevelBox * list, int i, int numOf_level){ //Minden param
                             //A stringet manipulálni kell, nem bízom rá a button_init függvényre
     element->button = button_init(element->pos.x, element->pos.y, element->width, MENU_LEVEL_HEIGHT, "");
 
-    element->button.subscription = (char*) realloc(element->button.subscription, (strlen(X_LEVEL)+2) * sizeof(char));//+2, hogy biztosan legyen elég hely a több helyiértékkel jelölt szinteknek
+    element->button.subscription = (char*) realloc(element->button.subscription, (strlen(X_LEVEL)+2) *sizeof(char));//+2, hogy biztosan legyen elég hely a több helyiértékkel jelölt szinteknek
     sprintf(element->button.subscription, X_LEVEL, i+1);
 
     //Új elem hozzáadása a listához
@@ -42,14 +42,14 @@ LevelBox * levelBox_add(LevelBox * list, int i, int numOf_level){ //Minden param
         list = element;
     }
     else{
-        LevelBox * iter;
+        LevelBox *iter;
         for (iter = list; iter->next != NULL; iter = iter->next);
         iter->next = element;
     }
     return list;
 }
 
-void levelBox_drw(SDL_Surface *screen, LevelBox * box, TTF_Font *font, Data data){
+void levelBox_drw(SDL_Surface *screen, LevelBox *box, TTF_Font *font, Data data){
     button_drw(screen, &box->button, font);
 
     char str[14+1];
@@ -75,15 +75,15 @@ void levelBox_drw(SDL_Surface *screen, LevelBox * box, TTF_Font *font, Data data
 
 
 
-void levelBox_upd(LevelBox * box, SDL_Event ev){
+void levelBox_upd(LevelBox *box, SDL_Event ev){
     button_upd(&box->button, ev);
 }
 
 
-void levelBox_cleanUp(LevelBox * list){
+void levelBox_cleanUp(LevelBox *list){
     while (list != NULL){
         free(list->button.subscription);
-        LevelBox * temp = list->next;
+        LevelBox *temp = list->next;
         free(list);
         list = temp;
     }

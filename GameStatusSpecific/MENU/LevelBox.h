@@ -28,23 +28,23 @@ typedef struct LevelBox{
 *@param index Az egyéni azonosítót inicializálja. Azért került a paraméterlistára, mert így nem kell static változót deklarálni.
 *@param numOf_level A pozíció kiszámításához szükséges. Azt tárolja, hány szint van.
 */
-LevelBox *levelBox_add(LevelBox * list, int index, int numOf_level); //Minden paraméterét a fájlból olvassa
+LevelBox *levelBox_add(LevelBox *list, int index, int numOf_level); //Minden paraméterét a fájlból olvassa
 
 /**Kirajzolja a szintet képviselő gombot:
-*   1. Magát a gombot
-*   2. A sikertelen próbálkozások számát kiírja
-*   3. Áthúzza a gombot, ha nem elérhető
+*  1. Magát a gombot
+*  2. A sikertelen próbálkozások számát kiírja
+*  3. Áthúzza a gombot, ha nem elérhető
 *@param numOf_level Szükség van a szintek számára a számításokhoz.
 *@param data Ez alapján tudja, hogy melyik szintek vannak már lejesítve, és melyikeket kell áthúzni.
 */
-void levelBox_drw(SDL_Surface *screen, LevelBox * box, TTF_Font *font, Data data);
+void levelBox_drw(SDL_Surface *screen, LevelBox *box, TTF_Font *font, Data data);
 
 /**A gombot frissíti.
 */
-void levelBox_upd(LevelBox * box, SDL_Event ev);
+void levelBox_upd(LevelBox *box, SDL_Event ev);
 
 /**Feltakarítja a láncolt listét és a gomb felirata által lefoglalt területet.
 */
-void levelBox_cleanUp(LevelBox * list);
+void levelBox_cleanUp(LevelBox *list);
 
 #endif // LEVEL_BOX_H

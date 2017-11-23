@@ -18,6 +18,6 @@ Gate gate_init(float upper, float lower);
 
 /**Kirajzolja a képernyőre a célvonalat
 */
-void gate_drw(SDL_Surface *screen, Gate * gate);
+void gate_drw(SDL_Surface *screen, Gate *gate);
 
 #endif // GATE_H

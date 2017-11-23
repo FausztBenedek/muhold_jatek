@@ -4,7 +4,7 @@
 
 WinningScreen winningScreen_init(){
     WinningScreen this;
-    int buttonWidth = (WIDTH - MENU_LEVEL_LIST_BORDER * 2 - MENU_SPACE_BETWEEN_LEVELS) / 2;
+    int buttonWidth = (WIDTH - MENU_LEVEL_LIST_BORDER *2 - MENU_SPACE_BETWEEN_LEVELS) / 2;
     this.toMenu = button_init(MENU_LEVEL_LIST_BORDER, MENU_LEVEL_LIST_UPPER_LINE, buttonWidth, MENU_LEVEL_HEIGHT, STRMENU);
 
     this.nextLevel = button_init(MENU_LEVEL_LIST_BORDER + buttonWidth + MENU_SPACE_BETWEEN_LEVELS,

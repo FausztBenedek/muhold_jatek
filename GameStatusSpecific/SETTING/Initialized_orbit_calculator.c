@@ -3,13 +3,13 @@
 #include "../../tools.h"
 #include "../../Constants.h"
 
-helplt helplt_init(Satellite * const Satellite){
+helplt helplt_init(Satellite *const Satellite){
     helplt h; int i;
     for (i = 0; i < NUM_OF_HELPLT; i++) h.posarr[i] = vect_init(0, 0);
     return h;
 }
 
-void helplt_upd(Helplt plots, Satellite * const sat, SDL_Event ev) {
+void helplt_upd(Helplt plots, Satellite *const sat, SDL_Event ev) {
     if (ev.type == SDL_MOUSEBUTTONDOWN || ev.type == SDL_MOUSEMOTION){
         Satellite s = *sat;
         sat_resetMotion(&s);

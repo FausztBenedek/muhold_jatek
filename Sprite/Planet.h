@@ -8,7 +8,7 @@
 #include "../Physics/Vector.h"
 #include "../GameStatusSpecific/Button.h"
 
-/** A Pln (planet) struktúra a bolygókat és a hozzájuk tartozó menüt tárolja.
+/**A Pln (planet) struktúra a bolygókat és a hozzájuk tartozó menüt tárolja.
 *Minden bolygó rendelkezik egy saját menüvel. A menü adatai bele vannak ágyazva ebbe a struktúrába.
 *A bolygó menüje nem azonos a játék menüjével. Minden bolygónak saját menüje van.
 */
@@ -19,8 +19,8 @@ typedef struct Pln {
     bool removeable;///<Nincs funkció (későbbi fejlesztéshez kell)
 
     /**Akkor true, ha az adott bolygó menüjét kezeljük
-    *   1. Ha az egér a BOLYGÓ fölé ér true lesz és az is marad.
-    *   2. Ha az egér nincs a MENÜ fölött false lesz és az is marad.
+    *  1. Ha az egér a BOLYGÓ fölé ér true lesz és az is marad.
+    *  2. Ha az egér nincs a MENÜ fölött false lesz és az is marad.
     */
     bool menuIsActive;
 
@@ -43,19 +43,19 @@ Pln pln_init(float x, float y, int strength);
 
 /**Kirajzolja a bolygót a képernyőre. CSAK a bolygót, a menüjét nem.
 */
-void pln_drw(SDL_Surface *screen, Pln * const p);
+void pln_drw(SDL_Surface *screen, Pln *const p);
 
 /**Megállapítja, hogy az egér a bolygó felett van-e.
 *@return true, ha benne van az egér a bolygóban és false, ha nem.
 */
-bool pln_hover(Pln * const this, SDL_Event ev);
+bool pln_hover(Pln *const this, SDL_Event ev);
 
 /**Ez a függvény CSAK a vonszolásért felelős. A menüböl kezelhető változók a plnMenu_upd() függvényben frissülnek.
 */
-void pln_upd(Pln * this, SDL_Event ev);
+void pln_upd(Pln *this, SDL_Event ev);
 
 ///@return A bolygó sugarát számítja a srength változóból.
-float pln_getRad(Pln * const p);
+float pln_getRad(Pln *const p);
 
 //--------------------------------------
 //Menüvel kapcsoloatos függvények
@@ -63,38 +63,38 @@ float pln_getRad(Pln * const p);
 
 /**@return A menü körének sugarát számítja ki.
 */
-float plnMenu_getRad(Pln * this);
+float plnMenu_getRad(Pln *this);
 /**@return A menü középpontjának koordinátáival tér vissza. Ennek megállapításához a bool screenSideLeft változót is felhasználja.
 */
-Vect plnMenu_getPos(Pln * this);
+Vect plnMenu_getPos(Pln *this);
 
 /**Feladatai:
-*   1. Frissíti mindhárom gombot.
-*   2. A strength változót növelő és csökkentő gomb funkcionalitását intézi.
-*   3. Beállítja a bool menuIsActive változót.
+*  1. Frissíti mindhárom gombot.
+*  2. A strength változót növelő és csökkentő gomb funkcionalitását intézi.
+*  3. Beállítja a bool menuIsActive változót.
 */
-void plnMenu_upd(Pln * this, SDL_Event ev);
+void plnMenu_upd(Pln *this, SDL_Event ev);
 
 /**Kirajzolja a:
-*   1. Menüt ábrázoló kört
-*   2. Gombokat
+*  1. Menüt ábrázoló kört
+*  2. Gombokat
 */
-void plnMenu_drw(SDL_Surface *screen, Pln * const this, SDL_Event ev, TTF_Font *font);
+void plnMenu_drw(SDL_Surface *screen, Pln *const this, SDL_Event ev, TTF_Font *font);
 
 /**@return true, ha benne van az egér a menüben és false, ha nem.
 *CSAK AKKOR szabad MEGHÍVNI, amikor a menuIsActive == true.
 */
-bool plnMenu_hover(Pln * const this, SDL_Event ev);
+bool plnMenu_hover(Pln *const this, SDL_Event ev);
 
 //--------------------------------------
 //Gombokkal kapcsolatos függvények
 //--------------------------------------
 /**A bolygó erejét növeli, ha a but_strengthUp gombot megnyomjuk.
 */
-void button_strengthUp_action(Pln * this);
+void button_strengthUp_action(Pln *this);
 
 /**A bolygó erejét csökkenti, ha a but_strengthDw gombot megnyomjuk.
 */
-void button_strengthDw_action(Pln * this);
+void button_strengthDw_action(Pln *this);
 
 #endif // BLACKHOLE_H

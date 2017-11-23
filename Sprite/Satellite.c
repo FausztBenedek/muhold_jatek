@@ -11,9 +11,9 @@
 #include "Obstacles/Wall.h"
 #include "Planet.h"
 
-static void calcResultantForceForSat(Satellite * s);
+static void calcResultantForceForSat(Satellite *s);
 
-static void sat_plnarr_button_del_action(Satellite * s);
+static void sat_plnarr_button_del_action(Satellite *s);
 
 Satellite sat_init(float x, float y, float rad){
     Satellite s;
@@ -29,7 +29,7 @@ Satellite sat_init(float x, float y, float rad){
     return s;
 }
 
-void sat_resetMotion(Satellite * s){
+void sat_resetMotion(Satellite *s){
     s->vel = vect_init(0,0);
     s->force = vect_init(0,0);
     s->pos = vect_init(10, HEIGHT/5);
@@ -50,12 +50,12 @@ void sat_resetInitialState(Satellite *this){
 }
 
 
-void sat_game_cleanup(Satellite * s){
+void sat_game_cleanup(Satellite *s){
     free(s->wallarr);
     free(s->plnarr);
 }
 
-void sat_drw(SDL_Surface *screen, Satellite * const s){
+void sat_drw(SDL_Surface *screen, Satellite *const s){
     filledCircleRGBA(screen,
             s->pos.x, s->pos.y,//(x, y)
             s->rad,//Sugár
@@ -69,7 +69,7 @@ void sat_drw(SDL_Surface *screen, Satellite * const s){
 //Hatások az objektumoktól
 //----------------------------------
 
-void sat_RUNNING_upd(Satellite * s){
+void sat_RUNNING_upd(Satellite *s){
 
     calcResultantForceForSat(s);//Ezzel kiszámoljuk az ehhez az időpillanathoz tartozó eredő erőt.
 
@@ -95,7 +95,7 @@ void sat_RUNNING_upd(Satellite * s){
         s->force.y *= -1; //Megfordítani horizontálisan az erõt
     }
 }
-void sat_SETTINGS_upd(Satellite * s, SDL_Event ev){
+void sat_SETTINGS_upd(Satellite *s, SDL_Event ev){
     bool ableToAddPlanet = true;
     int i;
     if (ev.type == SDL_MOUSEBUTTONDOWN && ev.button.button == SDL_BUTTON_LEFT) {
@@ -120,15 +120,15 @@ void sat_SETTINGS_upd(Satellite * s, SDL_Event ev){
     //Törölni a bolygót, ha a törlés gombra klikkelünk
     sat_plnarr_button_del_action(s);
 }
-static  void calcResultantForceForSat(Satellite * s) {//Ezt a függvényt az sat_upd() függvényben hívjuk meg, és az eredő erőt számoljuk ki vele
+static  void calcResultantForceForSat(Satellite *s) {//Ezt a függvényt az sat_upd() függvényben hívjuk meg, és az eredő erőt számoljuk ki vele
     /*
-    Gravitáció törvénye: F = G * m1 * m2 /d^2
-    A G * m1 * m2 szorzatot összevonjuk:
+    Gravitáció törvénye: F = G *m1 *m2 /d^2
+    A G *m1 *m2 szorzatot összevonjuk:
           1. Egy nagy konstans a kísérlet alapján JELE: C, Kiszámítása: (1/(float)SAT_DIV)
           2. A bolygó vonzereje: pln.stength változóban tárolva.
 
     Ebből a képlet:
-          F = C * bolygó_vonzereje / távolság^2
+          F = C *bolygó_vonzereje / távolság^2
     */
     //Először nullázzuk a jelenlegi erővektort
     multVect(   &(s->force)     ,0);
@@ -142,10 +142,10 @@ static  void calcResultantForceForSat(Satellite * s) {//Ezt a függvényt az sat
             normalizeVect(&dir);//Ha nagyon kicsi a távolság, akkor nagyon nagy a vonzóerő. Ezt kerüljük el.
         }
         //Erő kiszámítása és hozzárendelése a dir vektorhoz
-                  //F   = (          konstans         *     bolygó_vonzereje    ) /                 távolság^2           ;
-        float magnitude = (  (1/(float)SAT_DIV) * s->plnarr[i].strength   ) / (magnitudeOf(dir) * magnitudeOf(dir));//Érték
+                  //F   = (          konstans         *    bolygó_vonzereje    ) /                 távolság^2           ;
+        float magnitude = (  (1/(float)SAT_DIV) *s->plnarr[i].strength   ) / (magnitudeOf(dir) *magnitudeOf(dir));//Érték
         normalizeVect(&dir);//Irány
-        multVect(&dir, magnitude);//Irány * Érték
+        multVect(&dir, magnitude);//Irány *Érték
         //Eredő erőt tároló változóhoz hozzáadjuk
         add(    &(s->force)     , dir);
     }
@@ -157,18 +157,18 @@ static  void calcResultantForceForSat(Satellite * s) {//Ezt a függvényt az sat
 //Bolygókhoz tartozó függvények
 //----------------------------------
 
-void sat_addPln(Satellite * s, Pln * p) {
+void sat_addPln(Satellite *s, Pln *p) {
     if (s->numOf_pln == 0){
         s->plnarr = (Pln *) malloc(sizeof(Pln));
     }
     else {
-        s->plnarr = (Pln *) realloc(s->plnarr, (s->numOf_pln + 1) * sizeof(Pln));
+        s->plnarr = (Pln *) realloc(s->plnarr, (s->numOf_pln + 1) *sizeof(Pln));
     }
     s->plnarr[s->numOf_pln] = *p;
     s->numOf_pln++;
 }
 
-bool sat_remPln(Satellite * s, int index) {
+bool sat_remPln(Satellite *s, int index) {
     if (!s->plnarr[index].removeable){
         return false;
     }
@@ -177,10 +177,10 @@ bool sat_remPln(Satellite * s, int index) {
         s->plnarr[i] = s->plnarr[i+1];
     }
     --s->numOf_pln;
-    s->plnarr = realloc(s->plnarr, (s->numOf_pln) * sizeof(Pln));
+    s->plnarr = realloc(s->plnarr, (s->numOf_pln) *sizeof(Pln));
     return true;
 }
-static void sat_plnarr_button_del_action(Satellite * s){
+static void sat_plnarr_button_del_action(Satellite *s){
     int i;
     for (i = 0; i < s->numOf_pln; i++){
         if (s->plnarr[i].but_del.clicked){
@@ -190,7 +190,7 @@ static void sat_plnarr_button_del_action(Satellite * s){
 }
 
 
-void sat_wall_init(Satellite * s, int level, FILE *settings){
+void sat_wall_init(Satellite *s, int level, FILE *settings){
     //A keresett infókig vaóló eljutás
     char row[MAX_ROW_LENGTH_IN_FILE]; // "X.Szint'0'" = 8 karakter
     sprintf(row, X_LEVEL, level);
@@ -215,7 +215,7 @@ void sat_wall_init(Satellite * s, int level, FILE *settings){
     fseek(settings, file_pos, SEEK_SET);
 
     goto_word_in_file(settings, WALL_BEGIN, MAX_ROW_LENGTH_IN_FILE);
-    s->wallarr = (Wall) malloc(s->numOf_wall * sizeof(struct Wall));
+    s->wallarr = (Wall) malloc(s->numOf_wall *sizeof(struct Wall));
     if (s->wallarr == NULL) return;
     for (i = 0; i < s->numOf_wall; i++){
         fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);
@@ -226,7 +226,7 @@ void sat_wall_init(Satellite * s, int level, FILE *settings){
 
 }
 
-void sat_gate_init(Satellite * this, int level, FILE *settings){
+void sat_gate_init(Satellite *this, int level, FILE *settings){
     //A keresett infókig vaóló eljutás
     char row[MAX_ROW_LENGTH_IN_FILE]; // "X.Szint'0'" = 8 karakter
     sprintf(row, X_LEVEL, level);

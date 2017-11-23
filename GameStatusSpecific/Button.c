@@ -13,12 +13,12 @@ Button button_init(float x, float y, float w, float h, char *subscription){
     Button b;
     b.x = x;    b.y = y;    b.w = w;    b.h = h;
     b.hover = b.clicked = false;
-    b.subscription = (char*) malloc ( (strlen(subscription) + 1) * sizeof(char) );
+    b.subscription = (char*) malloc ( (strlen(subscription) + 1) *sizeof(char) );
     strcpy(b.subscription, subscription);
     return b;
 }
 
-void button_upd(Button * b, SDL_Event ev) {
+void button_upd(Button *b, SDL_Event ev) {
     if (ev.type == SDL_MOUSEBUTTONDOWN || ev.type == SDL_MOUSEMOTION){
 
         button_hover(b, ev);
@@ -30,7 +30,7 @@ void button_upd(Button * b, SDL_Event ev) {
         }
     }
 }
-void button_drw(SDL_Surface *screen, Button * b, TTF_Font *font){
+void button_drw(SDL_Surface *screen, Button *b, TTF_Font *font){
     if (b->clicked){
         boxRGBA(screen, b->x, b->y, b->x + b->w, b->y + b->h,
                170, 170, 170, 255
@@ -51,7 +51,7 @@ void button_drw(SDL_Surface *screen, Button * b, TTF_Font *font){
     print(screen, b->subscription, b->x + b->w/2, b->y + b->h/2, font);
 }
 
-bool button_hover(Button * b, SDL_Event ev){
+bool button_hover(Button *b, SDL_Event ev){
     //bal oldalától jobbra &&   jobb oldalától balra    &&     aljától fenntebb      &&  tetejétõl lentebb
     if (ev.motion.x > b->x && ev.motion.x < b->x + b->w && ev.motion.y < b->y + b->h && ev.motion.y > b->y) {
         b->hover = true;
@@ -62,6 +62,6 @@ bool button_hover(Button * b, SDL_Event ev){
     return b->hover;
 }
 
-void button_cleanup(Button * this){
+void button_cleanup(Button *this){
     free(this->subscription);
 }

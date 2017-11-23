@@ -14,8 +14,8 @@ Data data_read_in(){
     this.numOf_level = calculate_words(SETTINGS, LEVEL_IDENTIFIER, 20);;
     this.activeLevel = -1;
 
-    this.attempts = (int*) malloc(this.numOf_level * sizeof(int));
-    this.solved  = (bool*) malloc(this.numOf_level * sizeof(bool));
+    this.attempts = (int*) malloc(this.numOf_level *sizeof(int));
+    this.solved  = (bool*) malloc(this.numOf_level *sizeof(bool));
     int check;
     read_from_file(&check, this.solved, this.attempts);
     if (this.numOf_level != check){//A fájl nem helyes

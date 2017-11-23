@@ -16,8 +16,8 @@ typedef struct Data{
 }Data;
 
 /**Beolvassa a save.txt-ből az elmentett információkat.
-*   A fájlt a függvény nyitja meg, és be is zárja.
-*   Mindenképpen a menü inicializálása után kell meghívni
+*  A fájlt a függvény nyitja meg, és be is zárja.
+*  Mindenképpen a menü inicializálása után kell meghívni
 */
 Data data_read_in();
 
@@ -40,7 +40,7 @@ void data_drw(SDL_Surface *screen, Data this, TTF_Font *font);
 
 
 /**Az új fájlokat beírja a fájlba, amit megnyit, majd be is zár.
-*   A Data struktúrához tartozó gomb funkciója is ez a függvény.
+*  A Data struktúrához tartozó gomb funkciója is ez a függvény.
 */
 void data_save(Data data);
 

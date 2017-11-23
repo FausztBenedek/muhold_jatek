@@ -10,27 +10,32 @@
 #include "../Storage/Data.h"
 #include "WINNING/winning.h"
 
+///@defgroup gameStatus A játékállapotot megváltoztató függvények
+///@{
 
-
-void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s);
-/**
-*@param &data a data struktúrában tárolt próbálkozások száma nő.
+/**Inputra elindítja a műholdat. Input lehet SPACE billentyű vagy jobb gomb az egérrel.
 */
-void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, Data *data);
+void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s);
 
-/**
+/**Inputra visszaugrik tervező állapotba a GameOver képernyő megjelenése nélkül.
+*@param &data A sikertertelen próbálkozások száma nő.
+*/
+void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, Data *data);
+
+/**Megnyitja a menüben kiválasztott szintet. Fájlkezelő függvényt hív meg.
 *@param *data Beállítja az aktuális szintet
 */
-void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, Menu * Menu, Data *data);
+void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, Menu *Menu, Data *data);
+
 /**
 *@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat
 */
-void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, GameOverScreen gameOverScreen);
-void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Satellite * s, Data *data);
+void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, GameOverScreen gameOverScreen);
+void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Satellite *s, Data *data);
 /**
 *@param *data a data struktúrában tárolt próbálkozások száma nő.
 */
-void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Satellite * const s, Data *data);
+void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Satellite *const s, Data *data);
 
 /**A WINNING állapotból lép továb a képernyőn lévő két gomb lenyomásától függően.
 *@param winningScreen Ez a függvény kezeli a winningScreen struktúra két gombját.
@@ -38,12 +43,13 @@ void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Satellite
 *@param *gameStatus Ez a függvény megváltoztatja az állapotot a feltételek kiértékelését követően
 *@param ev Az állapotváltás függ az aktuális event-től
 */
-void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s,
-                                                   WinningScreen winningScreen, Data *data, Menu * Menu);
+void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s,
+                                                   WinningScreen winningScreen, Data *data, Menu *Menu);
 
 /**Az állandóan látható menü gomb frissítéséért és a menübe lépésért felelős
 */
-void game_status_button_toMenuButton_upd(Button * b, SDL_Event ev, Satellite * s, enum gameStatus *gameStatus);
+void game_status_button_toMenuButton_upd(Button *b, SDL_Event ev, Satellite *s, enum gameStatus *gameStatus);
 
+///@}
 
 #endif // GAME_STATUS_CHANGER_H

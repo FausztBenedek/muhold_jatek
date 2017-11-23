@@ -14,8 +14,8 @@ Menu menu_init(Data data){//Minden paraméterét a fájlból olvassa
     return theMenu;
 }
 
-void menu_upd(Menu * theMenu, SDL_Event ev, Data data){
-    LevelBox * iter;
+void menu_upd(Menu *theMenu, SDL_Event ev, Data data){
+    LevelBox *iter;
     for (iter = theMenu->levelarr; iter != NULL; iter = iter->next){
         if (iter->index == 0){//A 0. szintnek mindig aktívnak kell lennie
             levelBox_upd(iter, ev);
@@ -28,12 +28,12 @@ void menu_upd(Menu * theMenu, SDL_Event ev, Data data){
 }
 
 void menu_drw(SDL_Surface *screen, Menu theMenu, TTF_Font *font, Data data){
-    LevelBox * iter;
+    LevelBox *iter;
     for (iter = theMenu.levelarr; iter != NULL; iter = iter->next){
         levelBox_drw(screen, iter, font, data);
     }
 }
 
-void menu_cleanup(Menu * theMenu){
+void menu_cleanup(Menu *theMenu){
     levelBox_cleanUp(theMenu->levelarr);
 }

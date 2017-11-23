@@ -30,19 +30,19 @@ Button button_init(float x, float y, float w, float h, char *subscription);
 
 /**Felelős a clicked és a hover paraméter beállításáért. (A button_hover() függvényt meghívja)
 */
-void button_upd(Button * b, SDL_Event ev);
+void button_upd(Button *b, SDL_Event ev);
 
 /**Kirajzolja a gombot a *screen-re a *font-ot használva a felirathoz,
 *és ehhez figyeli a button.clicked és a button.hover állapotát.
 */
-void button_drw(SDL_Surface *screen, Button * b, TTF_Font *font);
+void button_drw(SDL_Surface *screen, Button *b, TTF_Font *font);
 
 /**Ez a függvény beállítja a button.hoover-t.
 */
-bool button_hover(Button * b, SDL_Event ev);
+bool button_hover(Button *b, SDL_Event ev);
 
 /**Felszabadítja az init-ben lefoglalt memórát a subscription-hoz.
 */
-void button_cleanup(Button * this);
+void button_cleanup(Button *this);
 
 #endif

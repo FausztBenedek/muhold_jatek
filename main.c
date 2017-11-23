@@ -9,7 +9,7 @@
 #include "Constants.h"
 #include "GameStatusSpecific/GameStatus.h"
 #include "GameStatusSpecific/GameStatusChangingFunctions.h"
-#include "GameStatusSpecific/SETTING/Initialized_orbit_calculator.h"
+#include "GameStatusSpecific/SETTING/HelpingPlots.h"
 #include "GameStatusSpecific/MENU/Menu.h"
 #include "tools.h"
 #include "GameStatusSpecific/GAMEOVER/gameover.h"

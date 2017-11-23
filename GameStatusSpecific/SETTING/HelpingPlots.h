@@ -8,8 +8,8 @@
 #include "../../Constants.h"
 #include "../../Sprite/Satellite.h"
 
-
-///
+///@defgroup helpingPlots Segítő pontok
+///@{
 typedef struct HelpingPlots {
     Vect posarr[NUM_OF_HELPLT];
 }HelpingPlots;
@@ -19,4 +19,5 @@ void helplt_upd(HelpingPlots * plots, Satellite sat, SDL_Event ev);
 
 void helplt_drw(SDL_Surface *screen, HelpingPlots * plots);
 
+///@}
 #endif // CALCULATE_ORBIT_H

@@ -7,7 +7,7 @@
 #define X_LEVEL "%d.Szint"
 #define LEVEL_IDENTIFIER "Szint"
 
-#define WALL_BEGIN "KEZD_Falak:"
+#define WALL_BEGIN "KEZD_Falak"
 #define WALL_END "VEGE_Falak"
 #define GATE_BEGIN "KEZD_Kapu"
 #define GATE_END "VEGE_Kapu"

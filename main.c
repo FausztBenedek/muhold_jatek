@@ -117,8 +117,8 @@ int game() {
 
                     //Objektumok rajzolása
                     sat_drw(screen, &sat);
-                    for (i = 0; i < sat.numOf_pln; i++)     pln_drw(screen, &sat.plnarr[i] );
                     for (i = 0; i < sat.numOf_wall; i++)    wall_drw(screen, &sat.wallarr[i]);
+                    for (i = 0; i < sat.numOf_pln; i++)     pln_drw(screen, &sat.plnarr[i] );
                     button_drw(screen, &toMenu, smallfont);
 
             ///......
@@ -227,8 +227,8 @@ int game() {
             //Objektumok rajzolása
             helplt_drw(screen, &plots);
             sat_drw(screen, &sat);
-            for (i = 0; i < sat.numOf_pln; i++)    pln_drw(    screen, &sat.plnarr[i]);
             for (i = 0; i < sat.numOf_wall; i++)   wall_drw(   screen, &sat.wallarr[i]);
+            for (i = 0; i < sat.numOf_pln; i++)    pln_drw(    screen, &sat.plnarr[i]);
             for (i = 0; i < sat.numOf_pln; i++)    plnMenu_drw(screen, &sat.plnarr[i], ev, tinyfont);
             button_drw(screen, &toMenu, smallfont);
 

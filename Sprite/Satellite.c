@@ -192,7 +192,6 @@ void sat_plnarr_button_del_action(Sat s){
 
 void sat_wall_init(Sat s, int level, FILE *settings){
     //A keresett infókig vaóló eljutás
-
     char row[MAX_ROW_LENGTH_IN_FILE]; // "X.Szint'0'" = 8 karakter
     sprintf(row, X_LEVEL, level);
     goto_word_in_file(settings, row, MAX_ROW_LENGTH_IN_FILE);
@@ -232,8 +231,6 @@ void sat_gate_init(Sat this, int level, FILE *settings){
     char row[MAX_ROW_LENGTH_IN_FILE]; // "X.Szint'0'" = 8 karakter
     sprintf(row, X_LEVEL, level);
     goto_word_in_file(settings, row, MAX_ROW_LENGTH_IN_FILE);
-
-
 
     goto_word_in_file(settings, GATE_BEGIN, MAX_ROW_LENGTH_IN_FILE);
     fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);

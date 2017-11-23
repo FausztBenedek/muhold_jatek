@@ -3,8 +3,8 @@
 #include "../../tools.h"
 #include "../../Constants.h"
 
-menu menu_init(){//Minden paraméterét a fájlból olvassa
-    menu theMenu;
+Menu menu_init(){//Minden paraméterét a fájlból olvassa
+    Menu theMenu;
     theMenu.numOf_levels = calculate_words(SETTINGS, LEVEL_IDENTIFIER, 20);
     theMenu.levelarr = NULL;
 
@@ -15,7 +15,7 @@ menu menu_init(){//Minden paraméterét a fájlból olvassa
     return theMenu;
 }
 
-void menu_upd(Menu theMenu, SDL_Event ev, Data data){
+void menu_upd(Menu * theMenu, SDL_Event ev, Data data){
     LevelBox * iter;
     for (iter = theMenu->levelarr; iter != NULL; iter = iter->next){
         if (iter->index == 0){//A 0. szintnek mindig aktívnak kell lennie
@@ -28,13 +28,13 @@ void menu_upd(Menu theMenu, SDL_Event ev, Data data){
 
 }
 
-void menu_drw(SDL_Surface *screen, menu theMenu, TTF_Font *font, Data data){
+void menu_drw(SDL_Surface *screen, Menu theMenu, TTF_Font *font, Data data){
     LevelBox * iter;
     for (iter = theMenu.levelarr; iter != NULL; iter = iter->next){
         levelBox_drw(screen, iter, theMenu.numOf_levels, font, data);
     }
 }
 
-void menu_cleanup(Menu theMenu){
+void menu_cleanup(Menu * theMenu){
     levelBox_cleanUp(theMenu->levelarr);
 }

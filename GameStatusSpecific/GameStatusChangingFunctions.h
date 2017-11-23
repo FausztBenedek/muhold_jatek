@@ -21,7 +21,7 @@ void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event 
 /**
 *@param *data Beállítja az aktuális szintet
 */
-void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, Menu menu, Data *data);
+void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, Menu * Menu, Data *data);
 /**
 *@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat
 */
@@ -39,7 +39,7 @@ void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Satellite
 *@param ev Az állapotváltás függ az aktuális event-től
 */
 void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s,
-                                                   WinningScreen winningScreen, Data *data, Menu menu);
+                                                   WinningScreen winningScreen, Data *data, Menu * Menu);
 
 /**Az állandóan látható menü gomb frissítéséért és a menübe lépésért felelős
 */

@@ -7,20 +7,17 @@
 
 #include "LevelBox.h"
 
-typedef struct menu menu;
-typedef struct menu *Menu;
-
-struct menu{
+typedef struct Menu{
     LevelBox * levelarr;
     int numOf_levels;
-};
+}Menu;
 
-menu menu_init();
+Menu menu_init();
 
-void menu_upd(Menu theMenu, SDL_Event ev, Data data);
+void menu_upd(Menu * theMenu, SDL_Event ev, Data data);
 
-void menu_drw(SDL_Surface *screen, menu theMenu, TTF_Font *font, Data data);
+void menu_drw(SDL_Surface *screen, Menu theMenu, TTF_Font *font, Data data);
 
-void menu_cleanup(Menu theMenu);
+void menu_cleanup(Menu * theMenu);
 
 #endif // MENU_H

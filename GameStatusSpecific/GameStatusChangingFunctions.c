@@ -11,15 +11,15 @@
 #include "MENU/LevelBox.h"
 #include "../tools.h"
 
-/*private*/void open_level(int level, Sat sat);
-/*private*/bool sat_touched_gate(Sat s);
+/*private*/void open_level(int level, Satellite * Satellite);
+/*private*/bool sat_touched_gate(Satellite * s);
 
-/*private*/void sat_and_pln_collide (enum gameStatus *gameStatus, Sat s);
-/*private*/void sat_and_astr_collide(enum gameStatus *gameStatus, Sat s);
-/*private*/void sat_and_wall_collide(enum gameStatus *gameStatus, Sat s);
-/*private*/void pln_and_astr_collide(enum gameStatus *gameStatus, Sat s);
+/*private*/void sat_and_pln_collide (enum gameStatus *gameStatus, Satellite * s);
+/*private*/void sat_and_astr_collide(enum gameStatus *gameStatus, Satellite * s);
+/*private*/void sat_and_wall_collide(enum gameStatus *gameStatus, Satellite * s);
+/*private*/void pln_and_astr_collide(enum gameStatus *gameStatus, Satellite * s);
 
-void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Sat s){
+void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s){
     if ((ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_SPACE) ||
         (ev.type == SDL_MOUSEBUTTONDOWN && ev.button.button  == SDL_BUTTON_RIGHT)
         ){
@@ -29,14 +29,14 @@ void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event 
     }
 }
 
-void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Data *data){
+void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, Data *data){
     if (ev.type == SDL_MOUSEBUTTONDOWN || (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_SPACE)){
         *gameStatus = SETTING;
         sat_resetMotion(s);
         data->attempts[data->activeLevel]++;
     }
 }
-void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, Menu menu, Data *data){
+void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, Menu menu, Data *data){
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         levelBox * iter;
         int i;
@@ -50,21 +50,21 @@ void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev,
         }
     }
 }
-/*private*/void open_level(int level, Sat sat){
+/*private*/void open_level(int level, Satellite * Satellite){
     FILE *settings;
     settings = fopen(SETTINGS, "r");
     if (settings == NULL) return;
 
-    sat_wall_init(sat, level, settings);
+    sat_wall_init(Satellite, level, settings);
     fseek(settings, 0, SEEK_SET);
 
-    sat_gate_init(sat, level, settings);
+    sat_gate_init(Satellite, level, settings);
 
     fclose(settings);
 }
 
 
-void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Sat s, gameOverScreen gameOverScreen){
+void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s, gameOverScreen gameOverScreen){
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         if (gameOverScreen.toMenu.clicked){
             *gameStatus = MENU;
@@ -81,28 +81,28 @@ void game_status_from_GAMEOVER_to_MENU_or_SETTING(enum gameStatus *gameStatus, S
 
 
 
-void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Sat s, Data *data){
+void game_status_from_RUNNING_to_WINNING(enum gameStatus *gameStatus, Satellite * s, Data *data){
     if (sat_touched_gate(s)){
         sat_resetMotion(s);
         *gameStatus = WINNING;
         data->solved[data->activeLevel] = true;
     }
 }
-/*private*/bool sat_touched_gate(Sat s){
+/*private*/bool sat_touched_gate(Satellite * s){
     //              nagyon közel van a jobb szélhez
     return s->pos.x >= WIDTH - s->rad - SAT_Y_DISTANCE_FROM_GATE_TO_WIN
     //  és      y irányban is jó helyen
         && (s->pos.y <= s->gate.lower && s->pos.y >= s->gate.upper);
 }
 
-void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat s, Data *data) {
+void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Satellite * s, Data *data) {
     sat_and_pln_collide (gameStatus, s);
     sat_and_wall_collide(gameStatus, s);
     if (*gameStatus == GAMEOVER){
         data->attempts[data->activeLevel]++;
     }
 }
-/*private*/void sat_and_pln_collide (enum gameStatus *gameStatus, Sat s){
+/*private*/void sat_and_pln_collide (enum gameStatus *gameStatus, Satellite * s){
     int i;
     for (i = 0; i < s->numOf_pln; i++){//Műhold & Bolygó
         if (circlesCollide(s->pos, s->rad, s->plnarr[i].pos, pln_getRad(&s->plnarr[i]))){
@@ -111,7 +111,7 @@ void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat s, Da
         }
     }
 }
-/*private*/void sat_and_wall_collide(enum gameStatus *gameStatus, Sat s){
+/*private*/void sat_and_wall_collide(enum gameStatus *gameStatus, Satellite * s){
     int i;
     for (i = 0; i < s->numOf_wall; i++){
       //float dist = a kör közepétől a négyzet legközelebb lévő pontjába mutató vektor hossza
@@ -123,7 +123,7 @@ void game_status_from_RUNNING_to_GAMEOVER(enum gameStatus *gameStatus, Sat s, Da
     }
 }
 
-void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Sat s,
+void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s,
                                                    WinningScreen winningScreen, Data *data, Menu menu){
     if (ev.type == SDL_MOUSEBUTTONDOWN){
         if (winningScreen.toMenu.clicked){
@@ -151,7 +151,7 @@ void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, 
     }
 }
 
-void game_status_button_toMenuButton_upd(Button b, SDL_Event ev, Sat s, enum gameStatus *gameStatus){
+void game_status_button_toMenuButton_upd(Button b, SDL_Event ev, Satellite * s, enum gameStatus *gameStatus){
     button_upd(b, ev);
     if (b->clicked){
         *gameStatus = MENU;

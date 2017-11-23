@@ -52,7 +52,7 @@ int game() {
 
     button toMenu = button_init(20, 20, 100, 40, STRMENU);
 
-    sat sat = sat_init(10, HEIGHT/5, 10);
+    Satellite sat = sat_init(10, HEIGHT/5, 10);
 
     helplt plots = helplt_init(&sat);//helping plots = helplt
 

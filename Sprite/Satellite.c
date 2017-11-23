@@ -11,12 +11,12 @@
 #include "Obstacles/Wall.h"
 #include "Planet.h"
 
-/*private*/void calcResultantForceForSat(Sat s);
+/*private*/void calcResultantForceForSat(Satellite * s);
 
-void sat_plnarr_button_del_action(Sat s);
+void sat_plnarr_button_del_action(Satellite * s);
 
-sat sat_init(float x, float y, float rad){
-    sat s;
+Satellite sat_init(float x, float y, float rad){
+    Satellite s;
     s.pos = vect_init(x, y);
     s.vel = vect_init(0,0);
     s.force = vect_init(0,0);
@@ -29,13 +29,13 @@ sat sat_init(float x, float y, float rad){
     return s;
 }
 
-void sat_resetMotion(Sat s){
+void sat_resetMotion(Satellite * s){
     s->vel = vect_init(0,0);
     s->force = vect_init(0,0);
     s->pos = vect_init(10, HEIGHT/5);
 }
 
-void sat_resetInitialState(sat *this){
+void sat_resetInitialState(Satellite *this){
     sat_resetMotion(this);
 
     free(this->wallarr);
@@ -50,12 +50,12 @@ void sat_resetInitialState(sat *this){
 }
 
 
-void sat_game_cleanup(Sat s){
+void sat_game_cleanup(Satellite * s){
     free(s->wallarr);
     free(s->plnarr);
 }
 
-void sat_drw(SDL_Surface *screen, Sat const s){
+void sat_drw(SDL_Surface *screen, Satellite * const s){
     filledCircleRGBA(screen,
             s->pos.x, s->pos.y,//(x, y)
             s->rad,//Sugár
@@ -69,7 +69,7 @@ void sat_drw(SDL_Surface *screen, Sat const s){
 //Hatások az objektumoktól
 //----------------------------------
 
-void sat_RUNNING_upd(Sat s){
+void sat_RUNNING_upd(Satellite * s){
 
     calcResultantForceForSat(s);//Ezzel kiszámoljuk az ehhez az időpillanathoz tartozó eredő erőt.
 
@@ -95,7 +95,7 @@ void sat_RUNNING_upd(Sat s){
         s->force.y *= -1; //Megfordítani horizontálisan az erõt
     }
 }
-void sat_SETTINGS_upd(Sat s, SDL_Event ev){
+void sat_SETTINGS_upd(Satellite * s, SDL_Event ev){
     bool ableToAddPlanet = true;
     int i;
     if (ev.type == SDL_MOUSEBUTTONDOWN && ev.button.button == SDL_BUTTON_LEFT) {
@@ -120,7 +120,7 @@ void sat_SETTINGS_upd(Sat s, SDL_Event ev){
     //Törölni a bolygót, ha a törlés gombra klikkelünk
     sat_plnarr_button_del_action(s);
 }
-/*private*/ void calcResultantForceForSat(Sat s) {//Ezt a függvényt az sat_upd() függvényben hívjuk meg, és az eredő erőt számoljuk ki vele
+/*private*/ void calcResultantForceForSat(Satellite * s) {//Ezt a függvényt az sat_upd() függvényben hívjuk meg, és az eredő erőt számoljuk ki vele
     /*
     Gravitáció törvénye: F = G * m1 * m2 /d^2
     A G * m1 * m2 szorzatot összevonjuk:
@@ -157,7 +157,7 @@ void sat_SETTINGS_upd(Sat s, SDL_Event ev){
 //Bolygókhoz tartozó függvények
 //----------------------------------
 
-void sat_addPln(Sat s, Pln p) {
+void sat_addPln(Satellite * s, Pln p) {
     if (s->numOf_pln == 0){
         s->plnarr = (Pln) malloc(sizeof(struct planet));
     }
@@ -168,7 +168,7 @@ void sat_addPln(Sat s, Pln p) {
     s->numOf_pln++;
 }
 
-bool sat_remPln(Sat s, int index) {
+bool sat_remPln(Satellite * s, int index) {
     if (!s->plnarr[index].removeable){
         return false;
     }
@@ -180,7 +180,7 @@ bool sat_remPln(Sat s, int index) {
     s->plnarr = realloc(s->plnarr, (s->numOf_pln) * sizeof(struct planet));
     return true;
 }
-void sat_plnarr_button_del_action(Sat s){
+void sat_plnarr_button_del_action(Satellite * s){
     int i;
     for (i = 0; i < s->numOf_pln; i++){
         if (s->plnarr[i].but_del.clicked){
@@ -190,7 +190,7 @@ void sat_plnarr_button_del_action(Sat s){
 }
 
 
-void sat_wall_init(Sat s, int level, FILE *settings){
+void sat_wall_init(Satellite * s, int level, FILE *settings){
     //A keresett infókig vaóló eljutás
     char row[MAX_ROW_LENGTH_IN_FILE]; // "X.Szint'0'" = 8 karakter
     sprintf(row, X_LEVEL, level);
@@ -226,7 +226,7 @@ void sat_wall_init(Sat s, int level, FILE *settings){
 
 }
 
-void sat_gate_init(Sat this, int level, FILE *settings){
+void sat_gate_init(Satellite * this, int level, FILE *settings){
     //A keresett infókig vaóló eljutás
     char row[MAX_ROW_LENGTH_IN_FILE]; // "X.Szint'0'" = 8 karakter
     sprintf(row, X_LEVEL, level);

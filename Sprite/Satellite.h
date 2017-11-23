@@ -8,7 +8,6 @@
 #include "../Physics/Vector.h"
 #include "Planet.h"
 #include "../GameStatusSpecific/GameStatus.h"
-#include "Obstacles/Asteroid.h"
 #include "Obstacles/Wall.h"
 #include "Gate.h"
 
@@ -20,7 +19,7 @@ typedef struct Satellite{
     Vect force;///<A műholdra ható eredő erőt tároló vektor
     float rad;///<A műholdat reprezentáló kör sugara
 
-    Pln plnarr;///<A műholdra ható bolygók tömbjének pointere
+    Pln * plnarr;///<A műholdra ható bolygók tömbjének pointere
     int numOf_pln;///<A műholdra ható bolygók száma
 
     Wall wallarr;///<A műholdat akadályozó falak tömbjének pointere (info fájlból olvasva)
@@ -73,7 +72,7 @@ void sat_SETTINGS_upd(Satellite * s, SDL_Event ev);
 /**Hozzáad egy már inicializált bolygót a játékhoz és eltárolja műhold plnarr változójában
 **@param p   az inicializált bolygó
 */
-void sat_addPln(Satellite * s, Pln const p);
+void sat_addPln(Satellite * s, Pln * const p);
 /**Töröl egybolygót a műhold listájából, ha a bolygó eltávolítható.
 *@param index   Minden bolygónak van egy egyedi indexe, ez megfelel a bolygótömb indexének
 *@return    Ha a bolygó eltávolítható akkor true, ha nem akkor false

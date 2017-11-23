@@ -5,7 +5,6 @@
 #include <SDL_gfxPrimitives.h>
 #include <SDL_ttf.h>
 
-#include "../../Sprite/Obstacles/Asteroid.h"
 #include "../../Sprite/Obstacles/Wall.h"
 #include "../Button.h"
 #include "../../Storage/Data.h"

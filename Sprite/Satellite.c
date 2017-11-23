@@ -112,7 +112,7 @@ void sat_SETTINGS_upd(Satellite * s, SDL_Event ev){
 
         //Hozzáadni a bolygót, ha nem bolygóra klikkeltünk
         if (ableToAddPlanet) {
-            pln onlyPlanet = pln_init(ev.motion.x, ev.motion.y, 30);
+            Pln onlyPlanet = pln_init(ev.motion.x, ev.motion.y, 30);
             sat_addPln(s, &onlyPlanet);
         }
     }
@@ -157,12 +157,12 @@ static  void calcResultantForceForSat(Satellite * s) {//Ezt a függvényt az sat
 //Bolygókhoz tartozó függvények
 //----------------------------------
 
-void sat_addPln(Satellite * s, Pln p) {
+void sat_addPln(Satellite * s, Pln * p) {
     if (s->numOf_pln == 0){
-        s->plnarr = (Pln) malloc(sizeof(struct planet));
+        s->plnarr = (Pln *) malloc(sizeof(Pln));
     }
     else {
-        s->plnarr = (Pln) realloc(s->plnarr, (s->numOf_pln + 1) * sizeof(struct planet));
+        s->plnarr = (Pln *) realloc(s->plnarr, (s->numOf_pln + 1) * sizeof(Pln));
     }
     s->plnarr[s->numOf_pln] = *p;
     s->numOf_pln++;
@@ -177,7 +177,7 @@ bool sat_remPln(Satellite * s, int index) {
         s->plnarr[i] = s->plnarr[i+1];
     }
     --s->numOf_pln;
-    s->plnarr = realloc(s->plnarr, (s->numOf_pln) * sizeof(struct planet));
+    s->plnarr = realloc(s->plnarr, (s->numOf_pln) * sizeof(Pln));
     return true;
 }
 void sat_plnarr_button_del_action(Satellite * s){

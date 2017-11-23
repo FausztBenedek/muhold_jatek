@@ -11,7 +11,7 @@
 #include "Obstacles/Wall.h"
 #include "Planet.h"
 
-/*private*/void calcResultantForceForSat(Satellite * s);
+static void calcResultantForceForSat(Satellite * s);
 
 void sat_plnarr_button_del_action(Satellite * s);
 
@@ -120,7 +120,7 @@ void sat_SETTINGS_upd(Satellite * s, SDL_Event ev){
     //Törölni a bolygót, ha a törlés gombra klikkelünk
     sat_plnarr_button_del_action(s);
 }
-/*private*/ void calcResultantForceForSat(Satellite * s) {//Ezt a függvényt az sat_upd() függvényben hívjuk meg, és az eredő erőt számoljuk ki vele
+static  void calcResultantForceForSat(Satellite * s) {//Ezt a függvényt az sat_upd() függvényben hívjuk meg, és az eredő erőt számoljuk ki vele
     /*
     Gravitáció törvénye: F = G * m1 * m2 /d^2
     A G * m1 * m2 szorzatot összevonjuk:

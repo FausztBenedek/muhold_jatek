@@ -5,8 +5,12 @@
 #include "../../Physics/Vector.h"
 #include "../../tools.h"
 #include "../../Constants.h"
+static float levelBox_getWidth(int numOf_levelBoxes){
+    //Szélesség  -        a lista margója     -         a lista elemei között lévő hely
+    return (WIDTH - 2 * MENU_LEVEL_LIST_BORDER - (numOf_levelBoxes - 1) * MENU_SPACE_BETWEEN_LEVELS)/numOf_levelBoxes;
+}
 
-/*private*/ vect levelBox_getPos(levelBox * box, int numOf_levelBoxes){
+static  vect levelBox_getPos(LevelBox * box, int numOf_levelBoxes){
     return vect_init(
             /*x value: */ mapping(box->index,
                                   0, numOf_levelBoxes - 1,
@@ -16,16 +20,11 @@
                     );
 }
 
-/*private*/float levelBox_getWidth(int numOf_levelBoxes){
-    //Szélesség  -        a lista margója     -         a lista elemei között lévő hely
-    return (WIDTH - 2 * MENU_LEVEL_LIST_BORDER - (numOf_levelBoxes - 1) * MENU_SPACE_BETWEEN_LEVELS)/numOf_levelBoxes;
-}
-
-levelBox * levelBox_add(levelBox * list, int i, int numOf_levelBoxes){ //Minden paraméterét a fájlból olvassa
+LevelBox * levelBox_add(LevelBox * list, int i, int numOf_levelBoxes){ //Minden paraméterét a fájlból olvassa
 
     //Új elem helyének lefoglalása
-    levelBox * element;
-    element = (levelBox *) malloc(sizeof(struct levelBox));
+    LevelBox * element;
+    element = (LevelBox *) malloc(sizeof(struct LevelBox));
 
     //Új elem inicializálása
     element->next = NULL;
@@ -49,7 +48,7 @@ levelBox * levelBox_add(levelBox * list, int i, int numOf_levelBoxes){ //Minden 
         list = element;
     }
     else{
-        levelBox * iter;
+        LevelBox * iter;
         for (iter = list; iter->next != NULL; iter = iter->next);
         iter->next = element;
     }
@@ -58,7 +57,7 @@ levelBox * levelBox_add(levelBox * list, int i, int numOf_levelBoxes){ //Minden 
 
 
 
-void levelBox_drw(SDL_Surface *screen, levelBox * box, int numOf_levels, TTF_Font *font, Data data){
+void levelBox_drw(SDL_Surface *screen, LevelBox * box, int numOf_levels, TTF_Font *font, Data data){
     button_drw(screen, &box->button, font);
 
     char str[14+1];
@@ -84,14 +83,14 @@ void levelBox_drw(SDL_Surface *screen, levelBox * box, int numOf_levels, TTF_Fon
 
 
 
-void levelBox_upd(levelBox * box, SDL_Event ev){
+void levelBox_upd(LevelBox * box, SDL_Event ev){
     button_upd(&box->button, ev);
 }
 
 
-void levelBox_cleanUp(levelBox * list){
+void levelBox_cleanUp(LevelBox * list){
     while (list != NULL){
-        levelBox * temp = list->next;
+        LevelBox * temp = list->next;
         free(list);
         list = temp;
     }

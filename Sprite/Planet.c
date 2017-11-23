@@ -7,12 +7,12 @@
 
 #include "../Constants.h"
 
-/*private*/void pln_reinit(Pln pln, vect pos);
-/*private*/void calculateCoordinatesFor_but_strengthUp(Pln pln);
-/*private*/void calculateCoordinatesFor_but_strengthDw(Pln pln);
-/*private*/void calculateCoordinatesFor_but_del(Pln pln);
+static void pln_reinit(Pln pln, vect pos);
+static void calculateCoordinatesFor_but_strengthUp(Pln pln);
+static void calculateCoordinatesFor_but_strengthDw(Pln pln);
+static void calculateCoordinatesFor_but_del(Pln pln);
 
-/*private*/void pln_drag(Pln pln, SDL_Event ev);
+static void pln_drag(Pln pln, SDL_Event ev);
 
 
 pln pln_init(float x, float y, int strength){
@@ -30,7 +30,7 @@ pln pln_init(float x, float y, int strength){
 
     return p;
 }
-/*private*/void pln_reinit(Pln pln, vect pos){
+static void pln_reinit(Pln pln, vect pos){
     pln->pos = vect_init(pos.x, pos.y);
     ///Menü
     if (pln->pos.x >= WIDTH/2) pln->screenSideLeft = false;
@@ -40,7 +40,7 @@ pln pln_init(float x, float y, int strength){
     calculateCoordinatesFor_but_strengthDw(pln);
     calculateCoordinatesFor_but_del(pln);
 }
-/*private*/void calculateCoordinatesFor_but_strengthUp(Pln pln){
+static void calculateCoordinatesFor_but_strengthUp(Pln pln){
     float x_coordinate, y_coordinate, width, height;
     width = height = sin(M_PI/4) * plnMenu_getRad(pln) / 3;
     y_coordinate = plnMenu_getPos(pln).y - plnMenu_getRad(pln) * sin(M_PI/4);
@@ -51,7 +51,7 @@ pln pln_init(float x, float y, int strength){
     pln->but_strengthUp = button_init(x_coordinate, y_coordinate, width, height, "+");
 
 }
-/*private*/void calculateCoordinatesFor_but_strengthDw(Pln pln){
+static void calculateCoordinatesFor_but_strengthDw(Pln pln){
     float x_coordinate, y_coordinate, width, height;
     width = height = sin(M_PI/4) * plnMenu_getRad(pln) / 3;
     y_coordinate = plnMenu_getPos(pln).y - plnMenu_getRad(pln) * sin(M_PI/4);
@@ -61,7 +61,7 @@ pln pln_init(float x, float y, int strength){
         x_coordinate = plnMenu_getPos(pln).x - plnMenu_getRad(pln)*sin(M_PI/4);
     pln->but_strengthDw = button_init(x_coordinate, y_coordinate, width, height, "-");
 }
-/*private*/void calculateCoordinatesFor_but_del(Pln pln){
+static void calculateCoordinatesFor_but_del(Pln pln){
         float x_coordinate, y_coordinate, width, height;
         height = sin(M_PI/4) * plnMenu_getRad(pln) / 3;
         width =  sin(M_PI/4) * plnMenu_getRad(pln);
@@ -101,7 +101,7 @@ void pln_upd(Pln pln, SDL_Event ev){
 
 }
 
-/*private*/void pln_drag(Pln pln, SDL_Event ev){
+static void pln_drag(Pln pln, SDL_Event ev){
     if (pln->pressing && ev.type == SDL_MOUSEMOTION && pln->removeable){
         pln_reinit(pln, vect_init(ev.motion.x, ev.motion.y));
     }

@@ -11,13 +11,9 @@
 #include "../../Storage/Data.h"
 
 
-
-typedef struct levelBox levelBox;
-typedef struct levelBox *LevelBox;
-
 /**Az egyes szinteket képviselő gombok a menüben
 */
-struct levelBox{
+typedef struct LevelBox{
     int index;///<Egyéni azonosító
 
     vect pos;///<Bal felső sarok
@@ -29,18 +25,16 @@ struct levelBox{
     Wall wallarr;
     int numOf_wall;
 
-    struct levelBox *next;
-};
-
-/*private*/float levelBox_getWidth(int numOf_levelBoxes);
+    struct LevelBox *next;
+}LevelBox;
 
 
-LevelBox levelBox_add(LevelBox list, int i, int numOf_levelBoxes); //Minden paraméterét a fájlból olvassa
+LevelBox * levelBox_add(LevelBox * list, int i, int numOf_levelBoxes); //Minden paraméterét a fájlból olvassa
 
-void levelBox_drw(SDL_Surface *screen, LevelBox box, int numOf_levelBoxes, TTF_Font *font, Data data);
+void levelBox_drw(SDL_Surface *screen, LevelBox * box, int numOf_levelBoxes, TTF_Font *font, Data data);
 
-void levelBox_upd(LevelBox box, SDL_Event ev);
+void levelBox_upd(LevelBox * box, SDL_Event ev);
 
-void levelBox_cleanUp(LevelBox list);
+void levelBox_cleanUp(LevelBox * list);
 
 #endif // LEVEL_BOX_H

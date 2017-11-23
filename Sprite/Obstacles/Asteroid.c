@@ -6,7 +6,7 @@
 #include "../../Constants.h"
 #include "../../tools.h"
 
-/*private*/ void calcForceForAstr(Astr a);
+static  void calcForceForAstr(Astr a);
 
 astr astr_init(float centerX, float centerY, float posX, float posY, float rad, float velX, float velY) {
     astr a;
@@ -32,7 +32,7 @@ void astr_upd(Astr a){
     add(    &(a->pos)   , a->vel);
 }
 
-/*private*/ void calcForceForAstr(Astr a){//Ezt a függvényt az astr_upd() függvényben hívjuk meg, és az eredõ erõt számoljuk ki vele
+static  void calcForceForAstr(Astr a){//Ezt a függvényt az astr_upd() függvényben hívjuk meg, és az eredõ erõt számoljuk ki vele
     /*
     Gravitáció törvénye: F = G * m1 * m2 /d^2
     A G * m1 * m2 szorzatot összevonjuk: Egy nagy konstans kísérlet alapján, JELE: C, Kiszámítása: (1/(float)ASTR_DIV)

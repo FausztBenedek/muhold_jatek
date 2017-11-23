@@ -46,7 +46,4 @@ void game_status_from_WINNING_to_MENU_or_NEXTLEVEL(enum gameStatus *gameStatus, 
 void game_status_button_toMenuButton_upd(Button b, SDL_Event ev, Satellite * s, enum gameStatus *gameStatus);
 
 
-/*private*/ float levelBox_getWidth(int numOf_levelBoxes);
-
-
 #endif // GAME_STATUS_CHANGER_H

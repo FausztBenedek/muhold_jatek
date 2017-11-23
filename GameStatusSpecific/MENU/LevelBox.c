@@ -6,7 +6,7 @@
 #include "../../tools.h"
 #include "../../Constants.h"
 
-/*private*/ vect levelBox_getPos(LevelBox box, int numOf_levelBoxes){
+/*private*/ vect levelBox_getPos(levelBox * box, int numOf_levelBoxes){
     return vect_init(
             /*x value: */ mapping(box->index,
                                   0, numOf_levelBoxes - 1,
@@ -21,11 +21,11 @@
     return (WIDTH - 2 * MENU_LEVEL_LIST_BORDER - (numOf_levelBoxes - 1) * MENU_SPACE_BETWEEN_LEVELS)/numOf_levelBoxes;
 }
 
-LevelBox levelBox_add(LevelBox list, int i, int numOf_levelBoxes){ //Minden paraméterét a fájlból olvassa
+levelBox * levelBox_add(levelBox * list, int i, int numOf_levelBoxes){ //Minden paraméterét a fájlból olvassa
 
     //Új elem helyének lefoglalása
-    LevelBox element;
-    element = (LevelBox) malloc(sizeof(struct levelBox));
+    levelBox * element;
+    element = (levelBox *) malloc(sizeof(struct levelBox));
 
     //Új elem inicializálása
     element->next = NULL;
@@ -49,7 +49,7 @@ LevelBox levelBox_add(LevelBox list, int i, int numOf_levelBoxes){ //Minden para
         list = element;
     }
     else{
-        LevelBox iter;
+        levelBox * iter;
         for (iter = list; iter->next != NULL; iter = iter->next);
         iter->next = element;
     }
@@ -58,7 +58,7 @@ LevelBox levelBox_add(LevelBox list, int i, int numOf_levelBoxes){ //Minden para
 
 
 
-void levelBox_drw(SDL_Surface *screen, LevelBox box, int numOf_levels, TTF_Font *font, Data data){
+void levelBox_drw(SDL_Surface *screen, levelBox * box, int numOf_levels, TTF_Font *font, Data data){
     button_drw(screen, &box->button, font);
 
     char str[14+1];
@@ -84,14 +84,14 @@ void levelBox_drw(SDL_Surface *screen, LevelBox box, int numOf_levels, TTF_Font 
 
 
 
-void levelBox_upd(LevelBox box, SDL_Event ev){
+void levelBox_upd(levelBox * box, SDL_Event ev){
     button_upd(&box->button, ev);
 }
 
 
-void levelBox_cleanUp(LevelBox list){
+void levelBox_cleanUp(levelBox * list){
     while (list != NULL){
-        LevelBox temp = list->next;
+        levelBox * temp = list->next;
         free(list);
         list = temp;
     }

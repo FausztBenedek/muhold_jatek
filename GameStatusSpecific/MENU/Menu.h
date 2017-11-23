@@ -11,7 +11,7 @@ typedef struct menu menu;
 typedef struct menu *Menu;
 
 struct menu{
-    LevelBox levelarr;
+    levelBox * levelarr;
     int numOf_levels;
 };
 

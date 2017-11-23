@@ -15,11 +15,13 @@
 typedef struct levelBox levelBox;
 typedef struct levelBox *LevelBox;
 
+/**Az egyes szinteket képviselő gombok a menüben
+*/
 struct levelBox{
-    int index;
+    int index;///<Egyéni azonosító
 
-    vect pos;
-    button button;
+    vect pos;///<Bal felső sarok
+    button button;///<Az interaktív felület, vagyis maga a gomb
 
     Astr astrarr;
     int numOf_astr;

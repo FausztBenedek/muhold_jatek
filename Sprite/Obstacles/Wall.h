@@ -7,12 +7,15 @@
 
 #include "../../Physics/Vector.h"
 
+///@defgroup wall Falak
+///@{
+
 
 typedef struct Wall{
     float x;
     float y;
-    float w;
-    float h;
+    float w;///<Szélesség
+    float h;///<Magasság
 }Wall;
 
 Wall wall_init(float x, float y, float w, float h);
@@ -21,6 +24,10 @@ void wall_drw(SDL_Surface *screen, Wall * wall);
 
 bool wall_hover(Wall * const wall, SDL_Event ev);
 
-Vect wall_closestPointToCircle(Wall * const w, Vect circle_center);//Visszaadja a legk�zelebbi pontot a k�r k�zep�hez
+/**Megvizsgálja, hogy melyik egy adott falnak a legközelebbi pontja egy körhöz.
+*@return Visszaadja a legközelebbi pontot a kör közepéhez.
+*/
+Vect wall_closestPointToCircle(Wall *w, Vect circle_center);
 
+///@}
 #endif //WALL_H

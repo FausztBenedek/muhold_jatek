@@ -27,6 +27,7 @@ bool wall_hover(Wall * wall, SDL_Event ev){
 
 Vect wall_closestPointToCircle(Wall * w, Vect circle_center){//Visszaadja a legközelebbi pontot a kör közepéhez
     //Ez a függvény nem kezeli azt az esetet, amikor a kör közepe benne van a négyzetben.
+
     float x, y;
     //          négyzet
     //            kör
@@ -43,7 +44,6 @@ Vect wall_closestPointToCircle(Wall * w, Vect circle_center){//Visszaadja a legk
     else
         x = w->x + w->w;
 
-    ///y:
     //négyzet   kör
     if (circle_center.y >= w->y && circle_center.y <= w->y + w->h)
         y = circle_center.y;

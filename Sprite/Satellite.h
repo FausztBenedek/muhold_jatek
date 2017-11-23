@@ -69,6 +69,8 @@ void sat_RUNNING_upd(Satellite *s);
 /**A műhold változóinak a változásáért felelős SETTING állapotban
 *  1. Bolygókat ad hozzá oda ahova kattintunk, illetve letilt bizonyos helyeket
 *  2. Ehhez teszteli, hogy mi az aktuális event
+*@ingroup planet
+*@ingroup justPlanet
 */
 void sat_SETTINGS_upd(Satellite *s, SDL_Event ev);
 
@@ -89,13 +91,14 @@ void sat_addPln(Satellite *s, Pln *const p);
 */
 bool sat_remPln(Satellite *s, int index);
 
-/**Beolvassa a falakhoz szükséges információakt fájból.
+/**Beolvassa a falakhoz szükséges információakt fájból és beállítja a sat->wallarr tömböt.
 *  1. Bal oldal,
 *  2. Felső oldal,
 *  3. Szélesség,
 *  4. Magasság
 *@param level   Szint száma a fájl szerint (0.-tól indul)
 *@param settings    Fájl elejére mutató pointer
+*@ingroup wall
 */
 //Falhoz tartozó függvény
 void sat_wall_init(Satellite *s, int level, FILE *settings);

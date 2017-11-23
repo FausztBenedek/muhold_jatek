@@ -63,6 +63,7 @@ void sat_drw(SDL_Surface *screen, Satellite *const s);//Megrajzolja a műholdat
 /**A műhold változóinak a változásáért felelős RUNNING állapotban.
 *  1. Kiszámolja az eredő erőt.
 *  2. Megoldja, hogy a műhold visszapattanjon a képernyő széléről
+*@ingroup helpingPlots
 */
 void sat_RUNNING_upd(Satellite *s);
 

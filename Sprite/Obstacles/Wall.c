@@ -8,24 +8,24 @@
 #include "../../tools.h"
 #include "../../Constants.h"
 
-wall wall_init(float x, float y, float w, float h){
-    wall wall;
-    wall.x = x;    wall.y = y;    wall.w = w;   wall.h = h;
-    return wall;
+Wall wall_init(float x, float y, float w, float h){
+    Wall Wall;
+    Wall.x = x;    Wall.y = y;    Wall.w = w;   Wall.h = h;
+    return Wall;
 }
 
-void wall_drw(SDL_Surface *screen, Wall wall){
+void wall_drw(SDL_Surface *screen, Wall * wall){
     boxRGBA(screen, wall->x, wall->y, wall->x + wall->w, wall->y + wall->h,
             0, 0, 0, 255
             );
 }
 
-bool wall_hover(Wall const wall, SDL_Event ev){
+bool wall_hover(Wall * wall, SDL_Event ev){
     //     bal oldalától jobbra  &&     jobb oldalától balra        &&       aljától fenntebb          &&   tetejétõl lentebb  ;
     return ev.motion.x > wall->x && ev.motion.x < wall->x + wall->w && ev.motion.y < wall->y + wall->w && ev.motion.y > wall->y;
 }
 
-Vect wall_closestPointToCircle(Wall const w, Vect circle_center){//Visszaadja a legközelebbi pontot a kör közepéhez
+Vect wall_closestPointToCircle(Wall * w, Vect circle_center){//Visszaadja a legközelebbi pontot a kör közepéhez
     //Ez a függvény nem kezeli azt az esetet, amikor a kör közepe benne van a négyzetben.
     float x, y;
     //          négyzet

@@ -215,7 +215,7 @@ void sat_wall_init(Satellite *s, int level, FILE *settings){
     fseek(settings, file_pos, SEEK_SET);
 
     goto_word_in_file(settings, WALL_BEGIN, MAX_ROW_LENGTH_IN_FILE);
-    s->wallarr = (Wall) malloc(s->numOf_wall *sizeof(struct Wall));
+    s->wallarr = (Wall *) malloc(s->numOf_wall *sizeof(Wall));
     if (s->wallarr == NULL) return;
     for (i = 0; i < s->numOf_wall; i++){
         fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);

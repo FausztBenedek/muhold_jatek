@@ -10,7 +10,8 @@
 #include "../GameStatusSpecific/GameStatus.h"
 #include "Obstacles/Wall.h"
 #include "Gate.h"
-
+///@defgroup sat Műhold
+///@{
 
 /**A LEGFONTOSABB struktúra! Tartalmazza:
 *  1. A műhold adatai
@@ -25,7 +26,7 @@ typedef struct Satellite{
     Pln *plnarr;///<A műholdra ható bolygók tömbjének pointere
     int numOf_pln;///<A műholdra ható bolygók száma
 
-    Wall wallarr;///<A műholdat akadályozó falak tömbjének pointere (info fájlból olvasva)
+    Wall *wallarr;///<A műholdat akadályozó falak tömbjének pointere (info fájlból olvasva)
     int numOf_wall;///<A műholdat akadályozó falak száma (info fájlból olvasva)
 
     Gate gate;///<A kaput tároló struktúra. Itt kell átjutnia a műholdnak.
@@ -96,6 +97,7 @@ bool sat_remPln(Satellite *s, int index);
 *@param level   Szint száma a fájl szerint (0.-tól indul)
 *@param settings    Fájl elejére mutató pointer
 */
+//Falhoz tartozó függvény
 void sat_wall_init(Satellite *s, int level, FILE *settings);
 
 /**Beolvassa a kapuhoz szükséges információakt fájból.
@@ -104,7 +106,9 @@ void sat_wall_init(Satellite *s, int level, FILE *settings);
 *@param level   Szint száma a fájl szerint (0.-tól indul)
 *@param settings    Fájl elejére mutató pointer
 */
+//Kapuhoz tartozó függvény
 void sat_gate_init(Satellite *this, int level, FILE *settings);
 
+///@}
 
 #endif // PLANET_H

@@ -17,13 +17,13 @@ static void pln_drag(Pln * Pln, SDL_Event ev);
 
 Pln pln_init(float x, float y, int strength){
 
-    ///Bolygó infók
+    //Bolygó infók
     Pln p;
     p.index = -1;
     p.strength = strength;
 
     p.removeable = true;
-    ///Menü
+    //Menü
     p.menuIsActive = p.pressing = false;
 
     pln_reinit(&p, vect_init(x, y));
@@ -32,10 +32,10 @@ Pln pln_init(float x, float y, int strength){
 }
 static void pln_reinit(Pln * this, Vect pos){
     this->pos = vect_init(pos.x, pos.y);
-    ///Menü
+    //Menü
     if (this->pos.x >= WIDTH/2) this->screenSideLeft = false;
     else this->screenSideLeft = true;
-    ///Gombok
+    //Gombok
     calculateCoordinatesFor_but_strengthUp(this);
     calculateCoordinatesFor_but_strengthDw(this);
     calculateCoordinatesFor_but_del(this);
@@ -98,7 +98,6 @@ void pln_upd(Pln * this, SDL_Event ev){
         this->pressing = false;
 
     pln_drag(this, ev);
-
 }
 
 static void pln_drag(Pln * this, SDL_Event ev){
@@ -117,9 +116,9 @@ float pln_getRad(Pln * const p){
     return p->strength * 0.75;
 }
 
-///---------------------------------------------------
-///Menüvel kapcsolatos függvények
-///---------------------------------------------------
+//---------------------------------------------------
+//Menüvel kapcsolatos függvények
+//---------------------------------------------------
 
 float plnMenu_getRad(Pln * this){
     return PLN_MAX_STRENGTH*2*0.75 + PLN_MIN_STRENGTH;
@@ -176,9 +175,9 @@ bool plnMenu_hover(Pln * const this, SDL_Event ev){//Az egér éppen benne van a
             <= plnMenu_getRad(this) * plnMenu_getRad(this);
 }
 
-///---------------------------------------------------
-///Gombokkal kapcsolatos függvények
-///---------------------------------------------------
+//---------------------------------------------------
+//Gombokkal kapcsolatos függvények
+//---------------------------------------------------
 void button_strengthUp_action(Pln * this){
     if (this->but_strengthUp.clicked)
         if (this->strength < PLN_MAX_STRENGTH)

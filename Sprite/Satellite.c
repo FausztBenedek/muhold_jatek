@@ -13,7 +13,7 @@
 
 static void calcResultantForceForSat(Satellite * s);
 
-void sat_plnarr_button_del_action(Satellite * s);
+static void sat_plnarr_button_del_action(Satellite * s);
 
 Satellite sat_init(float x, float y, float rad){
     Satellite s;
@@ -180,7 +180,7 @@ bool sat_remPln(Satellite * s, int index) {
     s->plnarr = realloc(s->plnarr, (s->numOf_pln) * sizeof(Pln));
     return true;
 }
-void sat_plnarr_button_del_action(Satellite * s){
+static void sat_plnarr_button_del_action(Satellite * s){
     int i;
     for (i = 0; i < s->numOf_pln; i++){
         if (s->plnarr[i].but_del.clicked){

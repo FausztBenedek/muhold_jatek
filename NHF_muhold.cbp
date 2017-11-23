@@ -61,10 +61,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="GameStatusSpecific/MENU/Menu.h" />
-		<Unit filename="GameStatusSpecific/SETTING/Initialized_orbit_calculator.c">
+		<Unit filename="GameStatusSpecific/SETTING/HelpingPlots.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="GameStatusSpecific/SETTING/Initialized_orbit_calculator.h" />
+		<Unit filename="GameStatusSpecific/SETTING/HelpingPlots.h" />
 		<Unit filename="GameStatusSpecific/WINNING/winning.c">
 			<Option compilerVar="CC" />
 		</Unit>

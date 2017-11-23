@@ -15,9 +15,7 @@ static void open_level(int level, Satellite * Satellite);
 static bool sat_touched_gate(Satellite * s);
 
 static void sat_and_pln_collide (enum gameStatus *gameStatus, Satellite * s);
-static void sat_and_astr_collide(enum gameStatus *gameStatus, Satellite * s);
 static void sat_and_wall_collide(enum gameStatus *gameStatus, Satellite * s);
-static void pln_and_astr_collide(enum gameStatus *gameStatus, Satellite * s);
 
 void game_status_from_SETTING_to_RUNNING(enum gameStatus *gameStatus, SDL_Event ev, Satellite * s){
     if ((ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_SPACE) ||

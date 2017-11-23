@@ -240,6 +240,7 @@ int game() {
 ///  TAKARÍTÁS
 ///  ---------------------------------------------
     menu_cleanup(&menu);
+    winningScreen_cleanup(&winningScreen);
     data_cleanUp(&data);
     sat_game_cleanup(&sat);
     TTF_CloseFont(bigfont);

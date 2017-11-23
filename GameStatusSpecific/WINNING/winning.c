@@ -18,8 +18,11 @@ void winningScreen_drw(SDL_Surface *screen, WinningScreen this, TTF_Font *font){
 }
 
 void winningScreen_upd(WinningScreen *this, SDL_Event ev){
-    if (ev.type == SDL_MOUSEBUTTONDOWN || ev.type == SDL_MOUSEMOTION){
-        button_upd(&this->nextLevel, ev);
-        button_upd(&this->toMenu, ev);
-    }
+    button_upd(&this->nextLevel, ev);
+    button_upd(&this->toMenu, ev);
+}
+
+void winningScreen_cleanup(WinningScreen *this){
+    button_cleanup(&this->toMenu);
+    button_cleanup(&this->nextLevel);
 }

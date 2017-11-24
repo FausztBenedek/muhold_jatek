@@ -1,14 +1,9 @@
 #include "GameStatusChangingFunctions.h"
 
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
 
 #include "../Constants.h"
-#include "../Sprite/Satellite.h"
-#include "MENU/LevelBox.h"
 #include "../tools.h"
 
 static void open_level(int level, Satellite *Satellite);

@@ -1,8 +1,5 @@
 #include "Planet.h"
 
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
-#include <stdbool.h>
 #include <math.h>
 
 #include "../Constants.h"

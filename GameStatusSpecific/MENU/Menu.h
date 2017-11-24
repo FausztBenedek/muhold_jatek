@@ -1,10 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
-#include <SDL_ttf.h>
-
 #include "LevelBox.h"
 
 ///@defgroup menuinfos Menu
@@ -27,11 +23,11 @@ Menu menu_init();
 */
 void menu_upd(Menu *theMenu, SDL_Event ev, Data data);
 
-/**Sorba meghívja a linkelt lista elemeinek a kirajzoló függvényét
+/**Sorba meghívja a linkelt lista elemeinek a kirajzoló függvényét.
 */
 void menu_drw(SDL_Surface *screen, Menu theMenu, TTF_Font *font, Data data);
 
-/**Feltakarítja a linkelt listát
+/**Feltakarítja a linkelt listát.
 */
 void menu_cleanup(Menu *theMenu);
 

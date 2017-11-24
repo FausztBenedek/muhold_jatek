@@ -1,11 +1,5 @@
 #include "Button.h"
 
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
-#include <SDL_ttf.h>
-#include <stdbool.h>
-#include <string.h>
-
 #include "../tools.h"
 
 

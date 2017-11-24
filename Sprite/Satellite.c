@@ -1,15 +1,9 @@
 #include "Satellite.h"
 
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
 #include <string.h>
-#include <stdio.h>
 
 #include "../Constants.h"
 #include "../tools.h"
-#include "../GameStatusSpecific/GameStatus.h"
-#include "Obstacles/Wall.h"
-#include "Planet.h"
 
 static void calcResultantForceForSat(Satellite *s);
 
@@ -218,7 +212,7 @@ void sat_wall_init(Satellite *s, int level, FILE *settings){
     s->wallarr = (Wall *) malloc(s->numOf_wall *sizeof(Wall));
     if (s->wallarr == NULL) return;
     for (i = 0; i < s->numOf_wall; i++){
-        fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);
+        if (NULL == fgets(row, MAX_ROW_LENGTH_IN_FILE, settings)) perror("fgets problema");
         int x, y, w, h;
         sscanf(row, "%d, %d, %d, %d", &x, &y, &w, &h);
         s->wallarr[i] = wall_init(x, y, w, h);
@@ -233,7 +227,7 @@ void sat_gate_init(Satellite *this, int level, FILE *settings){
     goto_word_in_file(settings, row, MAX_ROW_LENGTH_IN_FILE);
 
     goto_word_in_file(settings, GATE_BEGIN, MAX_ROW_LENGTH_IN_FILE);
-    fgets(row, MAX_ROW_LENGTH_IN_FILE, settings);
+    if (NULL == fgets(row, MAX_ROW_LENGTH_IN_FILE, settings)) perror("fgets problema");
     int y, h;
     sscanf(row, "%d, %d", &y, &h);
     this->gate = gate_init(y, y+h);

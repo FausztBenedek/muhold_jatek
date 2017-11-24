@@ -2,14 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <math.h>
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
-#include <SDL_ttf.h>
 #include <string.h>
-
-#include "Physics/Vector.h"
 
 void print(SDL_Surface *screen, char *text, int midx, int midy, TTF_Font *font){
     int x, y, w, h;

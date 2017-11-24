@@ -4,7 +4,7 @@
 ///@defgroup vector Vektorok
 ///@{
 
-/**A vektorokat illetve pontokat tartalmazó struktúra
+/**A vektorokat illetve pontokat tartalmazó struktúra.
 */
 typedef struct Vect{
     float x, y;
@@ -17,6 +17,7 @@ Vect vect_init(float x, float y);
 Vect sumOf(Vect a, Vect b);
 
 ///Kivonja b vektort a-ból.
+///@return AB vektorral tér vissza.
 Vect differenceOf(Vect a, Vect b);
 
 ///Hozzáadja az első paraméterhez a másodikat.

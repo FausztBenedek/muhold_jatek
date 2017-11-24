@@ -1,3 +1,15 @@
+/**@mainpage
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*/
+
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
 #include <math.h>

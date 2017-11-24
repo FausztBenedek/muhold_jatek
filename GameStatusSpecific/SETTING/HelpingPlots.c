@@ -1,7 +1,6 @@
 #include "HelpingPlots.h"
 
 #include "../../tools.h"
-#include "../../Constants.h"
 
 HelpingPlots helplt_init(){
     HelpingPlots h; int i;

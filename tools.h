@@ -2,7 +2,6 @@
 #define TOOLE_H
 
 #include <stdbool.h>
-#include <stdio.h>
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
 #include <SDL_ttf.h>

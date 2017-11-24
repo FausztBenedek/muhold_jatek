@@ -1,10 +1,6 @@
 #ifndef WINNING_H
 #define WINNING_H
 
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
-#include <SDL_ttf.h>
-
 #include "../Button.h"
 
 ///@defgroup winningScreen Siker-képenyő

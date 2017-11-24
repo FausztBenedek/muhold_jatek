@@ -1,13 +1,10 @@
 #ifndef LEVEL_BOX_H
 #define LEVEL_BOX_H
 
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
-#include <SDL_ttf.h>
 
-#include "../../Sprite/Obstacles/Wall.h"
 #include "../Button.h"
 #include "../../Storage/Data.h"
+#include "../../Physics/Vector.h"
 
 ///@ingroup menuinfos
 ///@{

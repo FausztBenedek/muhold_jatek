@@ -7,7 +7,6 @@
 
 #include "../Physics/Vector.h"
 #include "Planet.h"
-#include "../GameStatusSpecific/GameStatus.h"
 #include "Obstacles/Wall.h"
 #include "Gate.h"
 ///@defgroup sat Műhold

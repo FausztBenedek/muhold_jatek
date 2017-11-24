@@ -1,12 +1,10 @@
 #ifndef GAME_STATUS_CHANGER_H
 #define GAME_STATUS_CHANGER_H
 
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
-
 #include "../Sprite/Satellite.h"
 #include "MENU/Menu.h"
 #include "GAMEOVER/gameover.h"
+#include "GameStatus.h"
 #include "../Storage/Data.h"
 #include "WINNING/winning.h"
 
@@ -27,7 +25,8 @@ void game_status_from_RUNNING_to_SETTING(enum gameStatus *gameStatus, SDL_Event 
 */
 void game_status_from_MENU_to_SETTING(enum gameStatus *gameStatus, SDL_Event ev, Satellite *s, Menu *Menu, Data *data);
 
-/**A GameOver-ből lép át menübe vagy tervező állapotba. A GameOver gombjainak funkcionalitását definiálja.
+/**A GameOver-ből lép át menübe vagy vissza tervező módba egy újrapróbálkozás keretein belül.
+* A GameOver gombjainak funkcionalitását definiálja.
 *@param s Viszzállítja az akadályokra mutató pointereket NULL-ba, gyakorlatilag újrainicializálja a műholdat, ha a toMenu gombra klikkelünk.
 *@param gameOverScreen A GameOverScreen struktúra gombjainak funkcionalitását kezeli.
 *@ingroup gameOverScreen

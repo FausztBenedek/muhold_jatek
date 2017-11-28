@@ -137,18 +137,7 @@ int game() {
     //*****************************
         case GAMEOVER:
             updGAMEOVER(&sat, ev, &gameStatus, &gameOverScreen, &toMenu);
-            //......
-            //Draw
-            //......
-
-            boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
-            gameOverScreen_drw(screen, gameOverScreen, smallfont);
-            button_drw(screen, &toMenu, smallfont);
-
-            print(screen, "VESZTETTÉL", WIDTH/2, HEIGHT/7, bigfont);
-            print(screen, "Próbáld újra!",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
-
-            SDL_Flip(screen);
+            drwGAMEOVER(screen, &toMenu, smallfont, bigfont, gameOverScreen);
             break;//VÉGE: gameStatus == GAMEOVER
     //*****************************
     //  WINNING

@@ -25,3 +25,14 @@ void updGAMEOVER(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Game
     game_status_from_GAMEOVER_to_MENU_or_SETTING(gameStatus, ev, sat, *gameOverScreen);
     game_status_button_toMenuButton_upd(toMenu, ev, sat, gameStatus);
 }
+
+void drwGAMEOVER(SDL_Surface *screen, Button *toMenu, TTF_Font *smallfont, TTF_Font *bigfont, GameOverScreen gameOverScreen){
+    boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
+    gameOverScreen_drw(screen, gameOverScreen, smallfont);
+    button_drw(screen, toMenu, smallfont);
+
+    print(screen, "VESZTETTÉL", WIDTH/2, HEIGHT/7, bigfont);
+    print(screen, "Próbáld újra!",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
+
+    SDL_Flip(screen);
+}

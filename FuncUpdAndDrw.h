@@ -24,4 +24,8 @@ void drwMENU(SDL_Surface *screen, Menu menu, Data data, TTF_Font *smallfont, TTF
 */
 void updGAMEOVER(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, GameOverScreen *gameOverScreen, Button *toMenu);
 
+/**A gemover képernyőt megrajzoló függvény
+*/
+void drwGAMEOVER(SDL_Surface *screen, Button *toMenu, TTF_Font *smallfont, TTF_Font *bigfont, GameOverScreen gameOverScreen);
+
 #endif //FUNC_UPD_AND_DRW_H

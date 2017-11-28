@@ -99,6 +99,7 @@ int game() {
         default:
             break;
         }
+        SDL_Flip(screen);
     }//VÉGE: gameStatus != QUIT
 //  ---------------------------------------------
 //  TAKARÍTÁS
@@ -121,9 +122,9 @@ int main(int argc, char *argv[]) {
     freopen("CON", "w", stderr);
     #endif
     srand(time(NULL));
-    game();
+    int a = game();
 
-    return 0;
+    return a;
 }
 
 Uint32 time_func(Uint32 sec, void *pointer) {

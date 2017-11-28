@@ -38,7 +38,6 @@ void drwRUNNING(SDL_Surface *screen, Satellite *sat, TTF_Font *smallfont, Button
         for (i = 0; i < sat->numOf_pln; i++)     pln_drw(screen, &sat->plnarr[i] );
         button_drw(screen, toMenu, smallfont);
     }
-    SDL_Flip(screen);
 }
 
 void drwMENU(SDL_Surface *screen, Menu menu, Data data, TTF_Font *smallfont, TTF_Font *bigfont, Button *toMenu){
@@ -48,7 +47,6 @@ void drwMENU(SDL_Surface *screen, Menu menu, Data data, TTF_Font *smallfont, TTF
     print(screen, "Hello!", WIDTH/2, HEIGHT/7, bigfont);
     print(screen, "Válassz egy szintet, és juttasd el a műholdat a kapuba!",WIDTH/2, HEIGHT/7+BIG_FONT_SIZE+10, bigfont);
     button_drw(screen, toMenu, smallfont);
-    SDL_Flip(screen);
 }
 
 void updGAMEOVER(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, GameOverScreen *gameOverScreen, Button *toMenu){
@@ -63,7 +61,6 @@ void drwGAMEOVER(SDL_Surface *screen, Button *toMenu, TTF_Font *smallfont, TTF_F
     button_drw(screen, toMenu, smallfont);
     print(screen, "VESZTETTÉL", WIDTH/2, HEIGHT/7, bigfont);
     print(screen, "Próbáld újra!",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
-    SDL_Flip(screen);
 }
 
 void updWINNING(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Button *toMenu, Data *data, Menu *menu, WinningScreen *winningScreen){
@@ -78,7 +75,6 @@ void drwWINNING(SDL_Surface *screen, Button *toMenu, TTF_Font *smallfont, TTF_Fo
     button_drw(screen, toMenu, smallfont);
     print(screen, "EZAZ!", WIDTH/2, HEIGHT/7, bigfont);
     print(screen, "Elérhető a következő pálya",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
-    SDL_Flip(screen);
 }
 
 void updSETTING(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Button *toMenu, HelpingPlots *plots){
@@ -100,5 +96,4 @@ void drwSETTING(SDL_Surface *screen, Satellite *sat, SDL_Event ev, TTF_Font *tin
     for (i = 0; i < sat->numOf_pln; i++)    pln_drw(    screen, &sat->plnarr[i]);
     for (i = 0; i < sat->numOf_pln; i++)    plnMenu_drw(screen, &sat->plnarr[i], ev, tinyfont);
     button_drw(screen, toMenu, smallfont);
-    SDL_Flip(screen);
 }

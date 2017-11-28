@@ -59,3 +59,15 @@ void updSETTING(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Butto
     helplt_upd(plots, *sat, ev);
     game_status_button_toMenuButton_upd(toMenu, ev, sat, gameStatus);
 }
+
+void drwSETTING(SDL_Surface *screen, Satellite *sat, SDL_Event ev, TTF_Font *tinyfont, TTF_Font *smallfont, Button *toMenu, HelpingPlots *plots){
+    int i;
+    boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
+    helplt_drw(screen, plots);
+    sat_drw(screen, sat);
+    for (i = 0; i < sat->numOf_wall; i++)   wall_drw(   screen, &sat->wallarr[i]);
+    for (i = 0; i < sat->numOf_pln; i++)    pln_drw(    screen, &sat->plnarr[i]);
+    for (i = 0; i < sat->numOf_pln; i++)    plnMenu_drw(screen, &sat->plnarr[i], ev, tinyfont);
+    button_drw(screen, toMenu, smallfont);
+    SDL_Flip(screen);
+}

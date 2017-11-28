@@ -1,6 +1,10 @@
 #ifndef FUNC_UPD_AND_DRW_H
 #define FUNC_UPD_AND_DRW_H
 
+#include <SDL.h>
+#include <SDL_gfxPrimitives.h>
+#include <SDL_ttf.h>
+
 #include "GameStatusSpecific/GameStatus.h"
 #include "GameStatusSpecific/GameStatusChangingFunctions.h"
 #include "GameStatusSpecific/SETTING/HelpingPlots.h"
@@ -39,4 +43,10 @@ void drwWINNING(SDL_Surface *screen, Button *toMenu, TTF_Font *smallfont, TTF_Fo
 /**A beállítási játékállapotot frissítő függvény
 */
 void updSETTING(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Button *toMenu, HelpingPlots *plots);
+
+/**A beállítási játékállapotot megrajzoló függvény
+*/
+void drwSETTING(SDL_Surface *screen, Satellite *sat, SDL_Event ev, TTF_Font *tinyfont, TTF_Font *smallfont, Button *toMenu, HelpingPlots *plots);
+
+
 #endif //FUNC_UPD_AND_DRW_H

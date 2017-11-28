@@ -10,6 +10,37 @@ void updMENU(Satellite *sat, Menu *menu, Data *data, Button *toMenu, enum gameSt
     game_status_button_toMenuButton_upd(toMenu, ev, sat, gameStatus);
 }
 
+void updRUNNING(Satellite *sat, enum gameStatus *gameStatus, Data *data, Button *toMenu, SDL_Event ev){
+    game_status_from_RUNNING_to_SETTING(gameStatus, ev, sat, data);
+    game_status_from_RUNNING_to_WINNING(gameStatus, sat, data);
+    game_status_from_RUNNING_to_GAMEOVER(gameStatus, sat, data);
+    switch (ev.type){
+        case SDL_USEREVENT:
+            sat_RUNNING_upd(sat);
+            break;
+
+        case SDL_MOUSEMOTION:
+            /*FALL THROUGH*/
+
+        case SDL_MOUSEBUTTONDOWN:
+            game_status_button_toMenuButton_upd(toMenu, ev, sat, gameStatus);
+            break;
+        default: break;
+    }
+}
+
+void drwRUNNING(SDL_Surface *screen, Satellite *sat, TTF_Font *smallfont, Button *toMenu, SDL_Event ev){
+    if (ev.type == SDL_USEREVENT){
+        int i;
+        boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
+        sat_drw(screen, sat);
+        for (i = 0; i < sat->numOf_wall; i++)    wall_drw(screen, &sat->wallarr[i]);
+        for (i = 0; i < sat->numOf_pln; i++)     pln_drw(screen, &sat->plnarr[i] );
+        button_drw(screen, toMenu, smallfont);
+    }
+    SDL_Flip(screen);
+}
+
 void drwMENU(SDL_Surface *screen, Menu menu, Data data, TTF_Font *smallfont, TTF_Font *bigfont, Button *toMenu){
     boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255,255,255,255);
     menu_drw(screen, menu, smallfont, data);

@@ -48,5 +48,13 @@ void updSETTING(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Butto
 */
 void drwSETTING(SDL_Surface *screen, Satellite *sat, SDL_Event ev, TTF_Font *tinyfont, TTF_Font *smallfont, Button *toMenu, HelpingPlots *plots);
 
+/**A running állapot frissítése
+*/
+void updRUNNING(Satellite *sat, enum gameStatus *gameStatus, Data *data, Button *toMenu, SDL_Event ev);
+
+/**A running állapot megrajzolása
+*/
+void drwRUNNING(SDL_Surface *screen, Satellite *sat, TTF_Font *smallfont, Button *toMenu, SDL_Event ev);
+
 
 #endif //FUNC_UPD_AND_DRW_H

@@ -53,8 +53,6 @@ int game() {
 //  ---------------------------------------------
     enum gameStatus gameStatus = MENU;
 
-    int i;
-
     Data data = data_read_in();
     Menu menu = menu_init(data);
 
@@ -83,47 +81,8 @@ int game() {
             drwMENU(screen, menu, data, smallfont, bigfont, &toMenu);
             break;
         case RUNNING:
-
-            game_status_from_RUNNING_to_SETTING(&gameStatus, ev, &sat, &data);
-            game_status_from_RUNNING_to_WINNING(&gameStatus, &sat, &data);
-            game_status_from_RUNNING_to_GAMEOVER(&gameStatus, &sat, &data);
-
-
-            switch (ev.type){
-
-
-                case SDL_USEREVENT:
-            //......
-            //Draw
-            //......
-                    //Háttér rajzolása
-                    boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
-
-                    //Objektumok rajzolása
-                    sat_drw(screen, &sat);
-                    for (i = 0; i < sat.numOf_wall; i++)    wall_drw(screen, &sat.wallarr[i]);
-                    for (i = 0; i < sat.numOf_pln; i++)     pln_drw(screen, &sat.plnarr[i] );
-                    button_drw(screen, &toMenu, smallfont);
-
-            //......
-            //Update
-            //......
-                    sat_RUNNING_upd(&sat);
-                    break;
-
-                case SDL_MOUSEMOTION:
-                    /*FALL THROUGH*/
-
-                case SDL_MOUSEBUTTONDOWN:
-                    game_status_button_toMenuButton_upd(&toMenu, ev, &sat, &gameStatus);
-                    break;
-                default: break;
-            }
-
-            SDL_Flip(screen);
-
-
-
+            updRUNNING(&sat, &gameStatus, &data, &toMenu, ev);
+            drwRUNNING(screen, &sat, smallfont, &toMenu, ev);
             break;
         case GAMEOVER:
             updGAMEOVER(&sat, ev, &gameStatus, &gameOverScreen, &toMenu);
@@ -136,6 +95,8 @@ int game() {
         case SETTING:
             updSETTING(&sat, ev, &gameStatus, &toMenu, &plots);
             drwSETTING(screen, &sat, ev, tinyfont, smallfont, &toMenu, &plots);
+            break;
+        default:
             break;
         }
     }//VÉGE: gameStatus != QUIT

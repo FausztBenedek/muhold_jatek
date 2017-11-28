@@ -150,25 +150,12 @@ int game() {
     //  BOLYGÓK BEÁLLÍTÁSA LOOP
     //*****************************
         case SETTING:
-
-            game_status_from_SETTING_to_RUNNING(&gameStatus, ev, &sat);
-
-            //......
-            //Update
-            //......
-            sat_SETTINGS_upd(&sat, ev);
-            for (i = 0; i < sat.numOf_pln; i++)    pln_upd(&sat.plnarr[i], ev);
-            for (i = 0; i < sat.numOf_pln; i++)    plnMenu_upd(&sat.plnarr[i], ev);
-            helplt_upd(&plots, sat, ev);
-            game_status_button_toMenuButton_upd(&toMenu, ev, &sat, &gameStatus);
-
+            updSETTING(&sat, ev, &gameStatus, &toMenu, &plots);
             //......
             //Draw
             //......
-            //Háttér rajzolása
             boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
 
-            //Objektumok rajzolása
             helplt_drw(screen, &plots);
             sat_drw(screen, &sat);
             for (i = 0; i < sat.numOf_wall; i++)   wall_drw(   screen, &sat.wallarr[i]);
@@ -177,7 +164,7 @@ int game() {
             button_drw(screen, &toMenu, smallfont);
 
             SDL_Flip(screen);
-            break;//VÉGE: gameStatus == SETTING
+            break;
 
         }
 

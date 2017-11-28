@@ -49,3 +49,13 @@ void drwWINNING(SDL_Surface *screen, Button *toMenu, TTF_Font *smallfont, TTF_Fo
     print(screen, "Elérhető a következő pálya",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
     SDL_Flip(screen);
 }
+
+void updSETTING(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Button *toMenu, HelpingPlots *plots){
+    int i;
+    game_status_from_SETTING_to_RUNNING(gameStatus, ev, sat);
+    sat_SETTINGS_upd(sat, ev);
+    for (i = 0; i < sat->numOf_pln; i++)    pln_upd(&sat->plnarr[i], ev);
+    for (i = 0; i < sat->numOf_pln; i++)    plnMenu_upd(&sat->plnarr[i], ev);
+    helplt_upd(plots, *sat, ev);
+    game_status_button_toMenuButton_upd(toMenu, ev, sat, gameStatus);
+}

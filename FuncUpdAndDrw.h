@@ -35,4 +35,8 @@ void updWINNING(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Butto
 /**A winning képernyőt megrajzoló függvény
 */
 void drwWINNING(SDL_Surface *screen, Button *toMenu, TTF_Font *smallfont, TTF_Font *bigfont, WinningScreen winningScreen);
+
+/**A beállítási játékállapotot frissítő függvény
+*/
+void updSETTING(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Button *toMenu, HelpingPlots *plots);
 #endif //FUNC_UPD_AND_DRW_H

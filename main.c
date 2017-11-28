@@ -78,17 +78,10 @@ int game() {
         case QUITTING:
             //while loop feltétel nem teljesül => kilépés
             break;
-    //*****************************
-    //  MENÜ LOOP
-    //*****************************
         case MENU:
             updMENU(&sat, &menu, &data, &toMenu, &gameStatus, ev);
             drwMENU(screen, menu, data, smallfont, bigfont, &toMenu);
             break;
-
-    //*****************************
-    //  MEGY A MŰHOLD LOOP
-    //*****************************
         case RUNNING:
 
             game_status_from_RUNNING_to_SETTING(&gameStatus, ev, &sat, &data);
@@ -131,30 +124,20 @@ int game() {
 
 
 
-            break;//VÉGE: gameStatus == RUNNING
-    //*****************************
-    //  GAMEOVER
-    //*****************************
+            break;
         case GAMEOVER:
             updGAMEOVER(&sat, ev, &gameStatus, &gameOverScreen, &toMenu);
             drwGAMEOVER(screen, &toMenu, smallfont, bigfont, gameOverScreen);
-            break;//VÉGE: gameStatus == GAMEOVER
-    //*****************************
-    //  WINNING
-    //*****************************
+            break;
         case WINNING:
             updWINNING(&sat, ev, &gameStatus, &toMenu, &data, &menu, &winningScreen);
             drwWINNING(screen, &toMenu, smallfont, bigfont, winningScreen);
             break;
-    //*****************************
-    //  BOLYGÓK BEÁLLÍTÁSA LOOP
-    //*****************************
         case SETTING:
             updSETTING(&sat, ev, &gameStatus, &toMenu, &plots);
             drwSETTING(screen, &sat, ev, tinyfont, smallfont, &toMenu, &plots);
             break;
         }
-
     }//VÉGE: gameStatus != QUIT
 //  ---------------------------------------------
 //  TAKARÍTÁS

@@ -28,4 +28,8 @@ void updGAMEOVER(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Game
 */
 void drwGAMEOVER(SDL_Surface *screen, Button *toMenu, TTF_Font *smallfont, TTF_Font *bigfont, GameOverScreen gameOverScreen);
 
+/**A winning képernyőt frissítő függvény
+*/
+void updWINNING(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Button *toMenu, Data *data, Menu *menu, WinningScreen *winningScreen);
+
 #endif //FUNC_UPD_AND_DRW_H

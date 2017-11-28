@@ -143,16 +143,7 @@ int game() {
     //  WINNING
     //*****************************
         case WINNING:
-
-            //......
-            //Update
-            //......
-
-            winningScreen_upd(&winningScreen, ev);
-            game_status_from_WINNING_to_MENU_or_NEXTLEVEL(&gameStatus, ev, &sat, winningScreen, &data, &menu);
-            game_status_button_toMenuButton_upd(&toMenu, ev, &sat, &gameStatus);
-
-
+            updWINNING(&sat, ev, &gameStatus, &toMenu, &data, &menu, &winningScreen);
             //......
             //Draw
             //......

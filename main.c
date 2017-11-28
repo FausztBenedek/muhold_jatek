@@ -82,24 +82,9 @@ int game() {
     //  MENÜ LOOP
     //*****************************
         case MENU:
-
             updMENU(&sat, &menu, &data, &toMenu, &gameStatus, ev);
-
-
-            //......
-            //Draw
-            //......
-            boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255,255,255,255);
-            menu_drw(screen, menu, smallfont, data);
-            data_drw(screen, data, smallfont);
-
-            print(screen, "Hello!", WIDTH/2, HEIGHT/7, bigfont);
-            print(screen, "Válassz egy szintet, és juttasd el a műholdat a kapuba!",WIDTH/2, HEIGHT/7+BIG_FONT_SIZE+10, bigfont);
-
-            button_drw(screen, &toMenu, smallfont);
-
-            SDL_Flip(screen);
-            break;//VÉGE: gameStatus == MENU
+            drwMENU(screen, menu, data, smallfont, bigfont, &toMenu);
+            break;
 
     //*****************************
     //  MEGY A MŰHOLD LOOP

@@ -10,6 +10,13 @@
 #include "GameStatusSpecific/Button.h"
 #include "Storage/Data.h"
 
+
+/**A menüt frissítő függvény
+*/
 void updMENU(Satellite *sat, Menu *menu, Data *data, Button *toMenu, enum gameStatus *gameStatus, SDL_Event ev);
+
+/**A menüt megrajzoló függvény
+*/
+void drwMENU(SDL_Surface *screen, Menu menu, Data data, TTF_Font *smallfont, TTF_Font *bigfont, Button *toMenu);
 
 #endif //FUNC_UPD_AND_DRW_H

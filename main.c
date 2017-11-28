@@ -136,16 +136,7 @@ int game() {
     //  GAMEOVER
     //*****************************
         case GAMEOVER:
-
-            //......
-            //Update
-            //......
-
-            gameOverScreen_upd(&gameOverScreen, ev);
-            game_status_from_GAMEOVER_to_MENU_or_SETTING(&gameStatus, ev, &sat, gameOverScreen);
-            game_status_button_toMenuButton_upd(&toMenu, ev, &sat, &gameStatus);
-
-
+            updGAMEOVER(&sat, ev, &gameStatus, &gameOverScreen, &toMenu);
             //......
             //Draw
             //......

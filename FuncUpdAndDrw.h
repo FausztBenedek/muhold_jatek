@@ -19,4 +19,9 @@ void updMENU(Satellite *sat, Menu *menu, Data *data, Button *toMenu, enum gameSt
 */
 void drwMENU(SDL_Surface *screen, Menu menu, Data data, TTF_Font *smallfont, TTF_Font *bigfont, Button *toMenu);
 
+
+/**A gameover képernyőt frissítő függvény
+*/
+void updGAMEOVER(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, GameOverScreen *gameOverScreen, Button *toMenu);
+
 #endif //FUNC_UPD_AND_DRW_H

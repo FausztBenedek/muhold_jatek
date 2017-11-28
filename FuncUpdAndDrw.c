@@ -19,3 +19,9 @@ void drwMENU(SDL_Surface *screen, Menu menu, Data data, TTF_Font *smallfont, TTF
     button_drw(screen, toMenu, smallfont);
     SDL_Flip(screen);
 }
+
+void updGAMEOVER(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, GameOverScreen *gameOverScreen, Button *toMenu){
+    gameOverScreen_upd(gameOverScreen, ev);
+    game_status_from_GAMEOVER_to_MENU_or_SETTING(gameStatus, ev, sat, *gameOverScreen);
+    game_status_button_toMenuButton_upd(toMenu, ev, sat, gameStatus);
+}

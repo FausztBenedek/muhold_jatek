@@ -40,6 +40,10 @@
 			<Add library="SDL_mixer" />
 		</Linker>
 		<Unit filename="Constants.h" />
+		<Unit filename="FuncUpdAndDrw.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="FuncUpdAndDrw.h" />
 		<Unit filename="GameStatusSpecific/Button.c">
 			<Option compilerVar="CC" />
 		</Unit>

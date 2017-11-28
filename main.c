@@ -144,18 +144,7 @@ int game() {
     //*****************************
         case WINNING:
             updWINNING(&sat, ev, &gameStatus, &toMenu, &data, &menu, &winningScreen);
-            //......
-            //Draw
-            //......
-
-            boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
-            winningScreen_drw(screen, winningScreen, smallfont);
-            button_drw(screen, &toMenu, smallfont);
-
-            print(screen, "EZAZ!", WIDTH/2, HEIGHT/7, bigfont);
-            print(screen, "Elérhető a következő pálya",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
-
-            SDL_Flip(screen);
+            drwWINNING(screen, &toMenu, smallfont, bigfont, winningScreen);
             break;
     //*****************************
     //  BOLYGÓK BEÁLLÍTÁSA LOOP

@@ -32,4 +32,7 @@ void drwGAMEOVER(SDL_Surface *screen, Button *toMenu, TTF_Font *smallfont, TTF_F
 */
 void updWINNING(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Button *toMenu, Data *data, Menu *menu, WinningScreen *winningScreen);
 
+/**A winning képernyőt megrajzoló függvény
+*/
+void drwWINNING(SDL_Surface *screen, Button *toMenu, TTF_Font *smallfont, TTF_Font *bigfont, WinningScreen winningScreen);
 #endif //FUNC_UPD_AND_DRW_H

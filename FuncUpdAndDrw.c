@@ -40,3 +40,12 @@ void updWINNING(Satellite *sat, SDL_Event ev, enum gameStatus *gameStatus, Butto
     game_status_from_WINNING_to_MENU_or_NEXTLEVEL(gameStatus, ev, sat, *winningScreen, data, menu);
     game_status_button_toMenuButton_upd(toMenu, ev, sat, gameStatus);
 }
+
+void drwWINNING(SDL_Surface *screen, Button *toMenu, TTF_Font *smallfont, TTF_Font *bigfont, WinningScreen winningScreen){
+    boxRGBA(screen, 0, 0, WIDTH, HEIGHT, 255, 255, 255, 255);
+    winningScreen_drw(screen, winningScreen, smallfont);
+    button_drw(screen, toMenu, smallfont);
+    print(screen, "EZAZ!", WIDTH/2, HEIGHT/7, bigfont);
+    print(screen, "Elérhető a következő pálya",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
+    SDL_Flip(screen);
+}

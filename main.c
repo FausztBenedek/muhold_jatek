@@ -1,7 +1,7 @@
 /**@mainpage
-*A játék a pályákat egy Settings.txt nevű fájlból olvassa be. Ehhez a fájlhoz a program dinamikusan alkalmazkodik, így könnyen lehet új pályákat hozzáadni a játékhoz. 
+*A játék a pályákat egy Settings.txt nevű fájlból olvassa be. Ehhez a fájlhoz a program dinamikusan alkalmazkodik, így könnyen lehet új pályákat hozzáadni a játékhoz.
 *Csak az eddigi mintát kell kiegészíteni, és a játék be fogja tudni olvasni.
-*A mentett játék adatait a program a Save.txt-be írja. Ezt a fájlt létre is hozza, ha szükséges, de üresen hagyja, ha nem kattintunk a mentés gombra. 
+*A mentett játék adatait a program a Save.txt-be írja. Ezt a fájlt létre is hozza, ha szükséges, de üresen hagyja, ha nem kattintunk a mentés gombra.
 *Új játékot a legkönnyebben úgy lehet kezdeni, hogy kitöröljük a Save.txt-t.
 *FONTOS! A programban használt betűtípust a Constants.h-ban definiáltam, és ezen lehet, hogy állítani kell, hogy másik gépen is működjön.
 *Linkelt listából csak egy van a programban, és az a müben lévő szintek sorozata. (LevelBox.h)
@@ -70,12 +70,17 @@ int game() {
 //  JÁTÉK LOOP
 //  ---------------------------------------------
     while (gameStatus != QUITTING){
+        SDL_WaitEvent(&ev);
+        if (ev.type == SDL_QUIT) gameStatus = QUITTING;
+
+        switch (gameStatus){
+        case QUITTING:
+            //while loop feltétel nem teljesül => kilépés
+            break;
     //*****************************
     //  MENÜ LOOP
     //*****************************
-        while (gameStatus == MENU){
-            SDL_WaitEvent(&ev);
-            if (ev.type == SDL_QUIT) gameStatus = QUITTING;
+        case MENU:
 
             //......
             //Update
@@ -98,23 +103,20 @@ int game() {
             button_drw(screen, &toMenu, smallfont);
 
             SDL_Flip(screen);
-        } //VÉGE: gameStatus == MENU
+            break;//VÉGE: gameStatus == MENU
 
     //*****************************
     //  MEGY A MŰHOLD LOOP
     //*****************************
-        while (gameStatus == RUNNING){
+        case RUNNING:
 
-            SDL_WaitEvent(&ev);
             game_status_from_RUNNING_to_SETTING(&gameStatus, ev, &sat, &data);
             game_status_from_RUNNING_to_WINNING(&gameStatus, &sat, &data);
             game_status_from_RUNNING_to_GAMEOVER(&gameStatus, &sat, &data);
 
 
             switch (ev.type){
-                case SDL_QUIT:
-                    gameStatus = QUITTING;
-                    break;
+
 
                 case SDL_USEREVENT:
             //......
@@ -148,14 +150,11 @@ int game() {
 
 
 
-        } //VÉGE: gameStatus == RUNNING
+            break;//VÉGE: gameStatus == RUNNING
     //*****************************
     //  GAMEOVER
     //*****************************
-        while (gameStatus == GAMEOVER){
-            SDL_WaitEvent(&ev);
-
-            if (ev.type == SDL_QUIT) gameStatus = QUITTING;
+        case GAMEOVER:
 
             //......
             //Update
@@ -178,13 +177,11 @@ int game() {
             print(screen, "Próbáld újra!",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
 
             SDL_Flip(screen);
-        }//VÉGE: gameStatus == GAMEOVER
+            break;//VÉGE: gameStatus == GAMEOVER
     //*****************************
     //  WINNING
     //*****************************
-        while (gameStatus == WINNING){
-            SDL_WaitEvent(&ev);
-            if (ev.type == SDL_QUIT) gameStatus = QUITTING;
+        case WINNING:
 
             //......
             //Update
@@ -207,15 +204,13 @@ int game() {
             print(screen, "Elérhető a következő pálya",WIDTH/2, HEIGHT/7 + BIG_FONT_SIZE + 10, bigfont);
 
             SDL_Flip(screen);
-        }
+            break;
     //*****************************
     //  BOLYGÓK BEÁLLÍTÁSA LOOP
     //*****************************
-        while (gameStatus == SETTING) {
-            SDL_WaitEvent(&ev);
-            game_status_from_SETTING_to_RUNNING(&gameStatus, ev, &sat);
+        case SETTING:
 
-            if (ev.type == SDL_QUIT) gameStatus = QUITTING;
+            game_status_from_SETTING_to_RUNNING(&gameStatus, ev, &sat);
 
             //......
             //Update
@@ -241,7 +236,9 @@ int game() {
             button_drw(screen, &toMenu, smallfont);
 
             SDL_Flip(screen);
-        }//VÉGE: gameStatus == SETTING
+            break;//VÉGE: gameStatus == SETTING
+
+        }
 
     }//VÉGE: gameStatus != QUIT
 //  ---------------------------------------------

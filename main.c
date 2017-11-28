@@ -24,6 +24,7 @@
 #include "GameStatusSpecific/GAMEOVER/gameover.h"
 #include "GameStatusSpecific/WINNING/winning.h"
 #include "Storage/Data.h"
+#include "FuncUpdAndDrw.h"
 
 
 Uint32 time_func(Uint32 sec, void *pointer);
@@ -82,13 +83,8 @@ int game() {
     //*****************************
         case MENU:
 
-            //......
-            //Update
-            //......
-            menu_upd(&menu, ev, data);
-            data_upd(&data, ev);
-            game_status_from_MENU_to_SETTING(&gameStatus, ev, &sat, &menu, &data);
-            game_status_button_toMenuButton_upd(&toMenu, ev, &sat, &gameStatus);
+            updMENU(&sat, &menu, &data, &toMenu, &gameStatus, ev);
+
 
             //......
             //Draw

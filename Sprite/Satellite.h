@@ -16,6 +16,8 @@
 /**A LEGFONTOSABB struktúra! Tartalmazza:
 *  1. A műhold adatai
 *  2. Mineden, ami a műholdra hat, köztük a bolygók, és az akadályok
+*Azért lett ez a kettő összevonva, mert ez egy egyszerűbbm egoldásnak bizonyult.
+*Ha külön modulban szerkeztettem volna az egyes elemeket, akkor egymást include-olták volna a modulok.
 */
 typedef struct Satellite{
     Vect pos;///<A műholdat reprezentáló kör középpontját tároló float x, y számpár

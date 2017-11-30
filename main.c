@@ -1,10 +1,11 @@
 /**@mainpage
+*A program grafikus megjelenítéshez az SDL 1.2 könyvtárat használja. A külső függvények mindegyikét ebből használom fel, kivétel egyet: tool.c/print()/TTF_TextSize().
 *A játék a pályákat egy Settings.txt nevű fájlból olvassa be. Ehhez a fájlhoz a program dinamikusan alkalmazkodik, így könnyen lehet új pályákat hozzáadni a játékhoz.
 *Csak az eddigi mintát kell kiegészíteni, és a játék be fogja tudni olvasni.
 *A mentett játék adatait a program a Save.txt-be írja. Ezt a fájlt létre is hozza, ha szükséges, de üresen hagyja, ha nem kattintunk a mentés gombra.
 *Új játékot a legkönnyebben úgy lehet kezdeni, hogy kitöröljük a Save.txt-t.
 *FONTOS! A programban használt betűtípust a Constants.h-ban definiáltam, és ezen lehet, hogy állítani kell, hogy másik gépen is működjön.
-*Linkelt listából csak egy van a programban, és az a müben lévő szintek sorozata. (LevelBox.h)
+*Linkelt listából csak egy van a programban, és az a menüben lévő szintek sorozata. (LevelBox.h)
 */
 
 #include <SDL.h>

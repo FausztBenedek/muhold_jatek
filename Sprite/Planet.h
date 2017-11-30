@@ -19,6 +19,9 @@
 /**A Pln (planet) struktúra a bolygókat és a hozzájuk tartozó menüt tárolja.
 *Minden bolygó rendelkezik egy saját menüvel. A menü adatai bele vannak ágyazva ebbe a struktúrába.
 *A bolygó menüje nem azonos a játék menüjével. Minden bolygónak saját menüje van.
+*Azért nem láncolt listában vannak tárolva a bolygók, mert vonszoláskor az nagyon lassú lenne.
+*Készült ilyen verzió, és élvezhetetlenül lassú volt. Ezzel szemben minden hozzáadáskor a realloc() bőven elég gyors, ahhoz,
+*hogy ne lehessen érezni.
 *@ingroup justPlanet
 *@ingroup planetMenu
 */

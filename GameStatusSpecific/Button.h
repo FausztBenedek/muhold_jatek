@@ -15,6 +15,8 @@ A gombok mûködése:
     3. A button_upd() függvény a megfelelõ _upd() függvényben lesz meghívva
     4. A button_drw() függvény a megfelelõ _drw() függvényben lesz meghívva
     5. A funkcionalitásának leírása eltérő lehet.
+
+*A gombokat érdemes volt egy külön modulba szedni, és újrafelhasználhatóvá tenni, mert sok helyen előfordulnak.
 */
 typedef struct Button {
     float x, y, w, h;///<(x, y) bal felső sarok koordinátája, w = szélesség, h = magasság

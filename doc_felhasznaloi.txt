@@ -1,3 +1,6 @@
+A játék célja:
+	Egy mûholdat kell átjuttatni a naprendszeren a megfelelõ helyre a bolygók vonzóerejét felhasználva, természetesen anélkül, hogy a mûhold nekiütközne a bolygóknak, vagy az akadályoknak.
+A játék működése:    
     Belépéskor a menü az első megjelenő ablak. Látható gombok a menü-gomb, a szintek, és a mentés.
     A menü-gomb végig látható minden játékállapotban, és a menübe lehet vele lépni. A mentés gomb elmenti az adott játékot, hogy amikor majd újra megnyitjuk a játékot, akkor onnan folytathassuk, ahol abbahagytuk. A szintek akkor elérhetőek, ha nincsenek áthúzva. Ahhoz hogy feloldjunk egy szintet, teljesíteni kell az előzőt.
     Ha játszani szeretnénk, akkor ki kell választanunk egy szintet. Ekkor a tervezés következik. Meg kell tervezni a műhold pályáját úgy, hogy a képernyő jobb szélén látható kis piros vonalkán áthaladjon. Ehhez bolygókat adhatunk hozzá a játékhoz úgy, hogy kattintunk a játékmezőn. A bolygók tulajdonságait a bolygó-menüből érhetjük el, amelyet úgy lehet megnyitni, hogy az egérmutatót az adott bolygó felé visszük. Ekkor a + és - jelekkel a méretet lehet állítani, a Törlés gombbal pedig a bolygót lehet eltávolítani a pályáról. Ha a bolygóra hosszan kattintunk, és mozgatjuk az egeret, akkor tudjuk vonszolni.

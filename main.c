@@ -1,5 +1,5 @@
 /**@mainpage
-*A program grafikus megjelenítéshez az SDL 1.2 könyvtárat használja. A külső függvények mindegyikét ebből használom fel, kivétel egyet: tool.c/print()/TTF_TextSize().
+*A program grafikus megjelenítéshez az SDL 1.2 könyvtárat használja. A külső függvények mindegyikét ebből használom fel, kivétel egyet: tools.c/print()/TTF_TextSize(), amelyet az SDL 2-ből.
 *A játék a pályákat egy Settings.txt nevű fájlból olvassa be. Ehhez a fájlhoz a program dinamikusan alkalmazkodik, így könnyen lehet új pályákat hozzáadni a játékhoz.
 *Csak az eddigi mintát kell kiegészíteni, és a játék be fogja tudni olvasni.
 *A mentett játék adatait a program a Save.txt-be írja. Ezt a fájlt létre is hozza, ha szükséges, de üresen hagyja, ha nem kattintunk a mentés gombra.
